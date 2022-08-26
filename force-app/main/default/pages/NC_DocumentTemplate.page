@@ -1,0 +1,48 @@
+<apex:page >
+    <table >
+        <tr>
+            <td style="width:400px">
+                <apex:image style="padding-right:10px" url="{!$Resource.NCDHHS_LOGO}" width="250" height="90"/>
+            </td>
+            <td style="border-left: 3px solid black;">
+                <div style="padding-left:10px; font-size:12px">
+                    <p>
+                        ROY COOPER • Governor<br/>
+                        MANDY COHEN, MD, MPH • Secretary<br/>
+                        CHRIS EGAN, MSW, LCSW • Senior Director<br/>
+                        JAN WITHERS, MA • Division Director
+                    </p>         
+                </div>
+            </td>
+        </tr>   
+    </table>
+    <div class="body">
+        <apex:insert name="body" />
+    </div>
+    <table>
+        <tr>
+            <td align="center" >
+                <div style="padding-left:60px">
+                    <p style="font-size:10px">
+                        <strong> NC DEPARTMENT OF HEALTH AND HUMAN SERVICES • DIVISION OF SERVICES FOR THE DEAF AND HARD OF HEARING </strong>
+                    </p>
+                    <p style="font-size:10px">
+                        820 S. Boylan Avenue, McBryde Building, Raleigh, NC 27699
+                    </p>
+                    <p style="font-size:10px">
+                        MAILING ADDRESS: 2301 Mail Service Center, Raleigh, NC 27699-2301
+                    </p>
+                    <p style="font-size:10px">
+                        <a href="https://www.ncdhhs.gov/dsdhh" >https://www.ncdhhs.gov/dsdhh</a>
+                    </p>
+                    <p style="font-size:10px">
+                        TEL (V/TTY): 919-527-6930 | 800-851-6099• VP: 919-890-0859 • FAX: 919-715-0926
+                    </p>
+                    <p style="font-size:10px">
+                        AN EQUAL OPPORTUNITY / AFFIRMATIVE ACTION EMPLOYER
+                    </p>
+                </div>
+            </td>
+        </tr>
+    </table>
+</apex:page>

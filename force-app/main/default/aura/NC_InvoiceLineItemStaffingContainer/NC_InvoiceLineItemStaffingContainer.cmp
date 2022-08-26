@@ -1,0 +1,3 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId">
+    <c:nc_invoice_line_item_staffing onrefresh="{!c.refreshView}" recordId ="{!v.recordId}"></c:nc_invoice_line_item_staffing>
+</aura:component>

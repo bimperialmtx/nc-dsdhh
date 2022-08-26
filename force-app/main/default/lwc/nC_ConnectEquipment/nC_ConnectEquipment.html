@@ -1,0 +1,60 @@
+<template>
+    <template if:true={showSpinner}>
+            <lightning-spinner class="spins" variant="brand" size="medium"></lightning-spinner>
+    </template>
+    <lightning-layout>
+        <lightning-layout-item size="8">
+            <div class="slds-card slds-var-p-around_x-small a11y-focused">
+                <div class="slds-grid slds-m-bottom_x-small slds-m-top_x-small">
+                    <div class="slds-col slds-small-size_2-of-8">
+                        <template if:true={categoryOptions.length}>
+                            <lightning-combobox
+                                name="SelectCategory"
+                                value={selectedCategory}
+                                variant="label-hidden"
+                                options={categoryOptions}
+                                onchange={handleCategoryChange}
+                                class="slds-m-left_medium"></lightning-combobox>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-text-align_center slds-small-size_4-of-8">
+                        <h1 class="slds-text-heading_large">
+                            Connect Equipment
+                        </h1>
+                    </div>
+                    <div class="slds-col slds-small-size_2-of-8">
+                        <template if:true={equipmentResultMaster.length}>
+                            <lightning-input name="search" variant="label-hidden" type="search" placeholder="Search By Name" class="slds-m-right_medium"
+                            onchange={handleEquipmentSearch}></lightning-input>
+                        </template>
+                    </div>
+                </div>
+                <div class="content slds-m-left_x-small slds-m-right_x-small slds-scrollable">
+                    <template if:true={equipmentResult.length}>
+                        <template for:each={equipmentResult} for:item="product">
+                            <c-nc_equipment-tile key={product.KlasID} product={product} onequipmentselected={handleEquipmentSelected}></c-nc_equipment-tile>
+                        </template>
+                        <div style="margin-left: -20%;" role="alert">
+                            {equipmentResult.length} results found. 
+                        </div>
+                    </template>
+                    <template if:false={equipmentResult.length}>
+                        <div class="slds-var-p-around_large" style="width: 100%;" role="alert">
+                            <p class="slds-var-p-around_small slds-text-align_center">No result found</p>
+                        </div>
+                    </template>
+                </div>
+                <template if:true={equipmentResult.length}>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-m-top_small slds-m-bottom_small">
+                            <lightning-button variant="brand" label="Add Equipment to Cart" title="Add Equipment to Cart" onclick={handleSaveClick} class="slds-float_right slds-m-right_small"></lightning-button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item size="4" style="padding-left: 5px;">
+            <c-nc_equipment-detail product-data={productData}></c-nc_equipment-detail>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

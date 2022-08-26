@@ -1,0 +1,19 @@
+<apex:component >
+	<apex:attribute name="iconName" type="string" description="Icon name."/>
+	<apex:attribute name="size" type="string" description="Icon size." default="slds-icon--x-small"/>
+	<apex:attribute name="fillClass" type="string" description="Icon size." />
+	<div class="slds-truncate" title="">
+		<span class="slds-icon_container slds-icon-utility-{!iconName} slds-icon__svg--default" >
+		 	<svg aria-hidden="true" class="slds-icon slds-icon-text-default {!size} {!fillClass}">
+		  		<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#{!iconName}">
+		  		</use>
+		 	</svg>
+		 	<span class="slds-assistive-text">{!iconName}</span>
+		</span>
+    </div>
+    <style>
+        .fillWhite {
+            fill: white !important;
+        }
+    </style>
+</apex:component>

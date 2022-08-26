@@ -1,0 +1,6 @@
+<aura:component controller="NC_CreateCommunicationAccessRequest"
+                implements="force:lightningQuickAction,force:hasRecordId"
+                extends="c:NC_Base">
+    <aura:attribute name="isNDBEDPRequest" type="Boolean"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+</aura:component>

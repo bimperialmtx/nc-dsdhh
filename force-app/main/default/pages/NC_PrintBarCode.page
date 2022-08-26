@@ -1,0 +1,13 @@
+<apex:page standardcontroller="Resource__c"
+            applyBodyTag="false" renderAs="pdf"
+           applyHtmlTag="false" 
+           showHeader="false" sidebar="false" standardStylesheets="false"> 
+    <body>
+        <center>
+            <h3  style="margin-bottom: 10px;">
+                <apex:outputText value="{!Resource__c.Name}"/>
+            </h3>
+            <apex:outputText value="{!Resource__c.Generated_Bar_Code__c}" escape="false"/>
+        </center>
+    </body>
+</apex:page>

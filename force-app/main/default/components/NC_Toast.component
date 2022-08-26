@@ -1,0 +1,105 @@
+<apex:component >
+	<div id="infoMessageContainer" class="messageContainer">
+		<div class="slds-notify_container slds-is-relative">
+			<div class="slds-notify slds-notify_toast slds-theme_info" role="status">
+				<span class="slds-assistive-text">Info</span>
+				<c:NC_SVGIconComponent iconName="info" fillClass="fillWhite" size="slds-icon_small"></c:NC_SVGIconComponent>
+				&nbsp;&nbsp;
+				<div class="slds-notify__content">
+					<h2 class="slds-text-heading_small messageText">Info Message</h2>
+				</div>
+				<div class="slds-notify__close">
+					<div class="cursor_pointer" title="Close" onclick="hideToast('infoMessageContainer'); return false;">
+						<c:NC_SVGIconComponent iconName="close" fillClass="fillWhite" size="slds-icon--x-small"></c:NC_SVGIconComponent>
+						<span class="slds-assistive-text">Close</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="successMessageContainer" class="messageContainer">
+		<div class="slds-notify_container slds-is-relative">
+			<div class="slds-notify slds-notify_toast slds-theme_success" role="status">
+				<span class="slds-assistive-text">SUCCESS</span>
+				<c:NC_SVGIconComponent iconName="success" fillClass="fillWhite" size="slds-icon_small"></c:NC_SVGIconComponent>
+				&nbsp;&nbsp;
+				<div class="slds-notify__content">
+					<h2 class="slds-text-heading_small messageText">Success Message</h2>
+				</div>
+				<div class="slds-notify__close">
+					<div class="cursor_pointer" title="Close" onclick="hideToast('successMessageContainer'); return false;">
+						<c:NC_SVGIconComponent iconName="close" fillClass="fillWhite" size="slds-icon--x-small"></c:NC_SVGIconComponent>
+						<span class="slds-assistive-text">Close</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="warningMessageContainer" class="messageContainer">
+		<div class="slds-notify_container slds-is-relative">
+			<div class="slds-notify slds-notify_toast slds-theme_warning" role="status">
+				<span class="slds-assistive-text">WARNING</span>
+				<c:NC_SVGIconComponent iconName="warning" fillClass="fillWhite" size="slds-icon_small"></c:NC_SVGIconComponent>
+				&nbsp;&nbsp;
+				<div class="slds-notify__content">
+					<h2 class="slds-text-heading_small messageText">Warning Message</h2>
+				</div>
+				<div class="slds-notify__close">
+					<div class="cursor_pointer" title="Close" onclick="hideToast('warningMessageContainer'); return false;">
+						<c:NC_SVGIconComponent iconName="close" fillClass="fillWhite" size="slds-icon--x-small"></c:NC_SVGIconComponent>
+						<span class="slds-assistive-text">Close</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="errorMessageContainer" class="messageContainer">
+		<div class="slds-notify_container slds-is-relative">
+			<div class="slds-notify slds-notify_toast slds-theme_error" role="status">
+				<span class="slds-assistive-text">ERROR</span>
+				<c:NC_SVGIconComponent iconName="ban" fillClass="fillWhite" size="slds-icon_small"></c:NC_SVGIconComponent>
+				&nbsp;&nbsp;
+				<div class="slds-notify__content">
+					<h2 class="slds-text-heading_small messageText">Error Message</h2>
+				</div>
+				<div class="slds-notify__close">
+					<div class="cursor_pointer" title="Close" onclick="hideToast('errorMessageContainer'); return false;">
+						<c:NC_SVGIconComponent iconName="close" fillClass="fillWhite" size="slds-icon--x-small"></c:NC_SVGIconComponent>
+						<span class="slds-assistive-text">Close</span>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+    <style>
+        .slds-notify_toast {
+            width: auto !important;
+            min-width: 150px !important;
+        }
+        .messageContainer {
+            /* position: fixed; */
+            justify-content: center;
+            width: 100%;
+            left: 0;
+            top: 0;
+            display: none;
+        }
+        </style>
+	<script>
+		function showErrorMessage(type,message) {
+			$('.messageContainer').hide();
+			$('#'+type+'MessageContainer').show();
+			$('.messageText').text(message);
+			setTimeout(function(){
+				$('#'+type+'MessageContainer').hide();
+			},5000);
+		}
+		function hideToast(id) {
+			$('#'+id).hide();
+			return false;
+		}
+	</script>
+</apex:component>

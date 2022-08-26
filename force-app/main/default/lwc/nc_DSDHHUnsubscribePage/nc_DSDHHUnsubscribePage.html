@@ -1,0 +1,70 @@
+<template>
+    <div if:true={showSpinner}>
+        <div class="backdrop">
+            <div class="spinner">
+                <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+            </div>
+        </div>
+    </div>
+    <div if:false={showError}>
+        <div if:false={showThankYou} class="content wrapper-3">
+            <div class="slds-grid slds-gutters slds-wrap wrapper-4">
+                <div class="slds-col slds-size_1-of-1 slds-badge_lightest slds-p-bottom_medium slds-p-left_large">
+                    <lightning-checkbox-group name="subscription" required
+                        label="Which of these emails would you like to unsubscribe from?" options={subscriptionOption}
+                        value={contactRecord.Communications_Type__c} onchange={handleChange}>
+                    </lightning-checkbox-group>
+                </div>
+                <div if:true={showReasons}
+                    class="slds-col slds-size_1-of-1 slds-badge_lightest slds-p-left_large">
+                    <lightning-radio-group name="resonForUnsubscription" required
+                        label="If you have a moment, please let us know why you unsubscribed:"
+                        options={reasonsForSubscription} value={contactRecord.Why_You_Unsubscribed__c} type="radio"
+                        onchange={handleChange}>
+                    </lightning-radio-group>
+                    <template if:true={showOtherReason}>
+                        <div class="slds-p-around_medium lgc-bg">
+                            <lightning-textarea name="otherReason" required
+                                value={contactRecord.Other_Reason_For_Unsubscribe__c} placeholder="Type your reason...."
+                                variant="label-hidden" label="Other reason" maxlength="32000" onchange={handleChange}
+                                message-when-too-long="A maximum of 32k characters are allowed."
+                                message-when-value-missing="Please provide a reason.">
+                            </lightning-textarea>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            <div style="text-align:center;" class="wrapper-5">
+                <lightning-button variant="brand" label="Submit" title="Submit" onclick={insertContactData}
+                    class="slds-m-left_x-small">
+                </lightning-button>
+            </div>
+        </div>
+        <div if:true={showThankYou}>
+            <div class="content">
+                <div class="wrapper-1">
+                    <div class="wrapper-2">
+                        <h1>Thank you !</h1>
+                        <template if:true={showReasons}>
+                            <p>We have recorded your response. </p>
+                        </template>
+                        <template if:false={showReasons}>
+                            <p>You have unsubscribed from {getSubscriptionValues}. </p>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div if:true={showError}>
+        <div class="content">
+            <div class="wrapper-1">
+                <div class="wrapper-2">
+                    <h1>404 Error!</h1>
+                      <p>Page not found. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

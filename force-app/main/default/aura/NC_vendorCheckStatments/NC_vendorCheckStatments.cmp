@@ -1,0 +1,18 @@
+<!--
+  @description       : 
+  @author            : Suresh Beniwal
+  @group             : 
+  @last modified on  : 05-27-2021
+  @last modified by  : Suresh Beniwal
+  Modifications Log 
+  Ver   Date         Author           Modification
+  1.0   05-27-2021   Suresh Beniwal   Initial Version
+-->
+<aura:component controller="VendorCheckStatementController" implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId"  extends="c:NC_Base" access="global">
+    <ltng:require styles="{!$Resource.NC_DSDHH_Resource + '/styles/a11y.css'}"></ltng:require>
+    <aura:attribute name="recordId" type="String" default="" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <div class="a11y-focused">
+    	<c:vendorCheckStatements recordId="{!v.recordId}" ondownloadfile="{!c.downloadFileData}" onviewfile="{!c.viewfileData}" />
+    </div>
+</aura:component>

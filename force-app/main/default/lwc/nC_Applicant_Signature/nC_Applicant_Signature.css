@@ -1,0 +1,42 @@
+.strong-text {
+    color: #3E3E3C ;
+    font-weight: 650;
+}
+.strong-title{
+    color: hsl(9, 97%, 55%) ; 
+    font-weight: 700;
+    font-size: 125%;
+}
+.strong-heading {
+    color: #3E3E3C ;
+    font-weight: 800;
+}
+
+.strong-headingone {
+    color: #3E3E3C ;
+    font-size: 100%;
+    font-weight: 700;
+
+}
+
+.title1{
+    margin-top: -30px;
+}
+.strong-titletwo{
+    color: #3E3E3C;
+    font-weight: 700;
+    font-size: 140%;
+}
+.tableborders{
+    margin-left: -0px;
+}
+.points{
+margin-left: 10px;
+}
+.strong-link{
+    font-weight: 700;
+    font-size: 100%;
+}
+.closeButtonCss{
+    display: block !important;
+}

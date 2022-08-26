@@ -1,0 +1,3 @@
+<aura:component implements="force:lightningQuickAction,force:hasRecordId" >
+	<c:NC_CreateCommunicationAccessRequest recordId="{!v.recordId}" isNDBEDPRequest="true"></c:NC_CreateCommunicationAccessRequest>
+</aura:component>

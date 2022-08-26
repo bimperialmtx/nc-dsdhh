@@ -1,0 +1,144 @@
+<template>
+  <!-- Spinner -->
+  <div class="backdrop" if:true={showSpinner}>
+      <div class="spinner">
+          <lightning-spinner alternative-text="Income Worksheet Loading..."></lightning-spinner>
+      </div>
+  </div>
+  <span tabindex="0"></span>
+    <lightning-layout class="layout-properties" multiple-rows="true">
+      <!-- Title -->
+      <lightning-layout-item size="12">
+        <div class="slds-grid slds-gutters">
+              <div class="slds-col">
+                <h1 class="slds-m-around_small title"><b>Income Worksheet</b></h1>
+              </div>
+              <div class="slds-col">
+                <div class="slds-m-around_small slds-p-left_medium">
+                  <lightning-input
+                  name="ProofOfIncomeProvidedBy"
+                  label="Proof Of Income Provided By" disabled 
+                  value={proofOfIncomeProvidedBy} > </lightning-input>
+                  </div>
+              </div>  
+              <div class="slds-col">
+                <div class="slds-m-around_small slds-p-left_medium">
+                  <lightning-input label="Marital Status"
+                  name="MaritalStatus"  disabled 
+                  value={maritalStatus}> </lightning-input>
+                </div>          
+              </div>
+              <div class="slds-col">
+              </div>
+          </div>
+      </lightning-layout-item>
+      
+      <!-- heading -->
+      <lightning-layout-item size="12" class="heading-color">
+        <div class="slds-m-around_small slds-text-title heading">FAMILY MEMBERS IN THE HOUSEHOLD</div>
+      </lightning-layout-item>
+    </lightning-layout>
+      <template if:true={alreadyFilled}>
+          <div class="slds-col">
+            <div class="slds-m-around_small title slds-align_absolute-center"><b>Family Details Already Filled..</b></div>
+          </div>
+      </template>
+      <template if:true={showErroMessage}>
+        <div class="slds-col">
+          <!-- <div class="slds-m-around_small title slds-align_absolute-center"><b>Not Allowed To Fill..</b></div> -->
+          <div class="slds-m-around_small title slds-align_absolute-center"><b>Income Worksheet Is Not Required</b></div>
+        </div>
+      </template>
+      <template if:false={showErroMessage}>
+        <div class="action ">
+          <div class="slds-p-around_small slds-grid">
+            <div class="slds-col slds-size_10-of-12">
+
+            </div>
+            <div class="slds-col slds-size_1-of-12">
+              <lightning-button label="Save" title="Non-primary action" onclick={submitChanges}
+                class="slds-m-around_small  slds-float_right"></lightning-button>
+            </div>
+            <div class="slds-col slds-size_1-of-12">
+              <lightning-button label="Add" title="Non-primary action" onclick={addMore}
+                class="slds-m-around_small  slds-float_right" variant="brand"></lightning-button>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="table">
+            <div class="table-head">
+              <ul class="row">
+                <li class="fieldname">Name</li>
+                <li class="fieldname">Age</li>
+                <li class="fieldname">Relationship</li>
+                <li class="fieldname">Income</li>
+                <li class="fieldname">Action</li>
+              </ul>
+            </div>
+            <div class="table-body">
+              <ul class="row" key={family.name} for:each={incomeData} for:item="family" for:index="index">
+                <li class="data">
+                  <lightning-input aria-label={family.nameAriaLabel} type="text" required name="Name" data-index={index} variant="label-hidden"
+                    value={family.name} label="" onblur={handleChange}> </lightning-input>
+                </li>
+                <li class="data">
+                  <lightning-input aria-label={family.ageAriaLabel} type="number" required name="Age" data-index={index} variant="label-hidden"
+                    value={family.age} label="" onblur={handleChange}> </lightning-input>
+                </li>
+                <li class="data">
+                  <lightning-input aria-label={family.relationshipAriaLabel} type="text" pattern="^[a-zA-Z]*$" message-when-pattern-mismatch="Only Characters Are Allowed" required name="Relationship" data-index={index} variant="label-hidden"
+                    value={family.relationship} label="" onblur={handleChange}> </lightning-input>
+                </li>
+                <li class="data">
+                  <div aria-label={family.incomeAriaLabel}>${family.totalIncome}</div>
+                </li>
+                <li class="data">
+                  <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_10-of-12">
+                      <lightning-button aria-label={family.addIncomeAriaLabel} data-id="addIncomeId" label="Add Income" onclick={openModal}
+                        class="slds-m-left_xx-small" title="Add Income" name={index}>
+                      </lightning-button>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12">
+                      <template if:true={deleteDisabled}>
+                        <lightning-button-icon icon-name="utility:delete" alternative-text="Delete" onclick={deleteRow}
+                          class="slds-m-left_xx-small slds-align_absolute-center" title="Delete Row" name={index} disabled>
+                        </lightning-button-icon>
+                      </template>
+                      <template if:false={deleteDisabled}>
+                        <lightning-button-icon aria-label={family.deleteAriaLabel} icon-name="utility:delete" alternative-text="Delete" onclick={deleteRow}
+                          class="slds-m-left_xx-small slds-align_absolute-center" title="Delete Row" name={index}>
+                        </lightning-button-icon>
+                      </template>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <template if:true={isModalOpen}>
+        <c-nc_income_worksheet_items onclose={closeModal} income-type={incomeType} index={selectedIndex} onsave={saveData}></c-nc_income_worksheet_items>
+      </template>
+
+      <template if:true={deleteConfirmModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open" onkeyup={handleKeyUp}>
+          <div class="slds-modal__container" style="width: 30%;">
+            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse modal-focused" onclick={closeDeleteConfirmModal}>
+              <lightning-icon icon-name="utility:close" variant="inverse" size="small" alternative-text="close" title="close"></lightning-icon>
+            </button>
+            <div class="slds-modal__content slds-p-around_large modal-focused" id="modal-content-id-1">
+              Are you sure you want to delete?
+            </div>
+            <div class="slds-modal__footer">
+              <button class="slds-button slds-button_neutral modal-focused" onclick={closeDeleteConfirmModal}>Cancel</button>
+              <button class="slds-button slds-button_brand modal-focused" onclick={handleDeleteAction}>Delete</button>
+            </div>
+          </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+      </template>
+</template>

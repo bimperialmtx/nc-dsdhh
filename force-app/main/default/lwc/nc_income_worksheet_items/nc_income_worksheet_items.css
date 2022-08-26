@@ -1,0 +1,41 @@
+.container{
+    height:300px;
+    width:609px;
+    margin: 0 auto;
+    border:2px solid transparent;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    overflow-y:scroll;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .table{
+    height:100%;
+    width:100%;
+  }
+  /*--table head--*/
+  .table .table-head{
+    position: fixed;
+    z-index:1;
+    width: 606px;
+    background-color: #C4E3EB;
+    font-weight: 700;
+  }
+  .table .table-head .row{
+    display:flex;
+    flex-direction: row;
+  }
+  /*--table body--*/
+  .table .table-body .row{
+    display: flex;
+    flex-direction:row;
+    transform:translateY(calc(22px + 24px));
+    
+  }
+  .table .table-body .row:nth-child(even){
+    background-color: #EBF5F8;
+  }
+  /*-- others --*/
+  .fieldname, .data{
+    padding: 12px 0 12px 15px;
+    flex:1;
+  }

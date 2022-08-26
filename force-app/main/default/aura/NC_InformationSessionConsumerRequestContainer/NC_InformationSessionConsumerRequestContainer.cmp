@@ -1,0 +1,6 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId">
+    <ltng:require styles="{!$Resource.NC_DSDHH_Resource + '/styles/a11y.css'}"></ltng:require>
+    <div class="a11y-focused">
+    	<c:nC_InformationSessionConsumerRequest onrefresh="{!c.refreshView}" recordId ="{!v.recordId}"></c:nC_InformationSessionConsumerRequest>
+    </div>
+</aura:component>

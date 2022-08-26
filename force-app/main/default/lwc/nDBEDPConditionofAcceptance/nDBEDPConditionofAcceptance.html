@@ -1,0 +1,222 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 06-01-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+  Modifications Log 
+  Ver   Date         Author                       Modification
+  1.0   07-07-2021   kavya.konagonda@mtxb2b.com   Initial Version
+-->
+<template>
+  <div class="slds-align_absolute-center">
+    <template if:true={showSpinner}>
+      <lightning-spinner alternative-text="Loading" variant="brand" size="medium">
+      </lightning-spinner>
+    </template>
+  </div>
+  <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+    aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+    <div class="slds-modal__container" style="width: 120%;">
+      <header class="slds-modal__header">
+        <button data-id="close"
+          class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse closeButtonCss"
+          data-name="modal" title="Close" onclick={closeModalNew}>
+
+          <lightning-icon icon-name="utility:close" variant="inverse"
+            alternative-text="Close Ndbedp Condition of Acceptance Modal" title="Close"></lightning-icon>
+
+        </button>
+        <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Condition of Acceptance</h1>
+      </header>
+      <div class="slds-modal__content slds-var-p-around_medium " id="modal-content-id-2">
+
+        <div class="slds-grid slds-gutters_x-small">
+          <img src={logoURL} alt="Division of Services for the Deaf and Hard of Hearing banner" />
+        </div>
+        </br>
+        <div class="strong-title slds-align_absolute-center">North Carolina National Deaf-Blind</div>
+        <div class="strong-title slds-align_absolute-center">Equipment Distribution Program</div>
+        <div class="strong-title slds-align_absolute-center">
+          <a href="http://www.icanconnect.org/" target="​_blank" aria-describedby="ndbedpLink">www.iCanConnect.org</a>
+          <span id="ndbedpLink" style="display: none;">North Carolina National Deaf-Blind Equipment Distribution Program
+            link. Opens in new tab</span>
+        </div>
+
+        </br>
+        <h2 class="strong-headingone slds-align_absolute-center ">Equipment Selected</h2>
+        <div style="color: red;" class="slds-align_absolute-center">* indicates required fields</div>
+        <br />
+        <template if:true={showCase}>
+          <span id="tableInfoId" style="display: none;">Table of selected NDBEDP equipments</span>
+          <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-box"
+            aria-labelledby="element-with-table-label other-element-with-table-label" aria-describedby="tableInfoId">
+            <thead>
+              <tr class="slds-line-height_reset">
+
+                <th class="" scope="col">
+                  <div class="slds-truncate" title="Equipment Name">Equipment Name</div>
+                </th>
+
+                <th class="" scope="col">
+                  <div class="slds-truncate" title="Amount Authorized">Amount Authorized</div>
+                </th>
+                <th class="" scope="col">
+                  <div class="slds-truncate" title="Quantity">Quantity</div>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="slds-scrollable_y " style="max-height:30px;">
+              <template for:each={caseList} for:item="caseItem">
+                <tr key={caseItem.id}>
+                  <td data-label="Equipment Name">
+                    <div class="slds-cell-wrap">{caseItem.equipmentName}</div>
+                    <!-- {caseItem.equipmentName} -->
+                  </td>
+
+                  <td data-label="Amount Authorized">
+                    ${caseItem.equipmentAmountAuthorized}
+                  </td>
+                  <td data-label="Quantity">
+                    {caseItem.quantity}
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </template>
+
+        <template if:false={showCase}>
+          <div class="slds-box boxcss">
+            <div class="slds-align_absolute-center">There are no equipments selected.</div>
+          </div>
+        </template>
+
+        </br>
+        <h2 class="strong-headingone slds-align_absolute-center ">Conditions of Acceptance</h2>
+        </br>
+        <p>The following conditions will apply to all equipment received from this program:</p></br>
+
+        <span>{Condition_of_Acceptance_label_1_New}</span></br></br>
+        <p class="points">a. I cannot sell this equipment to anyone</p></br>
+        <p class="points">b. I cannot give away this equipment</p></br>
+        <p class="points">c. I cannot loan this equipment to anyone</p></br>
+        <span>{Condition_of_Acceptance_label_2_New}</span></br></br>
+        <span>{Condition_of_Acceptance_label_3_New}</span></br></br>
+        <span>{Condition_of_Acceptance_label_4_New}</span></br></br>
+        <span>{Condition_of_Acceptance_label_5_New}</span></br></br>
+        <span>{Condition_of_Acceptance_label_6_New}</span></br></br>
+        <p class="points">a. I no longer need the equipment (e.g., disability changes, deceased)</p></br>
+        <p class="points">b. My equipment has been replaced </p></br>
+        <span>{Condition_of_Acceptance_label_7_New}</span></br></br>
+        <span>{Condition_of_Acceptance_label_8_New}</span></br></br>
+        <span>{Condition_of_Acceptance_label_9_New}</span></br></br>
+        <div class="strong-heading">By signing this form, I am approving the equipment selection listed above and agree
+          to abide by the conditions as outlined.</div><br />
+
+        <div class="slds-grid slds-gutters_x-small">
+          <div class="slds-col slds-medium-size_1-of-2 slds-large-size_1-of-2">
+
+            <div><span style="color: red;">* </span>Signature of Applicant or Parent/Guardian (if
+              applicant is under 18)</div></br>
+
+            <template if:true={showImage}>
+              <div style="border-radius: 50%;"><img src={url} alt="" width="100" height="100px" /></div>
+            </template>
+
+            <div class="strong-link"><a name="SignHere" data-id="signHere" onclick={handleSign} tabindex="0"
+                aria-label="Signature of Applicant or Parent/Guardian (if applicant is under 18), Sign Here, required"
+                aria-describedby="signHereInfoId">Sign Here</a></div>
+            <span id="signHereInfoId" style="margin-left: -120%;">{signHereInfo}</span>
+
+          </div>
+
+
+          <div class="slds-col slds-medium-size_1-of-2 slds-large-size_1-of-2 datecss">
+            <div><abbr title="required" class="slds-required">*</abbr>Date</div>
+            <lightning-input type=Date name='attestationdate' aria-live="assertive" label='Date' onchange={handleChange}
+              value={RequestObj.attestationdate} variant="label-hidden" max={todayDate} required>
+            </lightning-input>
+          </div>
+        </div></br>
+
+      </div>
+
+      <footer class="slds-modal__footer" style="
+      background: white;
+  ">
+        <lightning-button variant="brand" label="Cancel" title="Cancel" name="Cancel" onclick={handleCancel}
+          class="slds-float_left"></lightning-button>
+        <lightning-button variant="brand" data-id="rejectButton" label="Reject" title="Reject" name="Reject"
+          onclick={openModal} class="slds-float_left slds-m-bottom_small slds-m-left_medium"></lightning-button>
+
+        <!-- <template if:false={accepted}> -->
+        <lightning-button variant="brand" label="Accept" title="Accept" name="Save" data-frombutton="fromaccept"
+          onclick={handleClick} class="slds-m-around_small"></lightning-button>
+        <!-- </template> -->
+
+
+      </footer>
+      <template if:true={isModalOpen}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" onkeyup={handleKeyUp}
+          aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open reject-modal"
+          style="background-color: rgba(0, 0, 0, 0.7);">
+          <div class="slds-modal__container">
+            <!-- <header class="slds-modal__header"> -->
+            <button data-id="rejectConfirmId" data-name="modal"
+              class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse closeButtonCss" title="Close"
+              aria-label="Close Reject Comments Modal" onclick={closeModal}>
+              <lightning-icon icon-name="utility:close" variant="inverse" size="small" alternative-text="close"
+                title="close"></lightning-icon>
+            </button>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+              <lightning-textarea data-name="modal" name='comments' label='Comments' value={RequestObjNew.comments}
+                onchange={handleChangeNew} required></lightning-textarea>
+            </div>
+            <!-- Modal/Popup Box LWC footer starts here -->
+            <footer class="slds-modal__footer">
+              <button class="slds-button slds-button_neutral" data-name="modal" onclick={closeModal}
+                title="Cancel">Cancel</button>
+              <button class="slds-button slds-button_brand" data-name="modal" onclick={submitDetails}
+                title="OK">OK</button>
+            </footer>
+          </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+      </template>
+
+      <template if:true={openRejectModel}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" onkeyup={handleKeyUp}
+          aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open reject-confirm-modal"
+          style="background-color: rgba(0, 0, 0, 0.7);">
+          <div class="slds-modal__container">
+            <!-- <header class="slds-modal__header"> -->
+            <button data-id="rejectModalId" data-name="modal"
+              class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse closeButtonCss" title="Close"
+              aria-label="Close Reject Confirmation Modal" onclick={closeModalReject}>
+              <lightning-icon icon-name="utility:close" variant="inverse" size="small" alternative-text="close"
+                title="close"></lightning-icon>
+            </button>
+            <!-- </header> -->
+            <div class="slds-modal__content slds-p-around_medium">
+              <h1 data-name="modal" >Are you sure you want to Reject? </h1>
+            </div>
+            <!-- Modal/Popup Box LWC footer starts here -->
+            <footer class="slds-modal__footer">
+              <button class="slds-button slds-button_neutral" data-name="modal" onclick={rejectConfirmation}
+                title="Yes">Yes</button>
+              <button class="slds-button slds-button_brand" data-name="modal" onclick={closeModalReject}
+                title="No">Cancel</button>
+            </footer>
+          </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+      </template>
+    </div>
+  </section>
+  <template if:true={usedInCommunity}>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+</template>

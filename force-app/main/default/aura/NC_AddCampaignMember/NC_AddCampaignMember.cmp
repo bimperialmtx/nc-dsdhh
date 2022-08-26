@@ -1,0 +1,6 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride,force:lightningQuickActionWithoutHeader"
+ access="global" >
+    <div style="background-color: white;" class="slds-p-around_xx-small">
+        <c:nc_add_campaign_member   recordId="{!v.recordId}" onrefresh="{!c.handleRefresh}"></c:nc_add_campaign_member>
+    </div>
+</aura:component>

@@ -1,0 +1,6 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId">
+    <ltng:require styles="{!$Resource.NC_DSDHH_Resource + '/styles/a11y.css'}"></ltng:require>
+    <div class="a11y-focused">
+    	<c:nc_staff_invitation_component onrefresh="{!c.refreshView}" recordId ="{!v.recordId}"></c:nc_staff_invitation_component>
+    </div>
+</aura:component>

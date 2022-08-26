@@ -1,0 +1,24 @@
+.paginator-button {
+  margin-left: .25rem;
+}
+
+.app-content {
+  margin-bottom: -1rem !important;
+}
+
+.button-class{
+  min-height: 30px;
+  background-color: #004E9A;
+  color: #ffffff;
+  font-size: 16px;
+  border-radius: 0;
+  transition: all .3s;
+  display: inline-block;
+  line-height: 1;
+}
+.width-150 {
+  width:150px;
+}
+.width-200 {
+  width:200px;
+}

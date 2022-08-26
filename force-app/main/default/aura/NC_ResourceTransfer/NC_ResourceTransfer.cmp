@@ -1,0 +1,23 @@
+<aura:component controller="NC_ResourceTransferController" implements="force:lightningQuickAction,force:hasRecordId">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="RegionalCenterList" type="List"/>
+    <aura:attribute name="spinner" type="boolean" default="false"/>
+    <aura:attribute name="errorMessage" type="String"/>
+    
+    <aura:if isTrue="{!v.spinner}">
+        <div class="exampleHolder">
+            <lightning:spinner alternativeText="Loading" size="large" />
+        </div>
+    </aura:if>
+
+    <aura:if isTrue="{! empty(v.errorMessage) }">
+        <aura:iteration var="regional" items="{!v.RegionalCenterList}">
+            <lightning:button name="{!regional.id}" onclick="{!c.transferResource}" label="{!regional.name}" class="regional-button slds-align_absolute-center" variant="success"/><br/>
+        </aura:iteration>
+        <aura:set attribute="else">
+            <p class="slds-align_absolute-center"><b>{!v.errorMessage}</b></p>
+        </aura:set>
+    </aura:if>
+    
+
+</aura:component>

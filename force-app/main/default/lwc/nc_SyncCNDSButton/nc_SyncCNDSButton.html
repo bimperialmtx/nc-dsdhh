@@ -1,0 +1,35 @@
+<!--
+ - Created by ashishpandey on 12/05/21.
+ -->
+
+<!-- Nc Sync Cnds Button -->
+<template>
+    <div class="slds-card slds-p-around_medium" if:true={isSyncFailed}>
+        <lightning-layout multiple-rows="false">
+            <lightning-layout-item size="12" class="">
+                <div class="slds-align_absolute-center" style="color:red;font-size:18px;font-weight:bold">Consumer CNDS Sync Failed.</div>
+                <div class="slds-p-top_small slds-align_absolute-center" style="font-size:13px;">Please re-sync by clicking the button below.</div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="">
+                <div if:true={spinner}>
+                    <div class="isLoading" >
+                        <lightning-spinner size="small" alternative-text="Loading..." variant="brand" class=""></lightning-spinner>
+                    </div>
+                </div>
+                <template if:false= {isUpdate}>
+                    <div class="slds-align_absolute-center slds-p-around_medium">
+                        <lightning-button disabled={isDisabled} variant="brand" label="Re-sync CNDS" title="Re-sync CNDS"
+                                          onclick={handleSync}></lightning-button>
+                    </div>
+                </template>
+                <template if:true={isUpdate}>
+                    <div class="slds-align_absolute-center slds-p-around_medium">
+                        <lightning-button disabled={isDisabled} variant="brand" label="Re-sync CNDS" title="Update"
+                                          onclick={handleUpdateSync}></lightning-button>
+                    </div>
+                </template>
+
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

@@ -1,0 +1,35 @@
+<!--
+ - Created by ashishpandey on 08/09/21.
+ -->
+
+<!-- Nc Resend Equipment Request -->
+<template>
+    <div class="slds-card slds-p-around_medium" if:true={isSyncFailed}>
+        <lightning-layout multiple-rows="false">
+            <lightning-layout-item size="12" class="">
+                <div class="slds-align_absolute-center" style="color:red;font-size:18px;font-weight:bold">
+                    <lightning-icon class="slds-p-right_medium" icon-name="utility:error" alternative-text="Error!" title="Error"></lightning-icon>
+                    In-Active Equipment Found.
+                </div>
+                <div class="slds-p-top_small slds-align_absolute-center" style="font-size:13px;">
+                    Below equipments found In-active or deleted in KLAS Database since last time you added.<br/>
+                    Please delete the below equipment or add a new one then click on Button below to re-send request.</div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-top_small">
+                <b>Equipment Names:</b><br/>
+                {requestObj.In_Active_Equipments_Name__c}
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="">
+                <div if:true={spinner}>
+                    <div class="isLoading" >
+                        <lightning-spinner size="small" alternative-text="Loading..." variant="brand" class=""></lightning-spinner>
+                    </div>
+                </div>
+                <div class="slds-align_absolute-center slds-p-around_medium slds-p-top_medium">
+                    <lightning-button disabled={isDisabled} variant="brand" label="Re-send request" title="Re-send request"
+                                      onclick={validateEquipment}></lightning-button>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

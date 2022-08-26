@@ -1,0 +1,73 @@
+<!--
+  @description       : 
+  @author            : Saurav Nirwal
+  @group             : 
+  @last modified on  : 04-29-2021
+  @last modified by  : Saurav Nirwal
+  Modifications Log 
+  Ver   Date         Author          Modification
+  1.0   04-29-2021   Saurav Nirwal   Initial Version
+-->
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner class="spins" variant="brand" size="medium"></lightning-spinner>
+    </template>
+    <div class="form-section slds-grid slds-wrap slds-gutters">
+        <div class="slds-col slds-small-size_1-of-5">
+            <lightning-input name="title" label="Title Search" variant="label-stacked" type="search" placeholder="Search By Title"
+                onchange={handleChange} value={searchKeyTitle}>
+            </lightning-input>
+        </div>
+        <div class="slds-col slds-small-size_1-of-5">
+            <lightning-combobox name="monthSearch" label="Search By Month" placeholder="Search By Month"
+                    value={searchKeyMonth} options={monthsPicklistValues} onchange={handleChange}>
+            </lightning-combobox>
+        </div>
+        <div class="slds-col slds-small-size_1-of-5">
+            <lightning-combobox name="yearSearch" label="Search By Year" placeholder="Search By Year"
+                    value={searchKeyYear} options={yearPicklistValues} onchange={handleChange}>
+            </lightning-combobox>
+        </div>
+        <div class="slds-col slds-small-size_1-of-5">
+            <lightning-combobox name="IsPrintedSearch" label="Printed &amp; Mailed Search" placeholder="Printed &amp; Mailed Search"
+                    value={searchKeyIsPrinted} options={allOrPrintedValues} onchange={handleChange}>
+            </lightning-combobox>
+        </div>
+        <!-- <lightning-input type="search" label="Title Search"  name ="title"> </lightning-input>
+    <lightning-input type="search" label="Date Search"  name = "dateValue"> 
+    </lightning-input> -->
+        <div class="slds-col slds-small-size_1-of-5 slds-p-top_medium">
+            <lightning-button class="slds-float_right" label="Search" title="Non-primary action" onclick={updateSearch} ></lightning-button>
+        </div>
+    </div>
+    <div class="slds-p-vertical_small">
+        <lightning-datatable key-field="id" data={data} columns={columns} onrowaction={handleRowAction}
+            hide-checkbox-column default-sort-direction={defaultSortDirection} sorted-direction={sortDirection}
+            sorted-by={sortedBy} onsort={onHandleSort} aria-label="Vendor Check Statements">
+        </lightning-datatable>
+    </div>
+
+    <template if:false={noRecords}>
+        <div style="margin-left: -120%;" role="alert">{data.length} results found.</div>
+    </template>
+
+    <lightning-layout horizontal-align="space">
+        <lightning-layout-item flexibility="auto" if:false={noRecords}>
+            Showing from {fromNumber} to {toNumber} of {totalRecountCount}
+        </lightning-layout-item>
+        <lightning-layout-item flexibility="auto" if:true={noRecords}>
+            <div role="alert">No records found.</div>
+        </lightning-layout-item>
+    </lightning-layout>
+
+    <lightning-layout horizontal-align="space" class="slds-m-top_large">
+        <lightning-layout-item flexibility="auto">
+            <lightning-button label="Previous" icon-name="utility:chevronleft" onclick={previousHandler} disabled={disablePrevious}>
+            </lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item flexibility="auto">
+            <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right" disabled={disableNext}
+                onclick={nextHandler}></lightning-button>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

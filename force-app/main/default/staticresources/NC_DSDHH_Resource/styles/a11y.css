@@ -1,0 +1,97 @@
+.a11y-focused.slds-button:focus {
+  outline: 2px solid #333333;
+  outline-offset: 4px;
+  outline-style: dotted;
+  box-shadow: none; }
+
+.a11y-focused.slds-input:focus {
+  outline: 2px solid #333333;
+  outline-offset: 4px;
+  outline-style: dotted;
+  box-shadow: none; }
+
+.a11y-focused .slds-textarea:focus {
+  outline: 2px solid #333333;
+  outline-offset: 4px;
+  outline-style: dotted;
+  box-shadow: none;
+}
+
+.a11y-focused .slds-button:focus {
+  outline: 2px solid #333333;
+  outline-offset: 4px;
+  outline-style: dotted;
+  box-shadow: none; }
+
+.a11y-focused .slds-input:focus {
+  outline: 2px solid #333333;
+  outline-offset: 4px;
+  outline-style: dotted;
+  box-shadow: none; }
+
+.a11y-focused .slds-dueling-list__options [aria-selected=true], .slds-picklist__options [aria-selected=true] {
+  background-color: #333333;
+}
+
+.a11y-focused .slds-dropdown [aria-selected=true] {
+  background-color: #333333;
+  color: white;
+  outline: 2px solid #333333;
+  outline-offset: 4px;
+  outline-style: dotted;
+  box-shadow: none;
+}
+
+.a11y-focused h2:focus {
+  outline: 2px solid #333333;
+  outline-offset: 4px;
+  outline-style: dotted;
+  box-shadow: none;
+}
+
+.a11y-focused .slds-combobox__input:focus {
+  outline: 2px solid #333333;
+  outline-offset: 4px;
+  outline-style: dotted;
+  box-shadow: none;
+}
+
+.a11y-focused .slds-checkbox input[type=checkbox]:focus + .slds-checkbox__label .slds-checkbox_faux {
+  outline: 2px solid #333333;
+  outline-offset: 4px;
+  outline-style: dotted;
+  box-shadow: none; }
+
+.a11y-focused .slds-checkbox.full input[type=checkbox]:focus + .slds-checkbox__label {
+  outline: 2px solid #333333;
+  outline-offset: 4px;
+  outline-style: dotted;
+  box-shadow: none; }
+  .a11y-focused .slds-checkbox.full input[type=checkbox]:focus + .slds-checkbox__label .slds-checkbox_faux {
+    outline: none !important; }
+
+.a11y-focused .slds-checkbox {
+  padding: 2px;
+}
+
+.a11y-focused div:focus {
+  outline: 2px solid #333333;
+  outline-offset: 2px;
+  outline-style: dotted;
+  box-shadow: none;
+}
+
+.a11y-focused [role=combobox] input[readonly].slds-has-focus,
+.a11y-focused [role=combobox] input[readonly]:focus,
+.a11y-focused input[readonly][role=combobox].slds-has-focus,
+.a11y-focused input[readonly][role=combobox]:focus {
+  outline: 2px solid #333333;
+  outline-offset: 4px;
+  outline-style: dotted;
+  box-shadow: none; }
+
+.a11y-focused .slds-radio [type=radio]:focus + .slds-radio__label .slds-radio_faux {
+  outline: 2px solid #333333;
+  outline-offset: 4px;
+  outline-style: dotted;
+  box-shadow: none; }

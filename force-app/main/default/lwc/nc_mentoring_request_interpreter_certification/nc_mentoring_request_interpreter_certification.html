@@ -1,0 +1,35 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 05-11-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+    </template>
+    <div class="container d-flex justify-space-between slds-p-bottom_xx-small">
+        <h2 class="slds-p-left_xx-small header-title" data-id="headerDiv" tabindex="-1" aria-label="Interpreter Certification Information (Step 4 of 10)"><b>Interpreter Certification Information</b></h2>
+    </div>
+    <span data-id="accessibilityInfo4" style="display: none;">
+        NCITLB License Information is complete. Interpreter Certification is the current step (Step 4 of 10).
+    </span>
+    <div style="color: red;" class="extra-padding">* indicates required fields</div>
+    <div class="extra-padding">
+        <lightning-combobox name="haveInterpreterCert" label="Do you hold an interpreter or transliteration certification?" value={certificateInformation.holdInterpreterCert} placeholder="" options={haveInterpreterCert} onchange={handleChange} ></lightning-combobox>
+        <template if:true={showCertifications}>
+            <lightning-checkbox-group name="Checkbox Group" aria-live="assertive"
+                              label="Please check the certifications held. (Check all that apply)"
+                              options={interpreterCertifications}
+                              value={certificateInformation.certificateValue}
+                              onchange={handleCertificationChange}
+                              required></lightning-checkbox-group>
+        </template>
+        <template if:true={stateLevelAssessment}>
+            <lightning-input type="text" data-id="assessmentLevel" value={certificateInformation.assessmentLevel} label="What level do you hold? (1-5)" onchange={handleAssessmentLevel} required></lightning-input>
+        </template>
+        <label class="slds-form-element__label">If you are an RID member, what is your RID member number?</label>
+        <lightning-input type="text" value={certificateInformation.RIDNumber} label="RID member number:" name="RIDNumber" onblur={updateInput}></lightning-input>
+    </div>
+</template>

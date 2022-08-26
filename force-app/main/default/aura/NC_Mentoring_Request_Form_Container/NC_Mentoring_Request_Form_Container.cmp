@@ -1,0 +1,13 @@
+<aura:component implements="lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                 access="global">
+    <lightning:workspaceAPI aura:id="workspace" />
+    <ltng:require styles="{!$Resource.NC_DSDHH_Resource + '/styles/a11y.css'}"></ltng:require>
+    <aura:attribute name="consumerId" type="String" />
+    <!-- Add an "init" handler to handle the first "v.pageReference" value -->
+    <aura:handler name="init" value="{!this}" action="{!c.onPageReferenceChange}"/>
+    <!-- Add a "change" handler to handle all changes to the "v.pageReference" value -->
+    <aura:handler name="change" value="{!v.pageReference}" action="{!c.onPageReferenceChange}"/>
+    <div style="background-color: white;" class="slds-p-around_medium a11y-focused">
+       <c:nc_mentoring_request_form  recordId ="{!v.consumerId}"></c:nc_mentoring_request_form>
+    </div>
+</aura:component>

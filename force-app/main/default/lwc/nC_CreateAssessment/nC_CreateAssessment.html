@@ -1,0 +1,290 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 06-01-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+  Modifications Log 
+  Ver   Date         Author                       Modification
+  1.0   07-02-2021   kavya.konagonda@mtxb2b.com   Initial Version
+-->
+<template>
+  <div class="spinner slds-align_absolute-center">
+    <template if:true={showSpinner}>
+      <lightning-spinner alternative-text="Loading" variant="brand" size="medium">
+      </lightning-spinner>
+    </template>
+  </div>
+  <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+    aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+    <div class="slds-modal__container" style="width: 100%;">
+      <header class="slds-modal__header">
+        <button data-id="close"
+          class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse closeButtonCss modal-focused"
+          title="Close" onclick={closeModalNew}>
+          <lightning-icon icon-name="utility:close" variant="inverse" alternative-text="Close New Assessment Modal"
+            title="Close"></lightning-icon>
+        </button>
+        <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">New Assessment</h1>
+      </header>
+      <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+
+        <div class="slds-grid slds-gutters_x-small">
+
+          <img src={logoURL} alt="Division of Services for the Deaf and Hard of Hearing banner" />
+
+        </div>
+        <div class="slds-col slds-medium-size_1-of-2 slds-large-size_1-of-2">
+          <lightning-input class="strong-text" name='consumername' label='Consumer Name' value={consumerValueNew}
+            disabled>
+          </lightning-input>
+        </div>
+        <div>
+          <br>
+
+          <div class="strong-title title1 slds-align_absolute-center">North Carolina National Deaf-Blind</div>
+          <div class="strong-title slds-align_absolute-center">Equipment Distribution Program</div>
+          <div class="strong-title slds-align_absolute-center">
+            <a href="http://www.icanconnect.org/" target="​_blank" aria-describedby="ndbedpLink">www.iCanConnect.org</a>
+            <span id="ndbedpLink" style="display: none;">North Carolina National Deaf-Blind Equipment Distribution
+              Program link. Opens in new tab</span>
+          </div></br>
+          <h2 class="strong-titletwo slds-align_absolute-center">Eligibility Assessment</h2>
+          <div style="color: red;" class="slds-align_absolute-center">* indicates required fields</div></br>
+        </div>
+
+        <h3><strong>Disability:</strong></h3>
+
+        <lightning-radio-group required name='hearing' aria-live="assertive" label='Hearing Loss (check one):'
+          options={picklistOptions} value={AssesmentObj.hearing} onchange={handleChange}>
+        </lightning-radio-group>
+
+        <lightning-radio-group required name='visionloss' aria-live="assertive" label='Vision Loss (check one):'
+          options={picklistOptionsvisionLoss} value={AssesmentObj.visionloss} onchange={handleChange}>
+        </lightning-radio-group>
+
+        <lightning-checkbox-group required name='other' aria-live="assertive" label='Other (check one or more):'
+          options={picklistOptionsOther} value={AssesmentObj.other} onchange={handleChange}></lightning-checkbox-group>
+
+        <lightning-checkbox-group required name='communicationskills' aria-live="assertive"
+          label='Communication Skills (check one or more):' options={picklistOptionscommunicationSkills}
+          value={AssesmentObj.communicationskills} onchange={handleChange}>
+        </lightning-checkbox-group>
+
+        <lightning-checkbox-group required name='connectivity' aria-live="assertive"
+          label='Connectivity (check one or more):' options={picklistOptionsConnectivity}
+          value={AssesmentObj.connectivity} onchange={handleChange}>
+        </lightning-checkbox-group>
+
+        <lightning-checkbox-group required name='atUsage' aria-live="assertive" label='AT Usage (check one or more):'
+          options={picklistOptionsATUsage} value={AssesmentObj.atUsage} onchange={handleChange}>
+        </lightning-checkbox-group>
+
+        <lightning-checkbox-group required name='computerusageexperience' aria-live="assertive"
+          label='Computer usage experience (check one or more):' options={picklistOptionsComputerUsageExperience}
+          value={AssesmentObj.computerusageexperience} onchange={handleChange}>
+        </lightning-checkbox-group>
+
+        <lightning-checkbox-group required name='hearingassessment' aria-live="assertive"
+          label='Hearing Assessment (check one or more):' options={picklistOptionsHearingAssessment}
+          value={AssesmentObj.hearingassessment} onchange={handleChange}>
+        </lightning-checkbox-group>
+
+        <lightning-checkbox-group required name='visualassessment' aria-live="assertive"
+          label='Visual Assessment (check one or more):' options={picklistOptionsVisualAssessment}
+          value={AssesmentObj.visualassessment} onchange={handleChange}>
+        </lightning-checkbox-group>
+
+        <lightning-checkbox-group required name='tactileassessment' aria-live="assertive"
+          label='Tactile Assessment (check one or more):' options={picklistOptionsTactileAssessment}
+          value={AssesmentObj.tactileassessment} onchange={handleChange}>
+        </lightning-checkbox-group>
+        </br>
+
+        <div class="strong-text"><abbr title="required" class="slds-required">*</abbr>Narrative</div>
+        <lightning-textarea required name='narrative' label='Narrative' onchange={handleChange}
+          value={AssesmentObj.narrative} variant="label-hidden">
+        </lightning-textarea></br>
+
+        <div class="strong-text"><abbr title="required" class="slds-required">*</abbr>Consumer Goals</div>
+        <lightning-textarea required name='consumergoals' label='Consumer Goals' onchange={handleChange}
+          value={AssesmentObj.consumergoals} variant="label-hidden">
+        </lightning-textarea></br>
+
+        <lightning-checkbox-group required name='levelofcomputerexperience' aria-live="assertive"
+          label='Level of Computer Experience (must be completed by staff):' options={picklistOptionsComputerExperience}
+          value={AssesmentObj.levelofcomputerexperience} onchange={handleChange}></lightning-checkbox-group></br>
+
+        </br>
+        <h3 class="strong-heading slds-align_absolute-center">ATTESTATION:</h3>
+        <div class="slds-align_absolute-center">(Professional must sign the application)</div>
+        </br>
+
+        <p>{Attestation_Label_1}</p></br>
+
+        <span class="strong-text">Verification of Disability: </span>{Verification_of_Disability}</br></br>
+
+        <span>{Verification_of_Disability_one}</span></br></br>
+
+        <span>{Verification_of_Disability_two}</span></br></br>
+
+        <span>{Verification_of_Disability_three}</span></br></br>
+
+        <span class="strong-text">Income Eligibility: </span>{Income_Eligibility}</br></br>
+
+        <span>{Income_Eligibility_two}</span></br></br>
+
+        <p>attestation is based on the following:</p>
+
+        </br>
+
+        <div class="strong-text"><abbr title="required" class="slds-required">*</abbr>Attestation</div>
+        <lightning-textarea name='attestation' label='Attestation' onchange={handleChange}
+          value={AssesmentObj.attestation} variant="label-hidden" required>
+        </lightning-textarea></br>
+
+        <div class="slds-grid slds-gutters_x-small">
+          <div class="slds-col slds-medium-size_1-of-2 slds-large-size_1-of-2">
+            <div class="strong-text"><span style="color: red;">* </span>Attestors signature</div></br>
+
+            <template if:true={showImage}>
+              <div style="border-radius: 50%;"><img src={url} alt="" width="100" height="100px" /></div>
+            </template>
+
+            <div class="strong-link"><a name="SignHere" data-id="signHere" onclick={handleSign} tabindex="0"
+                aria-label="Attestors signature, Sign Here, required" aria-describedby="signHereInfoId">Sign Here</a>
+            </div>
+            <span id="signHereInfoId" style="margin-left: -120%;">{signHereInfo}</span>
+          </div>
+
+          <div class="slds-col slds-medium-size_1-of-2 slds-large-size_1-of-2">
+            <div class="strong-text"><abbr title="required" class="slds-required">*</abbr>Date</div>
+            <lightning-input type=Date name='attestationdate' aria-live="assertive" label='Date' value={AssesmentObj.attestationdate}
+              onchange={handleChange} variant="label-hidden" max={todayDate} required>
+            </lightning-input>
+          </div>
+        </div></br>
+
+
+        <div class="strong-text"><abbr title="required" class="slds-required">*</abbr>Mailing Address</div>
+        <lightning-textarea name='mailingaddress' label='Mailing Address' value={consumerAddress}
+          onchange={handleChange} variant="label-hidden" disabled required>
+        </lightning-textarea></br>
+
+        <div class="slds-grid slds-gutters_x-small">
+          <div class="slds-col slds-medium-size_1-of-2 slds-large-size_1-of-2">
+            <div class="strong-text"><abbr title="required" class="slds-required">*</abbr>Email Address</div>
+
+            <lightning-input type="email" name='emailaddress' label='Email Address' value={consumerEmail}
+              onchange={handleChange} variant="label-hidden" disabled required>
+            </lightning-input>
+          </div>
+
+          <div class="slds-col slds-medium-size_1-of-2 slds-large-size_1-of-2">
+            <div class="strong-text"><abbr title="required" class="slds-required">*</abbr>Phone Number</div>
+
+            <lightning-input type="Phone" name='phone' label='Phone Number' value={consumerPhone}
+              onchange={handleChange} variant="label-hidden" disabled required>
+            </lightning-input>
+          </div>
+        </div></br>
+
+        <div class="strong-text">License/Certificate Number (if applicable)</div>
+        <lightning-textarea name='license' label='License/Certificate Number (if applicable)'
+          value={AssesmentObj.license} onchange={handleChange} variant="label-hidden">
+        </lightning-textarea>
+
+      </div>
+
+      <footer class="slds-modal__footer" style="
+      background: white;
+  ">
+        <div class="buttonCSS">
+          <div>
+
+            <lightning-button variant="brand" label="Cancel" title="Cancel" name="Cancel" onclick={handleCancel}
+              class="slds-m-around_small"></lightning-button>
+            <lightning-button variant="brand" data-id="rejectButton" label="Reject" title="Reject" name="Reject"
+              onclick={openModal} class="slds-m-around_small"></lightning-button>
+
+          </div>
+
+          <div>
+
+            <lightning-button variant="brand" label="Save" title="Save" name="Save" data-frombutton="fromsave"
+              onclick={handleClick} class="slds-m-around_small"></lightning-button>
+
+            <lightning-button variant="brand" label="Accept" title="Accept" name="accept" data-frombutton="fromaccept"
+              onclick={handleClick} class="slds-m-around_small"></lightning-button>
+
+
+          </div>
+        </div>
+      </footer>
+      <template if:true={isModalOpen}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" onkeyup={handleKeyUp}
+          aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open reject-modal"
+          style="background-color: rgba(0, 0, 0, 0.7);">
+          <div class="slds-modal__container">
+            <!-- <header class="slds-modal__header"> -->
+            <button data-id="rejectConfirmId"
+              class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse modal-focused closeButtonCss"
+              title="Close" aria-label="Close Reject Comments Modal" onclick={closeModal}>
+              <lightning-icon icon-name="utility:close" variant="inverse" size="small" alternative-text="close"
+                title="close"></lightning-icon>
+            </button>
+
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+
+              <lightning-textarea class='comment modal-focused' name='comments' label='Comments'
+                value={AssesmentObj.comments} onchange={handleChangeNew} required>
+              </lightning-textarea>
+            </div>
+            <!-- Modal/Popup Box LWC footer starts here -->
+            <footer class="slds-modal__footer">
+              <button class="slds-button slds-button_neutral modal-focused" onclick={closeModal}
+                title="Cancel">Cancel</button>
+              <button class="slds-button slds-button_brand modal-focused" onclick={submitDetails} title="OK">OK</button>
+            </footer>
+          </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+      </template>
+
+
+      <template if:true={openRejectModel}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" onkeyup={handleKeyUp}
+          aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open reject-confirm-modal"
+          style="background-color: rgba(0, 0, 0, 0.7);">
+          <div class="slds-modal__container">
+            <!-- <header class="slds-modal__header"> -->
+            <button data-id="rejectModalId"
+              class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse modal-focused closeButtonCss"
+              title="Close" aria-label="Close Reject Confirmation Modal" onclick={closeModalReject}>
+              <lightning-icon icon-name="utility:close" variant="inverse" size="small" alternative-text="close"
+                title="close"></lightning-icon>
+            </button>
+            <!-- </header> -->
+            <div class="slds-modal__content slds-p-around_medium">
+              <h1 data-name="modal" >Are you sure you want to Reject? </h1>
+            </div>
+            <!-- Modal/Popup Box LWC footer starts here -->
+            <footer class="slds-modal__footer">
+              <button class="slds-button slds-button_neutral modal-focused" onclick={rejectConfirmation}
+                title="Yes">Yes</button>
+              <button class="slds-button slds-button_brand modal-focused" onclick={closeModalReject}
+                title="No">Cancel</button>
+            </footer>
+          </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+      </template>
+    </div>
+    </div>
+  </section>
+  <template if:true={usedInCommunity}>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+</template>

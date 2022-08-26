@@ -1,0 +1,114 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 02-23-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<template>
+  <h1 style="position: absolute; margin-left: -120%;">North Carolina Department of Health and Human Services Portal Home Page</h1>
+  <template if:false={showCase}>
+    <template if:true={Assessor}>
+      <div class="demo-only" style="height:4rem">
+        <div class="slds-notify_container slds-is-relative">
+          <div class="slds-notify slds-notify_toast slds-theme_info" role="status">
+            <span class="slds-assistive-text">info</span>
+            <span class="slds-icon_container slds-icon-utility-info slds-m-right_small slds-no-flex slds-align-top"
+              title="Description of icon when needed">
+              <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#info"></use>
+              </svg>
+            </span>
+            <div class="slds-notify__content">
+              <h2 class="slds-text-heading_small">There are no pending Assessor invitation/request at this moment.
+              </h2>
+            </div>
+            <div class="slds-notify__close">
+              <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close">
+                <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                  <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                </svg>
+                <span class="slds-assistive-text">Close</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+  </template>
+  <template if:true={showCase}>
+    <!-- <div class="slds-grid slds-gutters"> -->
+    <div class="slds-col slds-scrollable" style="background-color: white;">
+      <h2 id="element-with-table-label"
+        class="slds-text-heading_medium slds-m-bottom_xx-small slds-m-left_small slds-m-top_small">Pending Requests</h2>
+      <div id="other-element-with-table-label" class="slds-text-title slds-m-bottom_small slds-m-left_small">Please click
+        on the link to approve or reject.</div>
+      <!-- <div style="font-size: 50px;
+        margin-left: 30px;" class="slds-m-top_x-large slds-align_absolute-center">
+            Pending Requests
+        </div> -->
+      <!-- <div style="font-size: 22px;margin-left: 40px;" class="slds-align_absolute-center">
+          Please click on the link to approve or reject.
+        </div> -->
+      <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-box "
+        aria-labelledby="element-with-table-label other-element-with-table-label">
+        <!-- style="margin-left: 520px;
+        block-size: 300px;
+        width: 400px" -->
+
+        <thead>
+          <tr class="slds-line-height_reset">
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Case Number">Case Number</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Case Status">Case Status</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Case Consumer Name">Case Consumer Name</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Case Consumer Email">Case Consumer Email</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="slds-scrollable_y" style="max-height:30px;">
+          <!-- <div class="slds-scrollable_y" style="max-height:100px;"> -->
+          <template for:each={caseList} for:item="caseItem">
+            <tr key={caseItem.Id}>
+              <td data-label="Case Number" style="text-decoration: underline;margin-bottom: 7px;">
+                <a data-value={caseItem.Id} onclick={getInvitation} tabindex="0">
+                  {caseItem.CaseNumber}
+                </a>
+              </td>
+              <td data-label="Case Status">
+                {caseItem.Status}
+              </td>
+              <td data-label="Case Consumer Name">
+                {caseItem.Contact.Name}
+              </td>
+              <td data-label="Case Consumer Email">
+                {caseItem.ContactEmail}
+              </td>
+            </tr>
+          </template>
+          <!-- </div> -->
+          <!-- </div> -->
+        </tbody>
+      </table>
+      <!-- <div aria-hidden="false" class="slds-scrollable_y" style="max-height:200px;" id="expando-unique-id">
+          <template for:each={caseList} for:item="caseItem">
+            <li key={caseItem.Id} style="text-decoration: underline;margin-bottom: 7px;">
+              <a data-value={caseItem.Id} style="
+                      font-size: large;
+                      font-family: fangsong;
+                      font-style: inherit;
+                      " onclick={getInvitation}>{caseItem.CaseNumber}</a>
+            </li>
+          </template>
+        </div> -->
+    </div>
+    <!-- </div> -->
+
+  </template>
+</template>

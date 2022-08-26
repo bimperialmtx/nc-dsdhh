@@ -1,0 +1,47 @@
+<apex:page renderAs="pdf" controller="NC_HA_ConApprovalController">
+<!-- Begin Default Content REMOVE THIS -->
+    <apex:composition template="NC_DocumentTemplate">
+        <apex:define name="body">
+            <div class="body-container" style="padding-top:70px;padding-bottom:120px">
+                <table>
+                    <tr>
+                        <td>{!consumerApprovalHearingAidObject.consumerName}</td>
+                      </tr>
+                      <tr>
+                        <td>{!consumerApprovalHearingAidObject.consumerAddress1}</td>
+                      </tr>
+                      <tr>
+                        <td>{!consumerApprovalHearingAidObject.consumerCity} {!consumerApprovalHearingAidObject.consumerState} {!consumerApprovalHearingAidObject.consumerPostalCode}</td>
+                      </tr>
+                </table>
+    
+                <div style="padding-top:25px">{!consumerApprovalHearingAidObject.currentDate}</div>
+                <div style="padding-top:25px">Dear {!consumerApprovalHearingAidObject.consumerName},</div>
+                <div style="padding-top:5px" class="p1">
+                    <p>
+                        Congratulations! Your request for a telecoil hearing aid has been approved. You are now ready for the next step. 
+                    </p>
+                </div>
+                <div class="p2">
+                    <p>
+                        {!consumerApprovalHearingAidObject.vendorName} will contact you for an appointment to meet with you. The provider is the one who signed your certification of loss form. Here is what you need to do: 
+                    </p>
+                </div>
+                <div class="p3">
+                    <p>
+                        <ul>
+                            <li>If after three (3) weeks you do not hear from {!consumerApprovalHearingAidObject.vendorName}, contact them for an appointment.</li>
+                            <li>Go to the appointment to get a hearing aid. {!consumerApprovalHearingAidObject.vendorName} will order your hearing aid based on the hearing test.</li>
+                            <li>After you receive the hearing aid, take time to learn how to use your hearing aid.</li>
+                            <li>You are allowed a 30-day trial period. If you are not satisfied with the hearing aid, please contact {!consumerApprovalHearingAidObject.vendorName} and the staff at the Regional Center in your area. Do this before the 30-day trial expires. {!consumerApprovalHearingAidObject.vendorName} will give you a date of trial period expiration.</li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="p4">
+                    <p>Thank you, it was a pleasure working with you. We wish you well in your journey to better hearing!</p>
+                </div>
+            </div>          
+        </apex:define>
+    </apex:composition>
+<!-- End Default Content REMOVE THIS -->
+</apex:page>

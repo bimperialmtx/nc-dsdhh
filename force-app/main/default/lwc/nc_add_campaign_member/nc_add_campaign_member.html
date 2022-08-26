@@ -1,0 +1,22 @@
+<template>
+  <div if:true={showSpinner}>
+    <div class="backdrop">
+      <div class="spinner">
+        <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+      </div>
+    </div>
+  </div>
+  <div if:false={showSpinner}>
+    <div if:true={showComponent}>
+      <c-nc_dyanmic_paginator object-name='Contact' numberofcolumns="4" columns-from-parent={columnsList}
+      placeholder="Search..." sort-by='FirstName' sort-dir='ASC' show-refresh-button
+      where-clause={whereClause} refresh-button-label=""  record-id-list={recordIdList}
+      table-class="property-table slds-table slds-table_cell-buffer slds-table_bordered slds-max-medium-table_stacked-horizontal"
+      reset-table={resetTable} reload-table={reloadTable} new-button-label="Add To Campaign"
+      show-new-button oncreaterecord={handleAddToCampaign} page-size="10" norecord-message=""
+      show-all-paginator-buttons=true onpaginatoraction={handlePaginatorAction} onresetflag={resetFlag} show-checkbox
+      onselectunselectcheckbox={updateSelectedValueList}>
+    </c-nc_dyanmic_paginator>
+    </div>
+  </div>
+</template>

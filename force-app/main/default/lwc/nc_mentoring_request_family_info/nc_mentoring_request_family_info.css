@@ -1,0 +1,70 @@
+.underline-section{
+    border-bottom: 1px solid lightgray;
+}
+.heading-section{
+    font-size: 16px;
+    padding-top: 1rem;
+}
+.text-font{
+    font-family: Lato;
+    font-weight: 700;
+    font-size: 0.75rem;
+}
+.legend-shift{
+    margin-left: -0.5rem;
+}
+
+.extra-padding{
+    padding: .5rem;
+}
+
+.required-color{
+    color: rgb(194, 57, 52) !important;
+    padding-right: 0.2rem;
+}
+
+.slds-checkbox {
+    display: inline !important;
+}
+.field-legend {
+    font-size: 14px;
+    margin-bottom: 0.5rem;
+}
+.dropdown{
+    height: 30px;
+}
+
+.day-group,.time-group {
+    margin-bottom: 1rem;
+    padding-top: 0.15rem;
+}
+
+@media (min-width: 768px) {
+    .day-group {
+        display: flex;
+    }
+    .day-group>.slds-form-element+.slds-form-element {
+        margin-left: 1rem;
+
+    }
+    .day-group .slds-form-element {
+        padding: 0px 0.25rem;
+        min-width: 108px;
+    }
+    .time-group {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .time-group > div {
+        padding-left: 1rem;
+    }
+}
+
+.field-horizontal {
+    margin-bottom: 1rem;
+}
+
+.header-title{
+    font-size: 1.10rem;
+    font-weight: 150;
+}

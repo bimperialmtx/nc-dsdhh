@@ -1,0 +1,4 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId">
+    <!--<c:nC_LineItemList onrefresh="{!c.refreshView}" recordId ="{!v.recordId}"></c:nC_LineItemList>-->
+    <c:nC_EDSLineItemList onrefresh="{!c.refreshView}" recordId ="{!v.recordId}"></c:nC_EDSLineItemList>
+</aura:component>

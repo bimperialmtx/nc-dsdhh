@@ -1,0 +1,4 @@
+<design:component >
+    <design:attribute name="disableField" label="Disable Field API Name" placeholder="(Confirm Field API Name)" />
+    <design:attribute name="disableFieldValue" label="Disable Field Value" placeholder="(Value)" />    
+</design:component>

@@ -1,0 +1,35 @@
+<template>
+    <div data-id="productLink" onclick={handleClick} onkeyup={cardKeyUp} tabindex="0" aria-label={productMainAriaLabel} aria-describedby="productDescriptionId">
+        <div data-id="productCard" class="content">
+            <img
+                src={pictureUrl}
+                class="product slds-align_absolute-center"
+                alt={imageAltLabel}
+            />
+            <div class="slds-grid slds-m-top_x-small">
+                <template if:false={product.isSelected}>
+                    <div class="slds-col title slds-small-size_1-of-1" onclick={openProductURL} data-id="productUrl" onkeyup={linkKeyUp} title={name} role="link" tabindex="0" aria-describedby="linkLabel">{name}</div>
+                </template>
+                <template if:true={product.isSelected}>
+                    <div class="slds-col title slds-small-size_4-of-6" onclick={openProductURL} data-id="productUrl" onkeyup={linkKeyUp} title={name} role="link" tabindex="0" aria-describedby="linkLabel">{name}</div>
+                    <div class="slds-col slds-small-size_2-of-6 slds-m-left_xxx-small">
+                        <template if:true={quantityOptions.length}>
+                            <lightning-combobox
+                                    dropdown-alignment="auto"
+                                    aria-describedby="selectQuantityId"
+                                    name="SelectQuantity"
+                                    value={selectedQuantity}
+                                    variant="label-hidden"
+                                    options={quantityOptions}
+                                    onchange={handleQuantityChange}
+                                    class="quantityBox"></lightning-combobox>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+    <span id="productDescriptionId" style="display: none;">{productAriaLabel}</span>
+    <span id="selectQuantityId" style="display: none;">{ariaLabel}</span>
+    <span id="linkLabel" style="display: none;">Opens in new tab</span>
+</template>

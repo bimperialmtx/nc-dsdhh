@@ -1,0 +1,40 @@
+<apex:page standardController="Resource__c" extensions="NC_PrintSelectBarCodeController"  recordSetVar="resourceBarcode"
+           tabStyle="Opportunity" applyBodyTag="false" 
+           applyHtmlTag="false" renderAs="pdf"
+           showHeader="false" sidebar="false" standardStylesheets="false">
+    <!--<apex:slds />-->
+    
+    <head>
+        <script type="text/javascript">
+        function doRedirect() {
+            window.history.back();
+        }
+        window.onload = function (){ 
+            processSelectedReources();
+        }
+        </script>
+       
+    </head>
+    
+    <apex:form >   
+        <center>
+            <apex:pageBlock >      
+                <apex:outputPanel rendered="{!zeroRecordSelected}">
+                    <center style="margin: 50px"> 
+                        <h1><apex:outputText value="{!errorMessage}"/></h1> 
+                    </center>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!!zeroRecordSelected}">
+                    <apex:repeat value="{!resourceList}" var="resource" >
+                        
+                        <div style="float: left;margin-right:30px;margin-left:30px;margin-top:30px;margin-bottom:50px;width:290px">
+                            <h5>{!resource.name}</h5>
+                            <apex:image id="theImage" width="290" height="100" value="{!resource.url}" alt="{!resource.name}"/>
+                        </div>
+                    </apex:repeat>
+                </apex:outputPanel>
+            </apex:pageBlock>
+        </center>
+    </apex:form>
+    
+</apex:page>

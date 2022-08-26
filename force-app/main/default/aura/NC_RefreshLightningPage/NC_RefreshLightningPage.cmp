@@ -1,0 +1,9 @@
+<aura:component controller="NC_RefreshLightningPageController" implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <div class="slds-box" style="background-color: white;">
+    	<div class="slds-text-color_destructive slds-align_absolute-center">This page needs to be refreshed</div>
+        <div class="slds-m-top_small slds-align_absolute-center">
+        	<lightning:button variant="brand" label="Click Here to Refresh" title="Click Here to Refresh" onclick="{!c.handleRefresh}" />
+        </div>
+    </div>
+</aura:component>

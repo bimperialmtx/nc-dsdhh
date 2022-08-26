@@ -1,0 +1,208 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 08-31-2021
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<template>
+    <div if:true={showSpinner}>
+        <div class="backdrop">
+            <div class="spinner">
+                <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+            </div>
+        </div>
+    </div>
+    <div if:false={showSpinner}>
+        <div class="slds-clearfix slds-p-bottom_small">
+            <!--slds-p-around_small-->
+            <div class="slds-grid slds-wrap">
+                <div if:true={isExternalRecord} style="padding-top: 13px"
+                    class="slds-col slds-size_1-of-1 slds-medium-size_1-of-5 slds-large-size_1-of-5">
+                    <lightning-input type="text" label="" placeholder="Search Name or Email" value={searchInput}
+                        class="slds-float_left" onchange={updateList}></lightning-input>
+                </div>
+                <div if:false={isExternalRecord} style="margin-top: -18px;"
+                    class="slds-col slds-size_1-of-1 slds-medium-size_1-of-5 slds-large-size_1-of-5">
+                    <lightning-input type="text" label="" placeholder="Search Name or Email" value={searchInput}
+                        class="slds-float_left slds-p-around_x-small" onchange={updateList}></lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-5 slds-large-size_1-of-5"></div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-5 slds-large-size_3-of-5">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-4 slds-large-size_1-of-4">
+                            <lightning-combobox if:true={isExternalRecord} name="RegionalCenter"
+                                class="slds-p-around_x-small" label="Regional Center" value={regionalCenterSelected}
+                                options={regionalCenterOptionList} onchange={handlePicklistChnage}>
+                            </lightning-combobox>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-4 slds-large-size_1-of-4">
+                            <lightning-combobox if:true={isExternalRecord} name="County" class="slds-p-around_x-small"
+                                label="County" value={countySelected} options={countyOptionList}
+                                onchange={handlePicklistChnage}>
+                            </lightning-combobox>
+                        </div>
+                        <template if:false={isNDBEDPTraining}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-4 slds-large-size_1-of-4">
+                                <lightning-combobox if:true={isExternalRecord} name="Speciality"
+                                    class="slds-p-around_x-small" label="Speciality" value={SpecialitySelected}
+                                    options={SpecialityList} onchange={handlePicklistChnage}>
+                                </lightning-combobox>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-4 slds-large-size_1-of-4">
+                                <lightning-combobox if:true={isExternalRecord} name="LicenseType"
+                                    class="slds-p-around_x-small" label="Licence Type" value={LicenceTypeSelected}
+                                    options={LicenceTypeList} onchange={handlePicklistChnage}>
+                                </lightning-combobox>
+                            </div>
+                            <div
+                                class="slds-col slds-size_1-of-1 slds-medium-size_1-of-4 slds-large-size_1-of-4 slds-float_right">
+                            </div>
+                            <div
+                                class="slds-col slds-size_1-of-1 slds-medium-size_1-of-4 slds-large-size_1-of-4 slds-float_right">
+                            </div>
+                        </template>
+                        <div class={sendInvitationDivClass}>
+                            <div class="buttonCSS">
+
+                                <lightning-button name="Send Invitation" label="Send Invitation" variant="brand"
+                                    class="slds-p-around_x-small slds-float_right" onclick={sendInvitation}>
+                                </lightning-button>
+
+                                <lightning-button-icon class="slds-p-around_x-small slds-float_right"
+                                    icon-name="utility:refresh" alternative-text="Refresh" title="Refresh"
+                                    onclick={handleRefresh}></lightning-button-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table
+            class="slds-table slds-table--bordered slds-table--fixed-layout slds-box slds-max-medium-table--stacked-horizontal">
+            <caption class="sr-only">Send Invitations</caption>
+            <thead>
+                <tr class="slds-line-height--reset slds-text-heading--label">
+                    <th class="slds-is-resizable slds-text-title--caps" style="width: 8%;" scope="col">
+                        <div class="slds-resizable" title="Action">
+                            <lightning-input variant="label-hidden" type="checkbox" aria-label="Select all Users" label="" name="Action"
+                                onchange={updateAll}></lightning-input>
+                        </div>
+                    </th>
+                    <th if:true={isInterpreter} class="slds-is-resizable slds-text-title--caps" scope="col">
+                        <div class="slds-truncate slds-resizable" title="Individual/Agency">
+                            Individual/Agency
+                        </div>
+                    </th>
+                    <template if:false={isNDBEDPTraining}>
+                        <th if:true={isExternalRecord} class="slds-is-resizable slds-text-title--caps" scope="col">
+                            <div class="slds-truncate slds-resizable slds-cell-wrap" title="Number of Members">
+                                Number of Members
+                            </div>
+                        </th>
+                    </template>
+                    <th class="slds-is-resizable slds-text-title--caps" scope="col">
+                        <div class="slds-truncate slds-resizable" title="Equipment Name">
+                            Name
+                        </div>
+                    </th>
+                    <th class="slds-is-resizable slds-text-title--caps" scope="col">
+                        <div class="slds-truncate slds-resizable" title="Amount Authorized">
+                            Email
+                        </div>
+                    </th>
+                    <th if:true={isExternalRecord} class="slds-is-resizable slds-text-title--caps" scope="col">
+                        <div class="slds-truncate slds-resizable" title="County">
+                            County
+                        </div>
+                    </th>
+                    <th if:true={isExternalRecord} class="slds-is-resizable slds-text-title--caps" scope="col">
+                        <div class="slds-truncate slds-resizable slds-cell-wrap" title="Regional Center">
+                            Regional Center
+                        </div>
+                    </th>
+                    <th if:true={isExternalRecord} class="slds-is-resizable slds-text-title--caps" scope="col">
+                        <div class="slds-truncate slds-resizable slds-cell-wrap" title="License Type">
+                            License Type
+                        </div>
+                    </th>
+                    <th if:true={isExternalRecord} class="slds-is-resizable slds-text-title--caps" scope="col">
+                        <div class="slds-truncate slds-resizable" title="Speciality">
+                            Speciality
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={userList} for:item="user" for:index="index">
+                    <tr class="slds-hint-parent" key={user.userId}>
+                        <th data-label="Invoice Line Item Number" scope="row" aria-label={user.userName}>
+                            <div class="" title="Invoice Line Item Number" aria-label={user.userName}>
+                                <lightning-input variant="label-hidden" type="checkbox" data-id="checkBoxId" label="" name={user.userId}
+                                    checked={user.isSelected} onchange={updateSelected}>
+                                </lightning-input>
+                            </div>
+                        </th>
+                        <td if:true={isInterpreter} data-label="Individual/Agency">&nbsp;
+                            <div if:true={user.isIndividual} class="slds-truncate word-break-td"
+                                title="Individual/Agency">
+                                Individual
+                            </div>
+                            <div if:false={user.isIndividual} class="slds-truncate word-break-td"
+                                title="Individual/Agency">
+                                Agency
+                            </div>
+                        </td>
+                        <template if:false={isNDBEDPTraining}>
+                            <td if:true={isExternalRecord} data-label="Equipment Name">&nbsp;
+                                <div if:true={user.isIndividual} class="word-break-td"
+                                    title="Number of Members">
+                                    <lightning-input type="number" disabled name={user.userId} value="1"
+                                        onchange={handleNumberChange} label=""></lightning-input>
+                                </div>
+                                <div if:false={user.isIndividual} class="word-break-td"
+                                    title="Number of Members">
+                                    <lightning-input type="number" name={user.userId}
+                                        value={user.numberOfMembersProving} onchange={handleNumberChange} label="">
+                                    </lightning-input>
+                                </div>
+                            </td>
+                        </template>
+                        <td data-label="Name">&nbsp;
+                            <div class="slds-truncate word-break-td" title="Name">
+                                {user.userName}
+                            </div>
+                        </td>
+                        <td data-label="Email">&nbsp;
+                            <div class="slds-truncate" title="Email">{user.emailId}</div>
+                        </td>
+                        <td if:true={isExternalRecord} data-label="County">&nbsp;
+                            <div class="slds-truncate" title="County">
+                                {user.accountRecord.County__c}
+                            </div>
+                        </td>
+                        <td if:true={isExternalRecord} data-label="Regional Center">&nbsp;
+                            <div if:true={user.accountRecord.Regional_Center__r} class="slds-truncate"
+                                title="Regional Center">
+                                {user.accountRecord.Regional_Center__r.Name}
+                            </div>
+                        </td>
+                        <td if:true={isExternalRecord} data-label="LicenceType">&nbsp;
+                            <div class="slds-truncate" title="Licence Type">
+                                {user.accountRecord.License_Type__c}
+                            </div>
+                        </td>
+                        <td if:true={isExternalRecord} data-label="Speciality">&nbsp;
+                            <div class="slds-truncate" title="Speciality">
+                                {user.accountRecord.Specialty__c}
+                            </div>
+                        </td>
+                    </tr>
+                </template>
+                <template if:true={userList}>
+                    <div role="alert" style="margin-left: -2000%;">{userList.length} results found</div>
+                </template>
+            </tbody>
+        </table>
+    </div>
+</template>

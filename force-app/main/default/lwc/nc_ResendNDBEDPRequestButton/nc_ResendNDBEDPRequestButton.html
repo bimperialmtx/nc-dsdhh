@@ -1,0 +1,26 @@
+<!--
+ - Created by ashishpandey on 24/09/21.
+ -->
+
+<!-- Resend Ndbedp Request Button -->
+<template>
+    <div class="slds-card slds-p-around_medium" if:true={isSyncFailed}>
+        <lightning-layout multiple-rows="false">
+            <lightning-layout-item size="12" class="">
+                <div class="slds-align_absolute-center" style="color:red;font-size:18px;font-weight:bold">Request send to KLAS failed.</div>
+                <div class="slds-p-top_small slds-align_absolute-center" style="font-size:13px;">Please re-send by clicking the button below.</div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="">
+                <div if:true={spinner}>
+                    <div class="isLoading" >
+                        <lightning-spinner size="small" alternative-text="Loading..." variant="brand" class=""></lightning-spinner>
+                    </div>
+                </div>
+                <div class="slds-align_absolute-center slds-p-around_medium">
+                    <lightning-button disabled={isDisabled} variant="brand" label="Re-send Request" title="Re-send Request"
+                                      onclick={validateEquipment}></lightning-button>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

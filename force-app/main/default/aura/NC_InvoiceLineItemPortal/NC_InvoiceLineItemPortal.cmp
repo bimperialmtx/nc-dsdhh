@@ -1,0 +1,39 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 09-09-2021
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<aura:component  controller="NC_InvoiceLineItemPortalCrtl" implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId">
+    <ltng:require styles="{!$Resource.NC_DSDHH_Resource + '/styles/a11y.css'}"></ltng:require>
+    <aura:handler name="init" value="{!this}" action="{!c.initHandler}" />
+    <aura:attribute name="showComponent" type="Boolean" />
+    <aura:attribute name="NDBEDPLineItem" type="Boolean" />
+    <aura:attribute name="CommunicationLineItem" type="Boolean" />
+    <aura:attribute name="EDSLineItem" type="Boolean" />
+
+    <div class="a11y-focused">
+        <aura:if isTrue="{!v.NDBEDPLineItem}">
+            <c:NC_InvoiceLineItemsNDBEDPContainer recordId ="{!v.recordId}"></c:NC_InvoiceLineItemsNDBEDPContainer>
+            <!--<c:nc_invoiceLineItemsNDBEDP recordId ="{!v.recordId}"></c:nc_invoiceLineItemsNDBEDP>-->
+        </aura:if>
+        <aura:if isTrue="{!v.CommunicationLineItem}">
+            <c:NC_InvoiceLineItemStaffingContainer  recordId ="{!v.recordId}"></c:NC_InvoiceLineItemStaffingContainer>
+        </aura:if>
+        <aura:if isTrue="{!v.EDSLineItem}">
+            <c:NC_InvoiceLineItemComponent  recordId ="{!v.recordId}"></c:NC_InvoiceLineItemComponent>
+        </aura:if>
+    </div>
+    
+    <!--
+    <aura:if isTrue="{!v.showComponent}">
+    <c:NC_InvoiceLineItemStaffingContainer  recordId ="{!v.recordId}"></c:NC_InvoiceLineItemStaffingContainer>
+
+    <aura:set attribute="else">
+        <c:NC_InvoiceLineItemComponent  recordId ="{!v.recordId}"></c:NC_InvoiceLineItemComponent>
+    </aura:set>
+
+    </aura:if>-->
+
+</aura:component>

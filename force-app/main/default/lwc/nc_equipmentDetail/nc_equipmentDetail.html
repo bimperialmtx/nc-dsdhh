@@ -1,0 +1,49 @@
+<template>
+    <lightning-card>
+        <template if:true={product}>
+            <div class="slds-var-m-horizontal_medium">
+                <div style="font-weight: bold;">{title}</div>
+                <img
+                    if:true={productPictureUrl}
+                    src={productPictureUrl}
+                    style="width: 100%; margin-bottom: 0.5rem;"
+                    alt="Product picture"
+                />
+                <div style="font-weight: bold; padding-bottom: 5px;">Equipment Details</div>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <tbody>
+                        <tr class="slds-hint-parent">
+                            <td data-label="Author">
+                                <div class="">Author</div>
+                            </td>
+                            <td data-label="Author">
+                                <div style="white-space: pre-wrap;">{author}</div>
+                            </td>
+                        </tr>
+                        <tr class="slds-hint-parent">
+                            <td data-label="Description">
+                                <div class="">Description</div>
+                            </td>
+                            <td data-label="Description">
+                                <div style="white-space: pre-wrap;">{annotations}</div>
+                            </td>
+                        </tr>
+                        <tr class="slds-hint-parent">
+                            <td data-label="Price">
+                                <div class="">Price</div>
+                            </td>
+                            <td data-label="Replace Cost">
+                                <div style="white-space: pre-wrap;">${replaceCost}</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+        <template if:false={product}>
+            <div class="slds-var-p-around_large">
+                <p class="slds-var-p-around_small slds-text-align_center">Select a equipment to see details</p>
+            </div>
+        </template>
+    </lightning-card>
+</template>

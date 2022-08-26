@@ -1,0 +1,289 @@
+<apex:page applyBodyTag="false" applyHtmlTag="false" sidebar="false" showHeader="false" standardcontroller="Resource_Loan__c"
+    extensions="NC_ResourceManagerController" doctype="html-5.0">
+    <apex:slds />
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous" />
+
+        <title>Scan Barcode</title>
+    </head>
+    <body>
+        <div class="slds-scope">
+            <c:NC_Toast ></c:NC_Toast>
+            <div>
+                <apex:form id="form">
+                    <apex:outputPanel id="refreshId">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div>
+                                    <center>
+                                        <div class="content_container">
+                                            <div class="content" id="content" style="display:initial;">
+                                                Click the button to scan Barcode
+                                            </div><br/><br/>
+                                            <label class="slds-form-element__label"><abbr class="slds-required" title="required"> *</abbr>Due Date</label>
+                                            <apex:input styleclass="form-control slds-size_1-of-1 required" type="date" value="{!dueDate}"/>
+                                            <!-- <apex:inputfield styleclass="form-control slds-size_1-of-1 required" id="duedate" html-placeholder="Due Date" value="{!requestedResource.Due_Date__c}" required="true"/> -->
+                                            <div class="duedate slds-hide requiredErrorMessage errorMsg"><strong>Error:</strong> You must enter a value</div><br/>
+                                            <label class="slds-form-element__label"><abbr class="slds-required" title="required"> *</abbr>Condition of Resource</label>
+                                            <apex:inputfield styleclass="form-control slds-size_1-of-1 required" id="condition" html-placeholder="Condition of Resource" value="{!requestedResource.Condition_of_Resource__c}" required="fasle"/>
+                                            <div class="condition slds-hide requiredErrorMessage errorMsg"><strong>Error:</strong> You must enter a value</div><br/>
+                                            
+                                            <label class="slds-form-element__label"><abbr class="slds-required" title="required"> *</abbr>Barcode Number</label>
+                                            <input id="scanner_input" class="form-control slds-size_1-of-1 required"  placeholder="Barcode Number" type="text" value="{!scanCode}"/>
+                                            <div class="scanner_input slds-hide requiredErrorMessage errorMsg"><strong>Error:</strong> You must enter a value</div><br/>
+                                            <div>
+                                                <button class="slds-size_1-of-1 slds-button slds-button--brand cuf-publisherCancelButton uiButton--default uiButton--brand uiButton" type="button" data-toggle="modal" data-target="#livestream_scanner">
+                                                    Scan Barcode
+                                                </button>
+                                            </div><br/>
+                                            <div>
+                                                <button class="slds-size_1-of-1 slds-button slds-button--brand cuf-publisherCancelButton uiButton--default uiButton--brand uiButton " id="Save" type="button" onclick="saveTextValueJavascript();">
+                                                    Check-Out
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                        <apex:inputText id="textvalue" value="{!scanCode}" style="display:none" />
+                        <span class="input-group-btn">
+
+                        </span>
+                    </apex:outputPanel>
+                    <apex:actionFunction name="saveTextValueJavascriptAF" action="{!resourceCheckOut}" reRender="none" oncomplete="validateResult('{!errorMessage}');"></apex:actionFunction>
+                    <apex:actionFunction name="redirectAF" action="{!redirect}" ></apex:actionFunction>
+                    <apex:inputhidden id="scanCode" value="{!scanCode}" />
+                </apex:form>
+
+            </div>
+            <div class="modal" id="livestream_scanner">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Barcode Scanner</h4>
+
+                        </div>
+                        <div class="modal-body" style="position: static">
+                            <div id="interactive" class="viewport"></div>
+                            <div class="error"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <!-- <label class="btn btn-default pull-left">
+                                <i class="fa fa-camera"></i> Use camera app
+                                <input type="file" accept="image/*;capture=camera" capture="camera" class="hidden" />
+                            </label> -->
+                            <button type="button" class="slds-button slds-button--neutral cuf-publisherCancelButton uiButton--default uiButton--brand uiButton" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+        </div>
+        <!-- /.modal -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+        <script src="{!URLFOR($Resource.barCodeJSQ)}"></script>
+        <style>
+            .dateFormat {
+                display: none;
+            }
+            .errorMsg {
+                text-align: left;
+            }
+            label {
+                width: 100%;
+                text-align: left;
+                margin: 0 !important;
+            }
+            #interactive.viewport {
+                position: relative;
+                width: 100%;
+                height: auto;
+                overflow: hidden;
+                text-align: center;
+            }
+
+            #interactive.viewport>canvas,
+            #interactive.viewport>video {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            canvas.drawing,
+            canvas.drawingBuffer {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            .content_container{
+                width: 250px;
+            }
+            .requiredHighlighter {
+                border: 2px solid red;
+            }
+        </style>
+        <script type="text/javascript">
+            function validateFields() {
+                let flag = true;
+                $('.required').removeClass('requiredHighlighter');
+                $('.requiredErrorMessage').addClass('slds-hide');
+                $.each($('.required') ,function(index,item) {
+                    if(typeof $(item).val() == 'undefined' || $(item).val() == '' || $(item).val() == null) {
+                        flag = false;
+                        $(item).addClass('requiredHighlighter');
+                        $('.'+$(item).attr('Id').split(':')[$(item).attr('Id').split(':').length - 1]).removeClass('slds-hide');
+                    }
+                });
+                return flag;
+            }
+            
+            function validateResult(errorMessage) {
+                if(typeof errorMessage == 'undefined' || errorMessage == '' || errorMessage == null)
+                    redirectAF();
+                else
+                    showErrorMessage('error',errorMessage);
+            }
+            handleMessage();
+            function handleMessage() {
+                var codeValue;
+                // Create the QuaggaJS config object for the live stream
+                var liveStreamConfig = {
+                    inputStream: {
+                        type: "LiveStream",
+                        constraints: {
+                            width: { min: 640 },
+                            height: { min: 480 },
+                            aspectRatio: { min: 1, max: 100 },
+                            facingMode: "environment" // or "user" for the front camera
+                        }
+                    },
+                    locator: {
+                        patchSize: "medium",
+                        halfSample: true
+                    },
+                    numOfWorkers: (navigator.hardwareConcurrency ? navigator.hardwareConcurrency : 4),
+                    decoder: {
+                        "readers": [
+                            { "format": "code_39_reader", "config": {} }
+                        ]
+                    },
+                    locate: true
+                };
+                // The fallback to the file API requires a different inputStream option. 
+                // The rest is the same 
+                var fileConfig = $.extend(
+                    {},
+                    liveStreamConfig,
+                    {
+                        inputStream: {
+                            size: 800
+                        }
+                    }
+                );
+                // Start the live stream scanner when the modal opens
+                $('#livestream_scanner').on('shown.bs.modal', function (e) {
+                    Quagga.init(
+                        liveStreamConfig,
+                        function (err) {
+                            if (err) {
+                                $('#livestream_scanner .modal-body .error').html('<div class="alert alert-danger"><strong><i class="fa fa-exclamation-triangle"></i> ' + err.name + '</strong>: ' + err.message + '</div>');
+                                Quagga.stop();
+                                return;
+                            }
+                            Quagga.start();
+                        }
+                    );
+                });
+
+                // Make sure, QuaggaJS draws frames an lines around possible 
+                // barcodes on the live stream
+                Quagga.onProcessed(function (result) {
+                    var drawingCtx = Quagga.canvas.ctx.overlay,
+                        drawingCanvas = Quagga.canvas.dom.overlay;
+
+                    if (result) {
+                        if (result.boxes) {
+                            drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
+                            result.boxes.filter(function (box) {
+                                return box !== result.box;
+                            }).forEach(function (box) {
+                                Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: "green", lineWidth: 2 });
+                            });
+                        }
+
+                        if (result.box) {
+                            Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: "#00F", lineWidth: 2 });
+                        }
+
+                        if (result.codeResult && result.codeResult.code) {
+                            Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'red', lineWidth: 3 });
+                        }
+                    }
+                });
+
+                // Once a barcode had been read successfully, stop quagga and 
+                // close the modal after a second to let the user notice where 
+                // the barcode had actually been found.
+                Quagga.onDetected(function (result) {
+                    if (result.codeResult.code) {
+                        $('#scanner_input').val(result.codeResult.code);
+                        codeValue = result.codeResult.code;
+                        document.getElementById('{!$Component.form.textvalue}').value = codeValue;
+                        document.getElementById("Save").style.display = "initial";
+                        document.getElementById("Save").style.displayalue = codeValue;
+                        document.getElementById("content").style.display = "none";
+                        console.log('-->' + codeValue);
+                        Quagga.stop();
+                        // evt.source.postMessage(JSON.stringify(result), "*");
+                        setTimeout(function () { $('#livestream_scanner').modal('hide'); }, 1000);
+                    }
+                });
+
+                // Stop quagga in any case, when the modal is closed
+                $('#livestream_scanner').on('hide.bs.modal', function () {
+                    if (Quagga) {
+                        Quagga.stop();
+                    }
+                });
+
+                // Call Quagga.decodeSingle() for every file selected in the 
+                // file input
+                $("#livestream_scanner input:file").on("change", function (e) {
+                    if (e.target.files && e.target.files.length) {
+                        Quagga.decodeSingle($.extend({}, fileConfig, { src: URL.createObjectURL(e.target.files[0]) }), function (result) { alert(result.codeResult.code); });
+                    }
+                });
+            };
+        </script>
+        <script type="text/javascript">
+            function saveTextValueJavascript() {
+                let tempvar = $('[id$="scanner_input"]').val();
+                if(validateFields()) {
+                    $('[id$="scanCode"]').val(tempvar);
+                    saveTextValueJavascriptAF();
+                }
+            }
+            function refreshPage() {
+                // call action function
+                document.getElementById('{!$Component.form.textvalue}').value = '';
+                document.getElementById('{!$Component.scanner_input}').value = '';
+            }
+            function redirect() {
+                window.location.href = '/TestingSite/s/oktc-appointments';
+            }
+
+        </script>
+    </body>
+</apex:page>

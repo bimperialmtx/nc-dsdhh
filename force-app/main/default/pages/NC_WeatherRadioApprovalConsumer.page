@@ -1,0 +1,70 @@
+<apex:page renderAs="pdf" controller="NC_WeatherRadioApprovalConController">
+<!-- Begin Default Content REMOVE THIS -->
+    <apex:composition template="NC_DocumentTemplate">
+        <apex:define name="body">
+            <div class="body-container" style="padding-top:70px;padding-bottom:140px">
+                <table>
+                    <tr>
+                      <td>{!weatherRadioApprovalConsumerObject.consumerName}</td>
+                    </tr>
+                    <tr>
+                      <td>{!weatherRadioApprovalConsumerObject.consumerAddress1}</td>
+                    </tr>
+                    <tr>
+                      <td>{!weatherRadioApprovalConsumerObject.consumerCity} {!weatherRadioApprovalConsumerObject.consumerState} {!weatherRadioApprovalConsumerObject.consumerPostalCode}</td>
+                    </tr>
+                </table>
+    
+                <div style="padding-top:25px">{!weatherRadioApprovalConsumerObject.currentDate}</div>
+                <div style="padding-top:25px">Dear {!weatherRadioApprovalConsumerObject.consumerName},</div>
+                <div style="padding-top:5px" class="p1">
+                    <p>
+                        Congratulations! Your request for the following 
+                        <apex:repeat value="{!weatherRadioApprovalConsumerObject.listOfEquipments}" var="equipment">
+                             {!equipment.name},
+                        </apex:repeat> 
+                        has been approved.
+                    </p>
+                </div>
+                <div class="p2">
+                    <p>
+                        The 
+                        <apex:repeat value="{!weatherRadioApprovalConsumerObject.listOfEquipments}" var="equipment">
+                            {!equipment.name},
+                        </apex:repeat> 
+                        will be shipped to the {!weatherRadioApprovalConsumerObject.regionalCenterName} and it should arrive about 3 to 4 weeks following the date of this letter. Here is what you need to know:
+                    </p>
+                </div>
+                <div class="p3">
+                    <p>
+                        <table border="1">
+                            <tr>
+                                <td>Equipment Name</td>
+                                <td>Days to Return</td>
+                                <td>Days to Exchange</td>
+                            </tr>
+                            <apex:repeat value="{!weatherRadioApprovalConsumerObject.listOfEquipments}" var="equipment">
+                                <tr>
+                                    <td>{!equipment.name}</td>
+                                    <td>{!equipment.daysReturn}</td>
+                                    <td>{!equipment.daysExchange}</td>
+                                </tr>
+                            </apex:repeat>
+                        </table>
+                        <ul>
+                            <li>You can return or exchange the equipment within the days, mentioned in the table above.</li>
+                            <li>Save the Packing Slip for your record. The Packing Slip has your order (invoice) number.</li>
+                            <li>In the package you will find the equipment manual and contact information for your local Regional Center.</li>
+                            <li>Have questions? Call {!weatherRadioApprovalConsumerObject.vendorName} (information is shown on the Packing Slip).</li>
+                            <li>Have more questions? Call the Regional Center and ask for the Community Accessibility Consultant. They will be happy to help you.</li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="p4">
+                    <p>Thank you, it was a pleasure working with you. We are very happy to have provided you with this service.</p>
+                </div>
+            </div>          
+        </apex:define>
+    </apex:composition>
+<!-- End Default Content REMOVE THIS -->
+</apex:page>

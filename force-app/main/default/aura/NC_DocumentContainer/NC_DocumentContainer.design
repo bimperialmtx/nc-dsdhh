@@ -1,0 +1,16 @@
+<design:component >
+    <design:attribute name="disableField" label="Disable Field API Name" placeholder="(Confirm Field API Name)" />
+    <design:attribute name="disableFieldValue" label="Disable Field Value" placeholder="(Value)" />    
+    <design:attribute name="fileInfo1" label="1st file info" placeholder="(Label;Confirm Field API Name;Id Field)" />
+    <design:attribute name="fileInfo2" label="2nd file info" placeholder="(Label;Confirm Field API Name;Id Field)" />
+    <design:attribute name="fileInfo3" label="3rd file info" placeholder="(Label;Confirm Field API Name;Id Field)" />
+    <design:attribute name="fileInfo4" label="4th file info" placeholder="(Label;Confirm Field API Name;Id Field)" />
+    <design:attribute name="fileInfo5" label="5th file info" placeholder="(Label;Confirm Field API Name;Id Field)" />
+    <design:attribute name="fileInfo6" label="6th file info" placeholder="(Label;Confirm Field API Name;Id Field)" />
+    <design:attribute name="fileInfo7" label="7th file info" placeholder="(Label;Confirm Field API Name;Id Field)" />
+    <design:attribute name="fileInfo8" label="8th file info" placeholder="(Label;Confirm Field API Name;Id Field)" />
+    <design:attribute name="fileInfo9" label="9th file info" placeholder="(Label;Confirm Field API Name;Id Field)" />
+    <design:attribute name="fileInfo10" label="10th file info" placeholder="(Label;Confirm Field API Name;Id Field)" />
+    <design:attribute name="fileInfo11" label="11th file info" placeholder="(Label;Confirm Field API Name;Id Field)" />
+    <design:attribute name="fileInfo12" label="12th file info" placeholder="(Label;Confirm Field API Name;Id Field)" />
+</design:component>

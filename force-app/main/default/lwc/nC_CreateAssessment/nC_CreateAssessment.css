@@ -1,0 +1,48 @@
+.strong-text {
+    color: #3E3E3C ;
+    font-weight: 650;
+}
+
+.strong-heading {
+    color: #3E3E3C ;
+    font-weight: 700;
+}
+
+.strong-title{
+    color: hsl(9, 97%, 55%) ; 
+    font-weight: 700;
+    font-size: 140%;
+}
+.strong-titletwo{
+    color: #3E3E3C ;
+    font-weight: 700;
+    font-size: 140%;
+}
+/* .title1{
+    margin-top: -35px;
+} */
+
+.footer{
+    /* background-attachment: fixed; */
+    position: sticky;
+    bottom: 0px;
+    margin-bottom: -100px;
+    margin-left: -35px;
+    margin-right: -35px;
+    padding-top: 8px;
+    padding-bottom: 10px;
+    background-color: rgb(233, 232, 232);
+    
+}
+.strong-link{
+    font-weight: 700;
+    font-size: 100%;
+}
+.buttonCSS{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.closeButtonCss{
+    display: block !important;
+}

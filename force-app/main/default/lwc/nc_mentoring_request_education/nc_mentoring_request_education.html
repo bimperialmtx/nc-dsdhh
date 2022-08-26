@@ -1,0 +1,31 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 05-27-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+    </template>
+    <div class="container d-flex justify-space-between slds-p-bottom_xx-small" >
+        <h2 class="slds-p-left_xx-small header-title" data-id="headerDiv" tabindex="-1" aria-label="Education Information (Step 2 of 10)"><b>Education Information</b></h2>
+    </div>
+    <span data-id="accessibilityInfo2" style="display: none;">
+        Family Information is complete. Education Information is the current step (Step 2 of 10).
+    </span>
+    <div style="color: red;" class="extra-padding">* indicates required fields</div>
+    <div class="extra-padding">
+        <lightning-combobox name="educationLevel" label="What is your highest level of education?" aria-label="What is your highest level of education?" value={educationInformation.educationLevel} placeholder="Select Progress" options={educationLevel} onchange={handleChange} ></lightning-combobox>
+        <lightning-input if:true={educationLevelOther} required type="text" label="Other Education Level" value={educationInformation.otherEducation} name="otherEducation" onblur={updateInput}></lightning-input>
+        <template if:false={hightSchoolDiploma}>
+            <lightning-dual-listbox name="college" aria-live="assertive" label="Which college did you get your degree?" tabindex="0" aria-label="Which college did you get your degree?" source-label="Available" selected-label="Selected" field-level-help="Select your college" options={college} onchange={handleChange}></lightning-dual-listbox>
+            <lightning-input if:true={otherCollegeSelected} required  type="text" label="Other College" value={educationInformation.otherCollege} name="otherCollege" onchange={handleChange} onblur={updateInput}></lightning-input>
+            <template if:false={noCollegeDegree}>
+                <lightning-dual-listbox name="degree" aria-live="assertive" label="What is your degree in?" tabindex="0" aria-label="What is your degree in?" source-label="Available" selected-label="Selected" field-level-help="Select your degree" options={degree} onchange={handleChange}></lightning-dual-listbox>
+                <lightning-input if:true={otherDegreeSelected} required type="text" label="Other Degree" value={educationInformation.otherDegree} name="otherDegree" onchange={handleChange} onblur={updateInput}></lightning-input>
+            </template>
+        </template>
+    </div>
+</template>

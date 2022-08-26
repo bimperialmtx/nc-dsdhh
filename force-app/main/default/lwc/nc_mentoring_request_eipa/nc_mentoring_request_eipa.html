@@ -1,0 +1,31 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 05-11-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+    </template>
+    <div class="container d-flex justify-space-between slds-p-bottom_xx-small">
+        <h2 class="slds-p-left_xx-small header-title" data-id="headerDiv" tabindex="-1" aria-label="EIPA Information (Step 7 of 10)"><b>EIPA Information</b></h2>
+    </div>
+    <span data-id="accessibilityInfo7" style="display: none;">
+      CASLI/NIC or CDI Performance Exam is complete. EIPA Information is the current step (Step 7 of 10).
+    </span>
+    <div style="color: red;" class="extra-padding">* indicates required fields</div>
+    <div class="extra-padding">
+        <span style="display: none;" data-id="whatIsYourEIPAScoreInfoId">What is your EIPA score? (If you've taken it multiple times, please list your highest score). Required</span>
+        <span style="display: none;" data-id="whenDoYouPlanToTakeTheEIPAInfoId">When do you plan to take the EIPA? Required</span>
+        <lightning-combobox name="haveYouTakenTheEIPA" label="Have you taken the EIPA?" value={eipaInformtion.haveYouTakenTheEIPA} placeholder="Select Progress" options={howTakenTheEIPA} onchange={handleChange} ></lightning-combobox>
+        <!-- <lightning-combobox if:true={EIPAExamTaken} required name="lastTaketheEIPA" label="When did you last take the EIPA?" value={eipaInformtion.lastTaketheEIPA} placeholder="Select Progress" options={lastTakeTheEIPA} onchange={handleChange} ></lightning-combobox> -->
+        <lightning-input type="text" if:true={EIPAExamTaken} data-id="lastTaketheEIPA" name="lastTaketheEIPA" label="When did you last take the EIPA?" value={eipaInformtion.lastTaketheEIPA} onchange={handleEIPATakenChange} required></lightning-input>
+        <lightning-combobox aria-labelled-by="whatIsYourEIPAScoreInfo" if:true={EIPAExamTaken} required name="whatIsYourEIPAScore" label="What is your EIPA score? (If you've taken it multiple times, please list your highest score)." value={eipaInformtion.whatIsYourEIPAScore} placeholder="Select Progress" options={eipaScore} onchange={handleChange} ></lightning-combobox>
+        <div if:false={EIPAExamTaken}>
+          <lightning-combobox name="AreYouPlanningToTakeTheEIPA" label="Are you planning to take the EIPA?" value={eipaInformtion.AreYouPlanningToTakeTheEIPA} placeholder="Select Progress" options={planToTakeEIPA} onchange={handleChange} ></lightning-combobox>
+          <lightning-combobox aria-labelled-by="whenDoYouPlanToTakeTheEIPAInfo" if:true={planningToTakeExam} required name="whenDoYouPlanToTakeTheEIPA" label="When do you plan to take the EIPA?" value={eipaInformtion.whenDoYouPlanToTakeTheEIPA} placeholder="Select Progress" options={whenPlanEIPA} onchange={handleChange} ></lightning-combobox>
+        </div>
+    </div>
+</template>

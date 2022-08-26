@@ -1,0 +1,12 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true
+    }
+  ],
+  "name": "nc-dsdhh",
+  "namespace": "",
+  "sfdcLoginUrl": "https://ncdsdhh--mtxuat.my.salesforce.com",
+  "sourceApiVersion": "55.0"
+}

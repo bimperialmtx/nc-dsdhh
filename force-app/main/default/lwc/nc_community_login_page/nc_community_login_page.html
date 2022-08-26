@@ -1,0 +1,63 @@
+<template>
+     <!-- Input Panel -->
+     <template if:true={isLoadedComp}>
+        <lightning-spinner class="spins" variant="brand" size="medium"></lightning-spinner>
+    </template>
+    <div class="logo-container">
+        <img src={logoURL} class="logo slds-align_absolute-center"/>
+    </div>
+    <div class="body-container">
+        <!-- <div class="has-shadow slds-p-vertical_medium slds-m-bottom_medium heading_header_registration">
+            <div class="container pageHeader app-content">
+                <h1 class="page-title">NC DHHS</h1>
+                <div class="description">Have a question or comment about PUA’s response to the Novel Coronavirus
+                            Outbreak? Enter it below.</div>
+            </div>
+        </div> -->
+    
+        <div class="container">
+            <div class="app-container">
+                <template if:false={showForgetPassword}>
+                <div class="app-content slds-m-bottom_large">
+                    <!--<c-pua-help-text help-text={Grants_Login_Page_Help_Text}></c-pua-help-text>-->
+                        <div class="section-card">
+                            <!-- Section -->
+                            
+                            <!-- Error Message -->
+                            <div if:true={errorMsg} style="margin:1rem 0rem;" class="slds-box slds-theme_info">{errorMsg}</div>
+    
+                            <div if:true={errorForgotError} style="margin:1rem 0rem;" class={forgetPassworClass}>{errorForgetMsg}</div>
+    
+                            <div class="slds-form__row slds-grid slds-gutters slds-wrap">
+                                <div class="slds-col slds-small-size_12-of-12 slds-size_1-of-1">
+                                    <lightning-input type="text" autocomplete="none" label="Username" required
+                                        onchange={handleInput} name="userName" style="width: 100%;" maxlength="80" field-level-help={Grants_User_Name_Pattern} class="ui-text">
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col slds-small-size_12-of-12 slds-size_1-of-1">
+                                    <lightning-input required type="password" label="Password" name="password" field-level-help={Grants_Password_Combination} class={error}
+                                        value={password} onchange={handleInput}></lightning-input>
+                                   <!--<div if:true={passwordError} class="slds-required slds-form-element__help">Complete this field.</div> -->
+                                </div>
+                                
+                                <div class="slds-col slds-small-size_12-of-12 slds-size_1-of-1 login-container">
+                                    <button class="slds-button slds-button_brand login-button"
+                                        onclick={loginContact}><span>Log In</span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                </div>
+            </div>
+        <!-- Spinner -->
+        <div class="backdrop" if:true={showSpinner}>
+            <div class="spinner">
+                <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+            </div>
+        </div>
+    </div>
+    
+
+
+</template>

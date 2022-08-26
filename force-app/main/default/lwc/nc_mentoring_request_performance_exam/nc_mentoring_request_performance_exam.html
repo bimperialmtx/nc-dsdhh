@@ -1,0 +1,32 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 05-11-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+    </template>
+    <div class="container d-flex justify-space-between slds-p-bottom_xx-small">
+        <h2 class="slds-p-left_xx-small header-title" data-id="headerDiv" tabindex="-1" aria-label="CASLI/NIC or CDI Performance Exam (Step 6 of 10)"><b>CASLI/NIC or CDI Performance Exam</b></h2>
+    </div>
+    <span data-id="accessibilityInfo6" style="display: none;">
+        CASLI/NIC or CDI Knowledge Exam is complete. CASLI/NIC or CDI Performance Exam is the current step (Step 6 of 10).
+    </span>
+    <div style="color: red;" class="extra-padding">* indicates required fields</div>
+    <div class="extra-padding">
+        <lightning-combobox name="takenCASLINICOrCDIPerformanceExam" label="Have you taken the CASLI/NIC or CDI Performance Exam?" value={performanceInformation.takenCASLINICOrCDIPerformanceExam} placeholder="Select Progress" options={takenPerformance} onchange={handleChange} ></lightning-combobox>
+        <span style="display: none;" data-id="passedCASLINICOrCDIPerformanceExamInfoId">Have you passed the CASLI/NIC or CDI Performance Exam? Required</span>
+        <span style="display: none;" data-id="howManyTimesCASLINICOrCDIPerformaInfoId">How many times have you taken the CASLI/NIC or CDI Performance Exam? Required</span>
+        <lightning-combobox aria-labelled-by="passedCASLINICOrCDIPerformanceExamInfo" if:true={CASLIExamTaken} required name="passedCASLINICOrCDIPerformanceExam" label="Have you passed the CASLI/NIC or CDI Performance Exam?" value={performanceInformation.passedCASLINICOrCDIPerformanceExam} placeholder="Select Progress" options={passedPerformance} onchange={handleChange} ></lightning-combobox>
+        <!-- <lightning-combobox if:true={CASLIExamTaken} required name="lastCASLINICOrCDIPerformanceExam" label="When did you last take the CASLI/NIC or CDI Performance Exam?" value={performanceInformation.lastCASLINICOrCDIPerformanceExam} placeholder="Select Progress" options={lastPerformance} onchange={handleChange} ></lightning-combobox> -->
+        <lightning-input type="text" if:true={CASLIExamTaken} data-id="lastCASLINICOrCDIPerformanceExam" name="lastCASLINICOrCDIPerformanceExam" label="When did you last take the CASLI/NIC or CDI Performance Exam?" value={performanceInformation.lastCASLINICOrCDIPerformanceExam} onchange={handleExamTakenChange} required></lightning-input>
+        <lightning-combobox aria-labelled-by="howManyTimesCASLINICOrCDIPerformaInfo" if:true={CASLIExamTaken} required name="howManyTimesCASLINICOrCDIPerforma" label="How many times have you taken the CASLI/NIC or CDI Performance Exam?" value={performanceInformation.howManyTimesCASLINICOrCDIPerforma} placeholder="Select Progress" options={howManyTimePerformance} onchange={handleChange} ></lightning-combobox>
+        <div if:false={CASLIExamTaken} >
+           <lightning-combobox name="planningCASLINICOrCDIPerformance" label="Are you planning to take Performance Exam soon?" value={performanceInformation.planningCASLINICOrCDIPerformance} placeholder="Select Progress" options={planningPerformance} onchange={handleChange} ></lightning-combobox>
+           <lightning-combobox if:true={planningToTakeExam} required name="timePeriodCASLINICOrCDIPerformance" label="When are you planning to take the CASLI/NIC or CDI Performance Exam?" value={performanceInformation.timePeriodCASLINICOrCDIPerformance} placeholder="Select Progress" options={timePeriodPerformance} onchange={handleChange} ></lightning-combobox>
+        </div>
+    </div>
+</template>

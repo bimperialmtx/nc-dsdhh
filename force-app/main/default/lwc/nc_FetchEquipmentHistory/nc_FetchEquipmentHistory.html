@@ -1,0 +1,8 @@
+<template>
+    <div style="display: none;">
+        {recordId}
+    </div>
+    <div class="loading_wheel" if:true={spinner}>
+        <lightning-spinner class="spins" size="medium" alternative-text="Loading..." variant="brand" ></lightning-spinner>
+    </div>
+</template>

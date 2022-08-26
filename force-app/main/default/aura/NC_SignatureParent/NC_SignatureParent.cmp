@@ -1,0 +1,11 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                access="global" controller="NC_SignatureController">
+	<aura:attribute name="customField" type="String" default="Signature_Id__c" access="global"/>
+    <aura:attribute name="filter" type="String" access="global"/>
+    <aura:attribute name="isVisible" type="Boolean" default="false" access="global"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:if isTrue="{!v.isVisible}">
+        <c:NC_Signature recordId="{!v.recordId}" customField="{!v.customField}"></c:NC_Signature>
+    </aura:if>
+</aura:component>

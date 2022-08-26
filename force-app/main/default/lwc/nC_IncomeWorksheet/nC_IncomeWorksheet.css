@@ -1,0 +1,69 @@
+:host {
+  display: block;
+  background: white;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.layout-properties{
+  background-color: white;
+}
+.title{
+  font-size: 2rem;
+  font-weight: 350;
+}
+.heading{
+  font-size: 1rem;
+  font-weight: 250;
+  
+}
+.heading-color{
+  background-color: rgb(243, 242, 242);
+}
+
+.marital-status{
+  width: 70%;
+}
+.slds-checkbox {
+  display: inline !important;
+}
+.container{
+  height:300px;
+  width:100%;
+  margin: 0 auto;
+  border:2px solid transparent;
+  /* box-shadow: 0 0 10px rgba(0,0,0,0.6); */
+  font-family: 'Roboto', sans-serif;
+}
+
+.table{
+  height:100%;
+  width:100%;
+}
+/*--table head--*/
+.table .table-head{
+  position: relative;
+  z-index:1;
+  width: 100%;
+  background-color: #C4E3EB;
+  font-weight: 700;
+}
+.table .table-head .row{
+  display:flex;
+  flex-direction: row;
+}
+/*--table body--*/
+.table .table-body .row{
+  display: flex;
+  flex-direction:row;
+  transform:translateY(calc(22px + 24px));
+  
+}
+.table .table-body .row:nth-child(even){
+  background-color: #EBF5F8;
+}
+/*-- others --*/
+.fieldname, .data{
+  padding: 12px 0 12px 15px;
+  flex:1;
+}

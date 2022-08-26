@@ -1,0 +1,35 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 05-20-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<template>
+  <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small"
+    aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+    <div class="slds-modal__container">
+      <header class="slds-modal__header">
+        <button data-name="modal"
+          class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse closeButtonCss modal-focused"
+          title="Close" onclick={closeWindow}>
+          <lightning-icon icon-name="utility:close" variant="inverse" alternative-text="Close Manage Documents Delete Modal"
+            size="small" title="Close"></lightning-icon>
+        </button>
+        <h2 id="modal-heading-01" data-name="modal" class="slds-modal__title slds-hyphenate">Do you want to
+          delete {name}</h2>
+      </header>
+      <!-- <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+          </div> -->
+      <footer class="slds-modal__footer">
+        <template if:true={showSpinner}>
+          <lightning-spinner variant="brand" alternative-text="Loading" size="medium" style="z-index: 9999;">
+          </lightning-spinner>
+        </template>
+        <lightning-button label="No" data-name="modal" onclick={closeWindow}></lightning-button>
+        <lightning-button label="Yes" data-name="modal" onclick={save}></lightning-button>
+      </footer>
+    </div>
+  </section>
+  <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

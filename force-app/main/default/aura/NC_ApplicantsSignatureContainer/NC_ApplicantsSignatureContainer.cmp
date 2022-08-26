@@ -1,0 +1,62 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 05-20-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<aura:component implements="lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader" 
+access="global">
+<ltng:require styles="{!$Resource.NC_DSDHH_Resource + '/styles/a11y.css'}"></ltng:require>
+<aura:handler event="c:NC_SignEvent" action="{!c.handleApplicationEvent}"/>
+
+<aura:attribute type="Boolean" name="showSignCmp"/>
+<!-- <aura:attribute type="Boolean" name="callLWC"/> -->
+<aura:attribute name="isModalOpen" type="boolean" default="false"/>
+
+<!-- <aura:handler name="init" value="{!this}" action="{!c.initHandler}" /> -->
+             <aura:html tag="style">
+      
+                .slds-modal__close{
+                  display : none;
+                }
+                .signHereClose{
+                  display: block !important;
+                }
+              </aura:html>
+<!-- <aura:if isTrue="{!v.callLWC}"> -->
+<div style="background-color: white;" class="slds-p-around_medium a11y-focused">
+    <c:nC_Applicant_Signature aura:id="applicantsSignature" recordId="{!v.recordId}" onvaluechange="{!c.closeModal}" onvaluechangeeventone="{!c.callSignatureComponent}"></c:nC_Applicant_Signature>
+    <!-- <cNC_SignatureParent recordId="{!v.recordId}" customField="Applicants_Signature_Id__c" onvaluechange="{!c.closeModal}" onvaluechangeeventone="{!c.callSignatureComponent}"></c:c:NC_SignatureParent> -->
+
+</div>
+<!-- </aura:if> -->
+
+<aura:if isTrue="{!v.showSignCmp}">
+   <!-- <aura:if isTrue="{!v.isModalOpen}"> -->
+  <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open a11y-focused" style="background-color: rgba(0, 0, 0, 0.7);" onkeydown="{!c.handleKeyDown}">
+    <div class="slds-modal__container">
+    <header class="slds-modal__header">
+    <button aura:id="signModal" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse modal-focused signHereClose" title="Close" aria-label="Close Signature Modal" onclick="{!c.closeSignatureModal}">
+		<lightning:icon iconName="utility:close" variant="inverse" size="small" alternativeText="close" title="close" />
+    </button>
+    <!-- <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/> -->
+    <!-- <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Modal header</h2> -->
+    </header>
+    <div class="slds-modal__content slds-p-around_medium modal-focused" id="modal-content-id-1">
+      <c:NC_SignatureParent recordId="{!v.recordId}" customField="Applicants_Signature_Id__c"></c:NC_SignatureParent>
+    </div>
+    <footer class="slds-modal__footer">
+     <button class="slds-button slds-button_neutral modal-focused" onclick="{!c.closeSignatureModal}">Cancel</button>
+   
+    </footer>
+    </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  <!-- </aura:if> -->
+</aura:if>
+</aura:component>

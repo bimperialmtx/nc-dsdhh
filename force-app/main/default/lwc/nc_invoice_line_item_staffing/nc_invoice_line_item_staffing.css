@@ -1,0 +1,38 @@
+.footer-tab{
+    text-align: right;
+   }
+   
+   .label-text-error{
+     color: #6d0606;
+   }
+   
+   .exampleHolder{
+     position: relative;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+   
+   }
+   .font-size{
+     font-size: medium;
+   }
+   
+   .total-input{
+     background-color: #e8a199;
+   }
+   
+   .locked-record{
+     background: lightgray !important;
+   }
+   
+   .word-break-td{
+     word-break: break-all; 
+   }
+   
+   .table-container{
+     width: 100% !important;
+   }
+   
+   .text-container{
+     position: absolute;
+   }

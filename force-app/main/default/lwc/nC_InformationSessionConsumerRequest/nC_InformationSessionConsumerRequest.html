@@ -1,0 +1,48 @@
+<template>
+  <div class="slds-clearfix slds-p-around_small">
+      <lightning-input type="text" label="" placeholder="Search Name or Email" aria-label="Invite Attendees Search Name or Email" value={searchInput} class="slds-float_left" onchange={updateList}></lightning-input>
+      <lightning-button name="Send Invitation" label="Send Invitation" class="slds-float_right button-send" onclick={sendInvitation} ></lightning-button>
+  </div> 
+  <table class="slds-table slds-table--bordered slds-table--fixed-layout slds-box slds-max-medium-table--stacked-horizontal">
+    <caption class="sr-only ">Invite Attendees</caption>
+      <thead>
+        <tr class="slds-line-height--reset slds-text-heading--label">
+          <th class="slds-is-resizable slds-text-title--caps" scope="col">
+              <div class="slds-resizable" title="Action">
+                  <lightning-input variant="label-hidden" type="checkbox" aria-label="Select all Consumers" label="" name="Action" onchange={updateAll}></lightning-input>
+              </div>
+          </th>
+          <th class="slds-is-resizable slds-text-title--caps" scope="col">
+              <div class="slds-truncate slds-resizable" title="Consumer Name">Consumer Name</div>
+          </th>
+          <th class="slds-is-resizable slds-text-title--caps" scope="col">
+              <div class="slds-truncate slds-resizable" title="Consumer Email">Consumer Email</div>  
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+          <template for:each={consumerList} for:item="consumer" for:index="index">
+              <tr class="slds-hint-parent" key={consumer.consumerId}>
+                  <th data-label="Action" scope="row" aria-label={consumer.consumerName}>
+                      <div class="" title="Action" aria-label={consumer.consumerName}>
+                          <lightning-input variant="label-hidden" type="checkbox" data-id="checkBoxId"
+                                           label="" name={consumer.consumerId} 
+                                           checked={consumer.isSelected} 
+                                           onchange={updateSelected}>
+                          </lightning-input>
+                      </div>
+                  </th>
+                  <td data-label="Consumer Name">&nbsp;
+                      <div class="slds-truncate word-break-td" title="Consumer Name">{consumer.consumerName}</div>
+                  </td>
+                  <td data-label="Consumer Email">&nbsp;
+                      <div class="slds-truncate" title="Consumer Email">{consumer.consumerEmailId}</div>
+                  </td>
+              </tr>
+          </template>
+          <template if:true={consumerList}>
+            <div role="alert" style="margin-left: -2000%;">{consumerList.length} results found</div>
+          </template>
+      </tbody>
+  </table>
+</template>

@@ -1,0 +1,214 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 06-01-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<template>
+  <div class="slds-align_absolute-center">
+    <template if:true={showSpinner}>
+      <lightning-spinner alternative-text="Loading" variant="brand" size="medium">
+      </lightning-spinner>
+    </template>
+  </div>
+  <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+    aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+    <div class="slds-modal__container" style="width: 120%;">
+      <header class="slds-modal__header">
+
+        <button data-id="close"
+          class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse closeButtonCss modal-focused"
+          title="Close" onclick={closeModalNew}>
+
+          <lightning-icon icon-name="utility:close" variant="inverse" alternative-text="Close Applicant Signature Modal"
+            title="Close"></lightning-icon>
+
+        </button>
+        <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Applicant Signature</h1>
+      </header>
+      <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-2">
+
+        <div class="slds-grid slds-gutters_x-small">
+          <img src={logoURL} alt="Division of Services for the Deaf and Hard of Hearing banner" />
+        </div>
+        </br>
+        <div class="strong-title slds-align_absolute-center">North Carolina National Deaf-Blind</div>
+        <div class="strong-title slds-align_absolute-center">Equipment Distribution Program</div>
+        <div class="strong-title slds-align_absolute-center">
+          <a href="http://www.icanconnect.org/" target="​_blank" aria-describedby="ndbedpLink">www.iCanConnect.org</a>
+          <span id="ndbedpLink" style="display: none;">North Carolina National Deaf-Blind Equipment Distribution Program
+            link. Opens in new tab</span>
+        </div>
+
+        </br>
+
+        </br>
+        <h2 class="strong-headingone slds-align_absolute-center ">Applicant must sign the application</h2>
+        <div style="color: red;" class="slds-align_absolute-center">* indicates required fields</div>
+        </br>
+        <p>With my signature below I hereby request services and certify that:</p></br>
+
+        <span>{Condition_of_Acceptance_label_1}</span></br>
+        <span>{Condition_of_Acceptance_label_2}</span></br>
+        <span>{Condition_of_Acceptance_label_3}</span></br></br>
+        <span>{Condition_of_Acceptance_label_4}</span></br></br>
+
+        <div class="strong-text">Name of Applicant</div>
+
+        <lightning-input class="strong-text" name='consumername' label='Applicants Name' value={consumerValueNew}
+          variant="label-hidden" disabled>
+        </lightning-input>
+        </br>
+
+        <div class="slds-grid slds-gutters_x-small">
+          <div class="slds-col slds-medium-size_1-of-2 slds-large-size_1-of-2">
+
+            <div class="strong-text"><span style="color: red;">* </span>Applicants Signature</div></br>
+
+            <template if:true={showImage}>
+              <div style="border-radius: 50%;"><img src={url} alt="" width="100" height="100px" /></div>
+            </template>
+
+            <div class="strong-link"><a name="SignHere" data-id="signHere" onclick={handleSign} tabindex="0"
+                aria-label="Applicants Signature, Sign Here, required" aria-describedby="signHereInfoId">Sign Here</a>
+            </div>
+            <span id="signHereInfoId" style="margin-left: -120%;">{signHereInfo}</span>
+
+          </div>
+
+          <div class="slds-col slds-medium-size_1-of-2 slds-large-size_1-of-2">
+            <div class="strong-text"><abbr title="required" class="slds-required">*</abbr>Date</div>
+            <lightning-input type=Date name='attestationdate' aria-live="assertive" label='Date' onchange={handleChange}
+              value={RequestObj.attestationdate} variant="label-hidden" max={todayDate} required>
+            </lightning-input>
+          </div>
+        </div></br>
+
+        <div class="strong-text">Name of person completing application (if other than applicant):</div>
+        <lightning-input name='personCompletingInformation'
+          label='Person completing Information (if other than applicant):'
+          value={RequestObj.personCompletingInformation} onchange={handleChange} variant="label-hidden">
+        </lightning-input></br>
+
+        <div class="slds-grid slds-gutters_x-small">
+          <div class="slds-col slds-medium-size_1-of-2 slds-large-size_1-of-2">
+            <div class="strong-text">Relationship to applicant:</div>
+            <lightning-input name='relationship' label='Relationship:' value={RequestObj.relationship}
+              onchange={handleChange} variant="label-hidden"></lightning-input>
+          </div>
+
+          <div class="slds-col slds-medium-size_1-of-2 slds-large-size_1-of-2">
+            <div class="strong-text">Telephone Number:</div>
+            <lightning-input name='phoneNumber' label='Phone Number:' value={RequestObj.phoneNumber}
+              onchange={handleChange} variant="label-hidden">
+            </lightning-input>
+          </div>
+        </div></br>
+
+        <div class="strong-text">Email Address</div>
+        <lightning-input type="email" name='emailaddress' label='Email Address' value={RequestObj.emailaddress}
+          onchange={handleChange} variant="label-hidden">
+        </lightning-input></br>
+
+
+        <div class="strong-text">Name of alternate contact person (for applicant):</div>
+        <lightning-input name='alternatecontact' label='Alternate contact (for applicant): '
+          value={RequestObj.alternatecontact} onchange={handleChange} variant="label-hidden">
+        </lightning-input></br>
+
+        <div class="slds-grid slds-gutters_x-small">
+          <div class="slds-col slds-medium-size_1-of-2 slds-large-size_1-of-2">
+            <div class="strong-text">Relationship to applicant:</div>
+            <lightning-input name='relationshipofalternatecontact' label='Relationship:'
+              value={RequestObj.relationshipofalternatecontact} onchange={handleChange} variant="label-hidden">
+            </lightning-input>
+          </div>
+
+          <div class="slds-col slds-medium-size_1-of-2 slds-large-size_1-of-2">
+            <div class="strong-text">Telephone Number:</div>
+            <lightning-input name='phoneNumberofalternatecontact' label='Phone Number:' onchange={handleChange}
+              value={RequestObj.phoneNumberofalternatecontact} variant="label-hidden">
+            </lightning-input>
+          </div>
+
+        </div></br>
+        <h2 class="strong-heading slds-align_absolute-center">Confidentiality Policy</h2><br />
+        <span>{Confidentiality_Policy}</span></br></br>
+      </div>
+
+      <footer class="slds-modal__footer" style="
+      background: white;
+  ">
+        <lightning-button variant="brand" label="Cancel" title="Cancel" name="Cancel" onclick={handleCancel}
+          class="slds-float_left"></lightning-button>
+        <lightning-button variant="brand" data-id="rejectButton" label="Reject" title="Reject" name="Reject"
+          onclick={handleRejectionModel} class="slds-float_left slds-m-bottom_small slds-m-left_medium">
+        </lightning-button>
+
+        <!-- <template if:false={accepted}> -->
+        <lightning-button variant="brand" label="Accept" title="Accept" name="Save" data-frombutton="fromaccept"
+          onclick={handleClick} class="slds-m-around_small"></lightning-button>
+        <!-- </template> -->
+
+
+      </footer>
+      <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" onkeyup={handleKeyUp}
+          aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open reject-modal">
+          <div class="slds-modal__container">
+            <button data-id="rejectConfirmId"
+              class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse modal-focused closeButtonCss"
+              title="Close" aria-label="Close Reject Comments Modal" onclick={closeModal}>
+              <lightning-icon icon-name="utility:close" variant="inverse" size="small" alternative-text="close"
+                title="close"></lightning-icon>
+            </button>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+              <lightning-textarea name='comments' label='Comments' value={RequestObjNew.comments}
+                onchange={handleChangeNew} required></lightning-textarea>
+            </div>
+
+            <footer class="slds-modal__footer">
+              <button class="slds-button slds-button_neutral modal-focused" onclick={closeModal}
+                title="Cancel">Cancel</button>
+              <button class="slds-button slds-button_brand modal-focused" onclick={submitDetails} title="OK">OK</button>
+            </footer>
+          </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+      </template>
+
+      <template if:true={openRejectModel}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" onkeyup={handleKeyUp}
+          aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open reject-confirm-modal"
+          style="background-color: rgba(0, 0, 0, 0.7);">
+          <div class="slds-modal__container">
+            <!-- <header class="slds-modal__header"> -->
+            <button data-id="rejectModalId"
+              class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse modal-focused closeButtonCss"
+              title="Close" aria-label="Close Reject Confirmation Modal" onclick={closeModalReject}>
+              <lightning-icon icon-name="utility:close" variant="inverse" size="small" alternative-text="close"
+                title="close"></lightning-icon>
+            </button>
+            <!-- </header> -->
+            <div class="slds-modal__content slds-p-around_medium">
+              <h1 data-name="modal" >Are you sure you want to Reject? </h1>
+            </div>
+            <!-- Modal/Popup Box LWC footer starts here -->
+            <footer class="slds-modal__footer">
+              <button class="slds-button slds-button_neutral modal-focused" onclick={rejectConfirmation}
+                title="Yes">Yes</button>
+              <button class="slds-button slds-button_brand modal-focused" onclick={closeModalReject}
+                title="No">Cancel</button>
+            </footer>
+          </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+      </template>
+    </div>
+  </section>
+  <template if:true={usedInCommunity}>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+</template>

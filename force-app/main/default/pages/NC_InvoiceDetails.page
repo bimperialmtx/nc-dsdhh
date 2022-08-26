@@ -1,0 +1,114 @@
+<!--
+  @description       : 
+  @author            : Saurav Nirwal
+  @group             : 
+  @last modified on  : 05-05-2021
+  @last modified by  : Saurav Nirwal
+  Modifications Log 
+  Ver   Date         Author          Modification
+  1.0   05-03-2021   Saurav Nirwal   Initial Version
+-->
+<apex:page renderAs="pdf" controller="NC_InvoiceDetailsController">
+    <div>
+        <div style=" width: 50%">
+            <div style="margin-left:0.5in ;margin-top:0.5in ;max-height: 0.792in ;min-height: 0.792in ;max-width:3.5in;min-width:3.5in">
+                2301 MSC
+                <br/> Raleigh, NC 27699-2301
+            </div>
+            <div style="margin-left:0.5in ;margin-top:0.75in;max-height: 0.875in;min-height: 0.875in; max-width:3.5in;min-width:3.5in">
+                {!vendorDetail.Name}
+                <br/> {!vendorDetail.BillingStreet} {!vendorDetail.BillingCity}
+                <br/> {!vendorDetail.BillingState} {!vendorDetail.BillingPostalCode}
+                <br/> {!vendorDetail.BillingCountry}
+                <br/>
+            </div>
+        </div>
+        <div style="width: 50%;position:absolute;right:0%;top:0 ">
+            <apex:image style="padding-right:10px" url="{!$Resource.NCDHHS_LOGO}" width="250" height="90" />
+            <br/>
+
+        </div>
+    </div>
+    <div class="body-container" style="">
+        <apex:repeat value="{!vendorInvoiceMap}" var="invoice">
+            <table style="border-collapse:collapse; width: 100%; margin-top:20px; margin-bottom:30px; font-family: Times;">
+                <tr>
+                    <td style="background-color: #EED13A; text-align: center; padding-top: 3px; padding-bottom: 3px; border: 2.5px solid white;">Check Number:</td>
+                    <td style="background-color: #EED13A; text-align: center; padding-top: 3px; padding-bottom: 3px; border: 2.5px solid white;">{!invoice}</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #518AC5; color: white; border: 2.5px solid white; text-align: center;">
+                        <b>Authorization Number</b>
+                    </td>
+                    <td style="background-color: #518AC5; color: white; border: 2.5px solid white; text-align: center;">
+                        <b>Invoice Number</b>
+                    </td>
+                    <td style="background-color: #518AC5; color: white; border: 2.5px solid white; text-align: center;">
+                        <b>Submitted Invoice Number</b>
+                    </td>
+                    <td style="background-color: #518AC5; color: white; border: 2.5px solid white; text-align: center;">
+                        <b>Authorization Amount</b>
+                    </td>
+                    <td style="background-color: #518AC5; color: white; border: 2.5px solid white; text-align: center;">
+                        <b>Amount Paid</b>
+                    </td>
+                </tr>
+                <apex:repeat value="{!vendorInvoiceMap[invoice]}" var="auth">
+                    <apex:variable var="count" value="{!0}" />
+                    <apex:repeat value="{!vendorInvoiceMap[invoice][auth]}" var="inv">
+                        <apex:variable var="count" value="{!count+1}" />
+                        <tr>
+                            <apex:outputText rendered="{!count == 1}">
+                                <td rowspan="{!inv.authRowSpan}" style="background-color: #F0F4F9; border: 2.5px solid white; text-align: center;">{!auth}</td>
+                            </apex:outputText>
+                            <td style="background-color: #F0F4F9; border: 2.5px solid white; text-align: center;">{!inv.invoiceNumber}</td>
+                            <td style="background-color: #F0F4F9; border: 2.5px solid white; text-align: center;">{!inv.internalInvoiceNumber}</td>
+                            <td style="background-color: #F0F4F9; border: 2.5px solid white; text-align: center;">{!inv.authorizationAmount}</td>
+                            <td style="background-color: #F0F4F9; border: 2.5px solid white; text-align: center;">{!inv.amountPaid}</td>
+                        </tr>
+                    </apex:repeat>
+                </apex:repeat>
+                <tr>
+                    <td colspan="4" style="background-color: #CBDBEE; border: 2.5px solid white; text-align: left; padding-left: 30px; padding-top: 5px; padding-bottom: 5px;">
+                        Total Check Amount:
+                    </td>
+                    <td style="background-color: #518AC5; color: white; border: 2.5px solid white; text-align: center;">
+                        <apex:repeat value="{!totalCheckAmountMap}" var="key">
+                            <apex:outputText rendered="{!invoice == key}">
+                                <b>{!totalCheckAmountMap[key]}</b>
+                            </apex:outputText>
+                        </apex:repeat>
+                    </td>
+                </tr>
+            </table>
+        </apex:repeat>
+    </div>
+
+    <table>
+        <tr>
+            <td align="center">
+                <div style="padding-left:60px">
+                    <p style="font-size:10px">
+                        <strong> NC DEPARTMENT OF HEALTH AND HUMAN SERVICES • DIVISION OF SERVICES FOR THE DEAF AND HARD OF HEARING
+                            </strong>
+                    </p>
+                    <p style="font-size:10px">
+                        820 S. Boylan Avenue, McBryde Building, Raleigh, NC 27699
+                    </p>
+                    <p style="font-size:10px">
+                        MAILING ADDRESS: 2301 Mail Service Center, Raleigh, NC 27699-2301
+                    </p>
+                    <p style="font-size:10px">
+                        <a href="https://www.ncdhhs.gov/dsdhh">https://www.ncdhhs.gov/dsdhh</a>
+                    </p>
+                    <p style="font-size:10px">
+                        TEL (V/TTY): 919-527-6930 | 800-851-6099• VP: 919-890-0859 • FAX: 919-715-0926
+                    </p>
+                    <p style="font-size:10px">
+                        AN EQUAL OPPORTUNITY / AFFIRMATIVE ACTION EMPLOYER
+                    </p>
+                </div>
+            </td>
+        </tr>
+    </table>
+</apex:page>

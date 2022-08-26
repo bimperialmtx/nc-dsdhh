@@ -1,0 +1,5 @@
+<design:component>
+    <design:attribute name="recordId" label="Record Id"  placeholder="Enter {!recordId}"/>
+	<design:attribute name="customField" label="Custom Field" default="Signature_Id__c"/>
+    <design:attribute name="filter" label="Filter"/>
+</design:component>

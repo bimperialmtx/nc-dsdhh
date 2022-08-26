@@ -1,0 +1,28 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 05-11-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+    </template>
+    <div class="container d-flex justify-space-between slds-p-bottom_xx-small">
+        <h2 class="slds-p-left_xx-small header-title" data-id="headerDiv" tabindex="-1" aria-label="CASLI/NIC or CDI Knowledge Exam (Step 5 of 10)"><b>CASLI/NIC or CDI Knowledge Exam</b></h2>
+    </div>
+    <span data-id="accessibilityInfo5" style="display: none;">
+        Interpreter Certification Information is complete. CASLI/NIC or CDI Knowledge Exam is the current step (Step 5 of 10).
+    </span>
+    <div style="color: red;" class="extra-padding">* indicates required fields</div>
+    <div class="extra-padding">
+        <lightning-combobox name="tkenCASLINICOrCDIKnowledgeExam" label="Have you taken the CASLI/NIC or CDI Knowledge (Written) Exam?" value={knowledgeInformation.tkenCASLINICOrCDIKnowledgeExam} placeholder="Select Progress" options={takenKnowledge} onchange={handleChange} ></lightning-combobox>
+
+        <span style="display: none;" data-id="passedCASLINICOrCDIKnowledgeInfoId">Have you passed the CASLI/NIC or CDI Knowledge (Written) Exam? Required</span>
+        <span style="display: none;" data-id="planningCASLINICOrCDIKnowledgeInfoId">When are you planning to take the CASLI/NIC or CDI Knowledge (Written) Exam? Required</span>
+
+        <lightning-combobox aria-labelled-by="passedCASLINICOrCDIKnowledgeInfo" if:false={examNotTaken} required name="passedCASLINICOrCDIKnowledge" label="Have you passed the CASLI/NIC or CDI Knowledge (Written) Exam?" value={knowledgeInformation.passedCASLINICOrCDIKnowledge} placeholder="Select Progress" options={passedKnowledge} onchange={handleChange} ></lightning-combobox>
+        <lightning-combobox aria-labelled-by="planningCASLINICOrCDIKnowledgeInfo" if:true={examNotTaken} required name="planningCASLINICOrCDIKnowledge" label="When are you planning to take the CASLI/NIC or CDI Knowledge (Written) Exam?" value={knowledgeInformation.planningCASLINICOrCDIKnowledge} placeholder="Select Progress" options={planningKnowledge} onchange={handleChange} ></lightning-combobox>
+    </div>
+</template>

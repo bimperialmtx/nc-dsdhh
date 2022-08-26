@@ -1,0 +1,68 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 01-27-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<template>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+    aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+    <template if:true={showSpinner}>
+      <lightning-spinner alternative-text="Loading"></lightning-spinner>
+  </template>
+    <div class="slds-modal__container" style="width: 100%;">
+      <header class="slds-modal__header">
+        <button data-id="close"
+        class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse closeButtonCss" title="Close"
+        onclick={cancelEvent}>
+        <lightning-icon icon-name="utility:close" variant="inverse"
+          alternative-text="Close Ndbedp Create Service Modal" title="Close"></lightning-icon>
+      </button>
+
+        <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Create NDBEDP Service Request</h1>
+      </header>
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+          <div style="color: red;" class="slds-align_absolute-center">* indicates required fields</div></br>
+        <div class="slds-col slds-medium-size_1-of-1">
+          <lightning-combobox name="requestParentId" label="Parent NDBEDP Request" value={requestObj.parentName}  options={parentOptions} disabled
+            onchange={handleChange}>
+          </lightning-combobox>
+        </div>
+        <div class="slds-col slds-medium-size_1-of-1">
+          <lightning-combobox name="requestAudience" label="Requested by" value={requestAudience} options={audienceOptions}   disabled 
+            onchange={handleChange}>
+          </lightning-combobox>
+        </div>
+        <div class="slds-col slds-medium-size_1-of-1">
+          <lightning-combobox name="requestType" label="Request Type" value={requestType}  options={typeOptions} disabled
+            onchange={handleChange}>
+          </lightning-combobox>
+        </div>
+        <div class="slds-col slds-medium-size_1-of-1">
+          <lightning-combobox style="overflow:visible !important;" name="requestSubtype" label="Request Sub-type" aria-label="required" value={requestObj.requestSubtype} options={options} required
+            onchange={handleChange}>
+          </lightning-combobox>
+
+</div>
+</br>
+</br>
+</br>
+</br>
+</br>
+</div>
+
+      <footer class="slds-modal__footer" style="background: white;">
+        <lightning-button variant="brand" label="Cancel" title="Cancel" name="Cancel" onclick={cancelEvent}
+          ></lightning-button>
+
+        <lightning-button variant="brand" label="Save" title="Save" name="Save" onclick={handleSave}
+        class="slds-m-left_medium" ></lightning-button>
+      </footer>
+    </div>
+  </section>
+  <!-- </template> -->
+  <template if:true={usedInCommunity}>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+</template>

@@ -1,0 +1,176 @@
+<template>
+  <div class="backdrop" if:true={showSpinner}>
+    <div class="spinner">
+        <lightning-spinner alternative-text="Income Worksheet Loading"></lightning-spinner>
+    </div>
+  </div>
+  <div if:false={invoiceApproved}>
+   <!-- <div if:false={statusReturned}>-->
+      <div class="slds-p-around_small footer-tab" if:false={editMode}>
+        <template if:true={hideEditButton}>
+          <lightning-button variant="brand" label="Edit Mode" title="Primary action" disabled class="slds-m-left_x-small"></lightning-button>
+        </template>
+        <template if:false={hideEditButton}>
+          <lightning-button variant="brand" label="Edit Mode" title="Primary action" onclick={enableEditing} class="slds-m-left_x-small"></lightning-button>
+        </template>
+      </div>
+    <!--</div>-->
+  </div>
+  
+  <div class="footer-tab slds-p-around_small" if:true={editMode}>
+    <lightning-button variant="brand" label="Save" title="Primary action" onclick={submitChange} class="slds-m-left_x-small slds-p-horizontal_x-small"></lightning-button>
+    <lightning-button variant="neutral" label="Cancel" title="Primary action" onclick={cancelEditing} class="slds-m-left_x-small slds-p-horizontal_x-small"></lightning-button>
+  </div>
+  <div class="table-container">
+    <table class="slds-table slds-table--bordered slds-table--fixed-layout slds-box slds-max-medium-table--stacked-horizontal">
+      <caption class="sr-only">Invoice Line Items</caption>
+      <thead>
+        <tr class="slds-line-height--reset slds-text-heading--label">
+          <th class="slds-is-resizable slds-text-title--caps" scope="col">
+            <div class="slds-truncate slds-resizable" title={column1}>{column1}</div>
+          </th>
+          <th class="slds-is-resizable slds-text-title--caps" scope="col">
+            <div class="slds-truncate slds-resizable" title={column2}>{column2}</div>
+          </th>
+          <th class="slds-is-resizable slds-text-title--caps" scope="col">
+            <div class="slds-truncate slds-resizable" title={column3}>{column3}</div>  
+          </th>
+          <th class="slds-is-resizable slds-text-title--caps" scope="col">
+            <div class="slds-truncate slds-resizable" title={column4}>
+              <!-- <abbr class="slds-required" title="required">* </abbr> -->
+              {column4}
+              </div>
+          </th>
+          <th class="slds-is-resizable slds-text-title--caps" scope="col">
+              <div class="slds-truncate slds-resizable" title={column5}>{column5}</div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <template for:each={lineItemsList} for:item="invoiceItem" for:index="index">
+          <!--
+          <template if:true={invoiceItem.isReturned}>
+            <tr class="slds-hint-parent  locked-record" key={invoiceItem.invoiceLineItemId}>
+              <th data-label="Invoice Line Item Number" scope="row">
+                <div class="slds-truncate" title="Invoice Line Item Number">{invoiceItem.lineItemName}</div>
+              </th>
+              <td data-label="Equipment Name">
+                <div class="slds-truncate word-break-td" title="Equipment Name">{invoiceItem.equipmentName}</div>
+              </td>
+              <td data-label="Amount Authorized">
+                <div class="slds-truncate" title="Amount Authorized">${invoiceItem.amountAuthorized}</div>
+              </td>
+              <td data-label="Amount Billed">
+                <div class="slds-truncate" title="Invoice Line Item Number">${invoiceItem.amountBilled}</div>
+              </td>
+            </tr>
+          </template>
+          <template if:false={invoiceItem.isReturned}>-->
+            <tr class="slds-hint-parent" key={invoiceItem.invoiceLineItemId}>
+              <th data-label="Invoice Line Item Number" scope="row">
+                <div class="slds-truncate" title="Invoice Line Item Number">{invoiceItem.lineItemName}</div>
+              </th>
+              <td data-label="Equipment Name">&nbsp;
+                <div class="slds-truncate word-break-td" title="Equipment Name">{invoiceItem.equipmentName}</div>
+              </td>
+              <td data-label="Amount Authorized">&nbsp;
+                <div class="slds-truncate" aria-label={invoiceItem.lineItemName} title="Amount Authorized">${invoiceItem.amountAuthorized}</div>
+              </td>
+              <td data-label="Amount Billed">&nbsp;
+                <div if:false={editMode} class="" title="Amount Billed">
+                  <lightning-input  aria-label={invoiceItem.lineItemName} type="number" name="input5" variant="label-hidden" formatter="currency"
+                   min="0" disabled value={invoiceItem.amountBilled} label="" step="0.01" > 
+                  </lightning-input>
+                </div>
+                <div if:true={editMode} class="" title="Amount Billed">
+                  <template if:true={invoiceItem.amountBilledEditable}>
+                    <lightning-input  aria-label={invoiceItem.lineItemName} type="number" required name={invoiceItem.invoiceLineItemId} variant="label-hidden" formatter="currency" min="0" max={invoiceItem.amountAuthorized}
+                      value={invoiceItem.amountBilled} onchange={updateValues} label="" step="0.01" > 
+                    </lightning-input>
+                  </template>
+                  <template if:false={invoiceItem.amountBilledEditable}>
+                    <lightning-input  aria-label={invoiceItem.lineItemName} type="number" disabled name={invoiceItem.invoiceLineItemId} variant="label-hidden" formatter="currency" min="0" max={invoiceItem.amountAuthorized}
+                      value={invoiceItem.amountBilled} label="" step="0.01" > 
+                    </lightning-input>
+                  </template>
+                </div>
+              </td>
+              <td data-label="Amount to Pay">&nbsp;
+                  <div if:false={editMode} class="" title="Amount to Pay">
+                    <lightning-input  aria-label={invoiceItem.lineItemName} type="number" name="input6" variant="label-hidden" formatter="currency"
+                     min="0" disabled value={invoiceItem.amountToPay} label="" step="0.01" > 
+                    </lightning-input>
+                  </div>
+                  <div if:true={editMode} class="" title="Amount to Pay">
+                    <template if:true={invoiceItem.amountToPayEditable}>
+                      <lightning-input  aria-label={invoiceItem.lineItemName} type="number" required name={invoiceItem.invoiceLineItemId} variant="label-hidden" formatter="currency" min="0" max={invoiceItem.amountBilled}
+                        value={invoiceItem.amountToPay} onchange={updateAmountToPayValues} label="" step="0.01" > 
+                      </lightning-input>
+                    </template>
+                    <template if:false={invoiceItem.amountToPayEditable}>
+                      <lightning-input  aria-label={invoiceItem.lineItemName} type="number" disabled name={invoiceItem.invoiceLineItemId} variant="label-hidden" formatter="currency" min="0" max={invoiceItem.amountBilled}
+                        value={invoiceItem.amountToPay} label="" step="0.01" > 
+                      </lightning-input>
+                    </template>
+                  </div>
+                </td>
+            </tr>
+         <!-- </template>-->
+        </template>
+        <template if:true={isHearingAid}>
+          <tr class="slds-hint-parent">
+            <th data-label="Total" scope="row">
+            </th>
+            <th data-label="Total" scope="row">
+              <div class="slds-truncate "><b>Total</b></div>
+            </th>
+            <template if:true={statusReturned}>
+              <td data-label="Total">&nbsp;
+                <div class="slds-truncate font-size text-container" aria-label="Total Amount Authorized">${maxTotalAmountAuthorizedReturned}</div>
+              </td>
+            </template>
+            <template if:false={statusReturned}>
+              <td data-label="Total">&nbsp;
+                <div class="slds-truncate text-container" aria-label="Total Amount Authorized">${maxTotalAmountAuthorized}</div>
+              </td>
+            </template>
+            <td data-label="Total" class={totalAmountInputClass}>&nbsp;
+              <lightning-input  type="number" name="totalInput" variant="label-hidden" formatter="currency"
+                    disabled value={totalBilledAmount} label="Total Amount Billed" step="0.01" > 
+              </lightning-input>
+              <div if:true={showTotalAmountError} class="slds-form-element__help label-text-error" id="error-message-unique-id">Total Amount Billed  <br/>cannot be greater then <br/> total Amount Authorized</div>
+            </td>
+            <td data-label="Total">&nbsp;
+              <lightning-input  type="number" name="totalInput" variant="label-hidden" formatter="currency"
+                    disabled value={totalAmountToPay} label="Total Amount to Pay" step="0.01" > 
+              </lightning-input>
+            </td>
+          </tr>
+        </template>
+        <template if:false={isHearingAid}>
+          <tr class="slds-hint-parent">
+            <th data-label="Total" scope="row">
+            </th>
+            <td data-label="Total">
+            </td>
+            <td data-label="Total">&nbsp;
+              <div class="slds-truncate footer-tab font-size"><b>Total</b></div>
+            </td>
+            <td data-label="Total" class={totalAmountInputClass}>&nbsp;
+              <lightning-input  type="number" name="totalInput" variant="label-hidden" formatter="currency"
+                    disabled value={totalBilledAmount} label="Total Amount Billed" step="0.01" > 
+              </lightning-input>
+              <div if:true={showTotalAmountError} class="slds-form-element__help label-text-error" id="error-message-unique-id-non-hearing">Total Amount Billed  <br/>cannot be greater then <br/> total Amount Authorized</div>
+            </td>
+            <td data-label="Total">&nbsp;
+              <lightning-input  type="number" name="totalInput" variant="label-hidden" formatter="currency"
+                    disabled value={totalAmountToPay} label="Total Amount to Pay" step="0.01" > 
+              </lightning-input>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+  </div>
+  
+</template>

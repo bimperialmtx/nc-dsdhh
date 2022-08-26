@@ -1,0 +1,26 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 05-11-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+    </template>
+    <div class="container d-flex justify-space-between slds-p-left_xx-small">
+        <h2 class="slds-p-left_xx-small header-title" data-id="headerDiv" tabindex="-1" aria-label="Family Information (Step 1 of 10)"><b>Family Information</b></h2>
+    </div>
+    <span data-id="accessibilityInfo" style="display: none;">
+        Family Information is the current step (Step 1 of 10).
+    </span>
+    <div style="color: red;" class="extra-padding">* indicates required fields</div>
+    <div class="extra-padding">
+        <lightning-combobox name="haveDeafFamilyMembers" label="Do you have Deaf family members?" value={familyInformation.haveDeafFamilyMembers} placeholder="Select Progress" options={deafFamilyMembers} onchange={handleChange} ></lightning-combobox>
+        <div if:true={hasFamilyMember}>
+            <lightning-dual-listbox  name="memberRelationship" aria-live="assertive" aria-label="what is their relationship to you? required" label="what is their relationship to you?" tabindex="0" required source-label="Available" selected-label="Selected" field-level-help="Select your preferred relationship" options={memberRelationship} onchange={handleChange}></lightning-dual-listbox>
+            <lightning-input if:true={otherSelected} type="text" label="Other  Relationship" required value={familyInformation.otherRelationship} name="relationshipIfOther" onchange={handleChange} onblur={updateInput}></lightning-input>
+        </div>
+    </div>
+</template>

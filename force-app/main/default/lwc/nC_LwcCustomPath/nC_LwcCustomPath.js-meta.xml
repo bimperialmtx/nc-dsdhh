@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__Tab</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default,lightning__HomePage,lightning__RecordPage">
+            <property name="recordId" label="Record Id" required="true" type="String" placeholder="Enter {!recordId}"/>
+            <property name="fieldApiName" label="PickList Field Api Name" required="true" type="String" placeholder="(Field API Name)"/>
+            <property name="recordTypesNames" label="RecordType(Path Available For)" required="false" type="String" placeholder="(RecordTypeName;RecordTypeName)" description="Leave empty if no record type on Object OtherWise (RecordTypeName;RecordTypeName)"/>
+            <property name="seeSuccessSate" label="Show Success State" type="Boolean"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

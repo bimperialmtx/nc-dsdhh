@@ -1,0 +1,75 @@
+<apex:page renderAs="pdf" controller="NC_EquipmentAuthorizationController">
+<!-- Begin Default Content REMOVE THIS -->
+    <apex:composition template="NC_DocumentTemplate">
+        <apex:define name="body">
+            <div class="body-container" style="padding-top:20px;padding-bottom:5px">
+                <table style="800px">
+                    <tr>
+                        <td>{!equipmentAuthorizationObject.vendorName}</td>
+                    </tr>
+                    <tr>
+                        <td>{!equipmentAuthorizationObject.vendorAddress1}</td>
+                    </tr>
+                    <tr>
+                        <td >{!equipmentAuthorizationObject.vendorCity} {!equipmentAuthorizationObject.vendorState} {!equipmentAuthorizationObject.vendorPostalCode}</td>
+                    </tr>
+                </table>
+                    
+                <div >{!equipmentAuthorizationObject.currentDate}</div>
+                <div>{!equipmentAuthorizationObject.authorizationNumber}</div>
+                    
+                <table style="800px;padding-top:5px">
+                    <tr>
+                        <td>{!equipmentAuthorizationObject.consumerName}</td>
+                    </tr>
+                    <tr>
+                        <td>{!equipmentAuthorizationObject.consumerAddress1}</td>
+                    </tr>
+                    <tr>
+                        <td >{!equipmentAuthorizationObject.consumerCity}, {!equipmentAuthorizationObject.consumerState} {!equipmentAuthorizationObject.consumerPostalCode}</td>
+                    </tr>
+                </table>
+                    
+                <div style="padding-top:20px">
+                    <p>
+                        {!equipmentAuthorizationObject.consumerName} has been approved for {!equipmentAuthorizationObject.equipmentsCSV}. Please ship {!equipmentAuthorizationObject.equipmentsCSV} to {!equipmentAuthorizationObject.regionalCenterName}. 
+                    </p>
+                </div>
+                    
+                <table border="1">
+                    <tr>
+                        <td>Equipment </td>
+                        <td>Replacement Equipment </td>
+                        <td>Amount Authorized</td>
+                        <td>Amount Billed</td>
+                    </tr>
+                    <apex:repeat value="{!equipmentAuthorizationObject.listOfEquipments}" var="equipment">
+                        <tr>
+                            <td>{!equipment.equipmentName}</td>
+                            <td>{!equipment.replacementEquipment}</td>
+                            <td>${!equipment.equipmentAmount}</td>
+                            <td>$</td>
+                        </tr>
+                    </apex:repeat>
+                </table>
+                <table style="width:800px;padding-top:10px">
+                    <tr>
+                        <td style="width:200px"></td>
+                        <td style="width:200px"></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">Signature</td>
+                        <td style="width:200px">Date</td>
+                    </tr>
+                </table>
+                    
+                <div>
+                    <p style="font-size:12px;padding-top:5px">
+                        Services herein authorized to be provided in compliance with Title VI of the Civil Rights Act of 1964. I hereby certify that all the above stated information is true, accurate and complete. I understand that payment and satisfaction of this claim will be from federal and state funds, and that any claims, statements, or documents, or concealment of a material fact may be prosecuted under applicable federal and state laws. I accept payment by the Division of Services for the Deaf and Hard of Hearing as payment in full for services rendered. 
+                    </p>
+                </div>
+            </div>          
+        </apex:define>
+    </apex:composition>
+<!-- End Default Content REMOVE THIS -->
+</apex:page>

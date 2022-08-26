@@ -1,0 +1,30 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId">
+    <ltng:require styles="{!$Resource.NC_DSDHH_Resource + '/styles/a11y.css'}"></ltng:require>
+    <aura:attribute name="disableField" type="String"/>
+    <aura:attribute name="disableFieldValue" type="String"/>
+    <aura:attribute name="fileInfo1" type="String" />
+    <aura:attribute name="fileInfo2" type="String" />
+    <aura:attribute name="fileInfo3" type="String" />
+    <aura:attribute name="fileInfo4" type="String" />
+    <aura:attribute name="fileInfo5" type="String" />
+    <aura:attribute name="fileInfo6" type="String" />
+    <aura:attribute name="fileInfo7" type="String" />
+    <aura:attribute name="fileInfo8" type="String" />
+    <aura:attribute name="fileInfo9" type="String" />
+    <aura:attribute name="fileInfo10" type="String" />
+    <aura:attribute name="fileInfo11" type="String" />
+    <aura:attribute name="fileInfo12" type="String" />
+    <aura:attribute name="fileInfo" type="List" description="Contains the list of files to be uploaded"></aura:attribute>    
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <div class="a11y-focused">
+        <c:nc_fileuploadcontainer 
+            recordId = "{!v.recordId}"
+            fileInfo = "{!v.fileInfo}"
+            onrefresh="{!c.refreshView}"
+            onviewfile="{!c.viewfile}"
+            disableField = "{!v.disableField}"
+            disableValue = "{!v.disableFieldValue}"
+        />
+    </div>
+</aura:component>

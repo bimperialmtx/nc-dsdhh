@@ -1,0 +1,35 @@
+<aura:component controller="NCDSH_SignatureController" 
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                access="global" >
+    <ltng:require afterScriptsLoaded="{!c.Init}"/>
+    <aura:attribute name="fileId" type="String" default=""/>
+    <aura:attribute name="applicationId" type="String" />
+    <aura:attribute name="recordId" type="string"   />
+    <aura:attribute name="signType" type="String"/>
+    <aura:attribute name="signatureObject" type="Object"/>
+    <aura:registerEvent name="SampleApplicationEvent" type="c:NCDSHSignEvent"/>
+
+    <aura:attribute name="spinner" type="Boolean" />
+    <aura:if isTrue="{!v.spinner }">
+        <div class="backgroundInverse">
+            <lightning:spinner class="spins" alternativeText="Loading" variant="brand" />
+        </div>
+    </aura:if>
+
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <div style="text-align: center; ">
+        <h2 class="slds-text-heading_medium slds-m-bottom_medium">
+            Sign Here
+        </h2> 
+    </div>
+     
+    <div style="text-align: center;">
+        <canvas aura:id="can" style="border:2px solid #ddd;background: transparent;"></canvas>
+    </div>
+    <div style="text-align: center;margin: 7px;">
+        <button class="slds-button slds-button_brand" onclick="{!c.erase}">Clear</button>
+        <button class="slds-button slds-button_brand" onclick="{!c.save}">Save</button>
+        <button class="slds-button slds-button_brand" onclick="{!c.OpenPdf}">Open PDF</button>
+    </div>
+    <!-- <lightning:fileCard fileId="{!v.fileID}"/> -->
+</aura:component>

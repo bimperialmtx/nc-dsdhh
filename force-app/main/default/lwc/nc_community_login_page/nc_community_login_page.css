@@ -1,0 +1,24 @@
+.body-container{
+    border: solid 1px #ecf07f;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.login-button{
+    width: 100% !important;
+    background: black !important;
+    border-color: white;
+}
+
+.login-container{
+    padding-top: 1.5rem !important;
+}
+
+.logo{
+    margin-bottom: 1rem;
+    width: 50% !important;
+}
+
+.ui-text label{
+    color: #ecf07f !important;
+}

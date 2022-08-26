@@ -1,0 +1,103 @@
+<template>
+    <div class="backdrop" if:true={showSpinner}>
+      <div class="spinner">
+          <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+      </div>
+    </div>
+    <div class="slds-p-around_small footer-tab" if:false={editMode}>
+      <lightning-button variant="brand" label="Edit Mode" title="Primary action" onclick={enableEditing} class="slds-m-left_x-small"></lightning-button>
+    </div>
+    <div class="footer-tab slds-p-around_small" if:true={editMode}>
+      <lightning-button variant="brand" label="Save" title="Primary action" onclick={submitChange} class="slds-m-left_x-small slds-p-horizontal_x-small"></lightning-button>
+      <lightning-button variant="neutral" label="Cancel" title="Primary action" onclick={cancelEditing} class="slds-m-left_x-small slds-p-horizontal_x-small"></lightning-button>
+    </div>
+
+    <div class="table-container">
+      <table class="slds-table slds-table--bordered slds-table--fixed-layout slds-box slds-max-medium-table--stacked-horizontal">
+        <thead>
+          <tr class="slds-line-height--reset slds-text-heading--label">
+            <th class="slds-is-resizable slds-text-title--caps" scope="col">
+              <div class="slds-truncate slds-resizable" title="Item Name">Name</div>
+            </th>
+            <th class="slds-is-resizable slds-text-title--caps" scope="col">
+                <div class="slds-truncate slds-resizable" title="Quantity">
+                  <abbr class="slds-required" title="required">*</abbr>
+                  Quantity
+                  </div>
+              </th>
+            <th class="slds-is-resizable slds-text-title--caps" scope="col">
+                <div class="slds-truncate slds-resizable" title="Amount Authorized">Amount Authorized</div>  
+            </th><th class="slds-is-resizable slds-text-title--caps" scope="col">
+                <div class="slds-truncate slds-resizable" title="Amount Billed">Amount Billed</div>  
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+        <template for:each={internalStaffItemList} for:item="Item" for:index="index">
+          <tr class="slds-hint-parent" key={Item.fieldApiName}>
+            <th data-label="Item Name" scope="row">
+              <div class="slds-truncate" title="Item Name">{Item.fieldLabel}</div>
+            </th>
+            <td data-label="Quantity">
+              <div if:false={editMode} class="slds-truncate" title="Quantity">
+                <lightning-input  type="number" name="input5" variant="label-hidden" min="0" disabled value={Item.quantity} label="" step="1"> </lightning-input>
+              </div>
+
+              <div if:true={editMode} class="slds-truncate" title="Quantity">
+                <template if:true={Item.isEditable}>
+                  <lightning-input  type="number" name={Item.fieldApiName} variant="label-hidden" min="0" value={Item.quantity} onchange={updateValues} label="" step="1">
+                  </lightning-input>
+                </template>
+                <template if:false={Item.isEditable}>
+                  <lightning-input  type="number" name="input5" variant="label-hidden" min="0" disabled value={Item.quantity} label="" step="1"> 
+                  </lightning-input>
+                </template>
+            </div>
+          </td>
+
+          <td data-label="Amount Authorized"> 
+              <template if:true={mileageLessThanNintyNine}>
+                 <div class="slds-truncate" title="Amount Authorized">${Item.amountAuthorized}</div>
+              </template>
+              <template if:false={mileageLessThanNintyNine}>
+                 <div class="slds-truncate" title="Amount Authorized">${Item.amountAuthorizedOver99Miles}</div>
+              </template>
+          </td>
+          
+          <td data-label="Amount Billed">
+            <div if:false={editMode} class="slds-truncate" title="Amount Billed">
+              <lightning-input  type="number" name="input5" variant="label-hidden" min="0" disabled value={Item.amountBilled} formatter="currency" label="" step="0.01"> </lightning-input>
+          </div>
+          <div if:true={editMode} class="slds-truncate" title="Amount Billed">
+              <template if:false={Item.isEditable}>
+                <lightning-input  type="number" name={Item.fieldApiName} variant="label-hidden" min="0" value={Item.amountBilled} formatter="currency" onchange={updateAmountBilled} label="" step="0.01"> </lightning-input>
+              </template>
+              <template if:true={Item.isEditable}>
+                <lightning-input  type="number" name="input5" variant="label-hidden" min="0" disabled value={Item.amountBilled} formatter="currency" label="" step="0.01"> </lightning-input>
+              </template>
+          </div>
+          </td>
+
+          </tr>
+        </template>
+    
+        <tr class="slds-hint-parent">
+            <td data-label="Total">
+            </td>
+            <td data-label="Total">
+            </td>
+            <td data-label="Total">
+              Total
+            </td>
+            <td data-label="Total">
+                <div class="slds-truncate text-container"><lightning-formatted-number
+                  value={totalAmountBilled}
+                  format-style="currency"
+                  currency-code="USD"></lightning-formatted-number></div>
+            </td>
+        </tr>
+      </tbody>
+</table>
+</div>
+
+</template>

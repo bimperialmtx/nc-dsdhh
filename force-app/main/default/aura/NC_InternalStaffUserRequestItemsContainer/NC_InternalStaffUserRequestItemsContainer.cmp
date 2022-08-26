@@ -1,0 +1,3 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId">
+  <c:nc_InternalStaffUserRequestItems onrefresh="{!c.refreshView}" recordId ="{!v.recordId}"></c:nc_InternalStaffUserRequestItems>
+</aura:component>

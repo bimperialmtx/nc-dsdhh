@@ -1,0 +1,93 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 05-23-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<template>
+    <div style="width: 100%;">
+        <template if:true={docVisible}>
+            <div class="slds-m-bottom_medium slds-m-top_medium">
+                <template if:true={fileInfo}>
+                    <template if:false={documentId}>
+                        <div class="slds-grid  slds-box">
+                            <div class="slds-col slds-size_10-of-12">
+                                <template if:true={enableUpload}>
+                                    <lightning-file-upload 
+                                    label={fileInfo.label} 
+                                    name={fileInfo.label} 
+                                    record-id={fileInfo.id}
+                                    onuploadfinished={handleUploadFinished}>
+                                </lightning-file-upload>
+                                </template>
+                                <template if:false={enableUpload}>
+                                    <lightning-file-upload 
+                                    label={fileInfo.label} 
+                                    name={fileInfo.label} 
+                                    record-id={fileInfo.id}
+                                    onuploadfinished={handleUploadFinished} disabled>
+                                </lightning-file-upload>
+                                </template>
+                            </div>
+                            <div class="slds-col slds-size_2-of-12 slds-align_absolute-center">
+                                <lightning-button-icon icon-name="utility:preview" onclick={filePreview} disabled></lightning-button-icon>&nbsp;
+                                <lightning-button-icon icon-name="utility:edit" onclick={updateFile} disabled></lightning-button-icon>&nbsp;
+                                <lightning-button-icon icon-name="utility:delete" onclick={deleteFile} disabled></lightning-button-icon>
+                            </div>
+                        </div>
+                    </template>
+                    <template if:true={documentId}>
+                        <div class={renewState}>
+                            <div class="slds-col slds-size_10-of-12" if:false={isEdit}>
+                                <lightning-file-upload 
+                                    label={fileInfo.label} 
+                                    name={fileInfo.label} 
+                                    record-id={fileInfo.id}
+                                    onuploadfinished={handleUploadVersion} disabled>
+                                </lightning-file-upload>
+                            </div>
+                            <div class="slds-col slds-size_10-of-12" if:true={isEdit}>
+                                <lightning-file-upload 
+                                    label={fileInfo.label} 
+                                    name={fileInfo.label} 
+                                    record-id={fileInfo.id}
+                                    onuploadfinished={handleUploadVersion}>
+                                </lightning-file-upload>
+                            </div>
+                            <div class="slds-col slds-size_2-of-12 slds-align_absolute-center">
+                                <lightning-button-icon icon-name="utility:preview" onclick={filePreview} aria-label={fileInfo.previewArialabel} alternative-text={fileInfo.previewArialabel}></lightning-button-icon>&nbsp;
+                                <template if:false={isEdit}>
+                                    <template if:true={enableUpload}>
+                                        <lightning-button-icon icon-name="utility:edit" onclick={updateFile} aria-label={fileInfo.editArialabel} alternative-text={fileInfo.editArialabel} data-id="editIcon"></lightning-button-icon>&nbsp;
+                                    </template>
+                                    <template if:false={enableUpload}>
+                                        <lightning-button-icon icon-name="utility:edit" onclick={updateFile} disabled></lightning-button-icon>&nbsp;
+                                    </template>
+                                </template>
+                                <template if:true={isEdit} >
+                                    <lightning-button-icon icon-name="utility:clear"  onclick={cancelEdit} aria-label={fileInfo.cancelArialabel} alternative-text={fileInfo.cancelArialabel} data-id="cancelIcon"></lightning-button-icon>&nbsp;
+                                </template>
+                                <template if:true={disableDelete}>
+                                    <lightning-button-icon icon-name="utility:delete" onclick={openModal} disabled></lightning-button-icon>
+                                </template>
+                                <template if:false={disableDelete}>
+                                    <template if:true={enableUpload}>
+                                        <lightning-button-icon icon-name="utility:delete" onclick={openModal} aria-label={fileInfo.deleteArialabel} alternative-text={fileInfo.deleteArialabel} data-id="deleteicon"></lightning-button-icon>
+                                    </template>
+                                    <template if:false={enableUpload}>
+                                        <lightning-button-icon icon-name="utility:delete" onclick={openModal} disabled></lightning-button-icon>
+                                    </template>
+                                </template>
+                                
+                            </div>
+                        </div>
+                    </template>
+                    <template if:true={showModal}>
+                        <c-ncdsdhh_modalwindow name={fileInfo.label} onsave={deleteFile} onclose={closeModal}></c-ncdsdhh_modalwindow>
+                    </template>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

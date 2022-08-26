@@ -1,0 +1,58 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 09-24-2021
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<aura:component controller="NC_SignatureController" 
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                access="global" >
+    <ltng:require afterScriptsLoaded="{!c.Init}"/>
+    <ltng:require styles="{!$Resource.NC_DSDHH_Resource + '/styles/a11y.css'}"></ltng:require>
+    <aura:attribute name="fileId" type="String" default=""/>
+    <aura:attribute name="applicationId" type="String" />
+    <aura:attribute name="recordId" type="string"   />
+    <aura:attribute name="signType" type="String"/>
+    <aura:attribute name="signatureObject" type="Object"/>
+    <aura:attribute name="customField" type="String" default="Signature_Id__c"/>
+    <aura:attribute name="filetype" type="List" default="['.png', '.jpg', '.jpeg']" />
+    <aura:registerEvent name="SampleApplicationEvent" type="c:NC_SignEvent"/>
+     <aura:attribute name="errorMessage" type="string"/>
+
+    <aura:attribute name="spinner" type="Boolean" />
+    <aura:if isTrue="{!v.spinner }">
+        <div class="backgroundInverse">
+            <lightning:spinner class="spins" alternativeText="Loading" variant="brand" />
+        </div>
+    </aura:if>
+
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <div style="text-align: center; " class="modal-focused">
+        <h1 class="slds-text-heading_medium slds-m-bottom_medium">
+  <span class="required-field" style="color: red;">*</span> Sign Here        
+  </h1> 
+    </div>
+     
+    <div style="text-align: center;" class="modal-focused" tabindex="0">
+        <canvas aura:id="can" aria-label="Required Sign Here" style="border:2px solid #ddd;background: transparent; margin-left: -8px;"></canvas>
+    </div>
+    <div style="text-align: center;margin: 10px;" class="a11y-focused">
+        <button class="slds-button slds-button_brand modal-focused" onclick="{!c.erase}" aria-describedby="errorMessage">Clear</button>
+        <button class="slds-button slds-button_brand modal-focused" onclick="{!c.save}">Save</button>
+        <div style="margin-top: 20px;">
+            <div style="margin-bottom: 20px;"> or </div>
+            <div>
+                <lightning:fileUpload label="Upload Signature"
+                    name="signUploader"
+                    multiple="false"
+                    accept="{!v.filetype}"
+                    recordId="{!v.recordId}"
+                    onuploadfinished="{!c.handleUploadFinished}" />
+            </div>
+        </div>
+       <!--<button class="slds-button slds-button_brand" onclick="{!c.OpenPdf}">Open PDF</button>--> 
+    </div>
+                    <span style="margin-left: -120%; " Id="errorMessage">{!v.errorMessage}</span>
+    <!-- <lightning:fileCard fileId="{!v.fileID}"/> -->
+</aura:component>

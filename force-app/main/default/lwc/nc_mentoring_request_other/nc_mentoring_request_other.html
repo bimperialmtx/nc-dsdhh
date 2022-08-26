@@ -1,0 +1,32 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 05-11-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+    </template>
+    
+   <div class="container d-flex justify-space-between slds-p-bottom_xx-small">
+     <h2 class="slds-p-left_xx-small header-title" data-id="headerDiv" tabindex="-1" aria-label="Other Information (Step 10 of 10)"><b>Other Information</b></h2>
+   </div>   
+   <span data-id="accessibilityInfo10" style="display: none;">
+      Interpreter Skills is complete. Other Information is the current step (Step 10 of 10).
+    </span>
+    <div class="extra-padding">
+        <!-- <lightning-combobox name="hoursWorkedinMedicalSettings" required label="If you work in the community, how many hours a week do you work in medical settings?" value={otherInformation.hoursWorkedinMedicalSettings} placeholder="Select Progress" options={hoursWorkedInMedicalSetting} onchange={handleChange} ></lightning-combobox> -->
+        
+        <lightning-combobox name="areYouOnDHHSInterpreterVendorList" label="Are you on DHHS’s Interpreter Services Vendor List?" value={otherInformation.areYouOnDHHSInterpreterVendorList} placeholder="Select Progress" options={dhhInterpreterVendorList} onchange={handleChange} ></lightning-combobox>
+        
+        <lightning-dual-listbox name="after5Years" aria-live="assertive" label="Where do you see yourself working 5 years from now? (Select all that apply.)" tabindex="0" source-label="Available" selected-label="Selected" options={after5Year} onchange={handleChange}></lightning-dual-listbox>
+        <lightning-input if:true={otherAfter5YearTrue} required type="text" label="Other" value={otherInformation.oherAfter5Year} name="oherAfter5Year" onchange={handleChange}></lightning-input>
+        
+        <lightning-input type="text" label="What are your current skill development goals?" value={otherInformation.currentSkillDevelopmentGoals} name="currentSkillDevelopmentGoals" onchange={handleChange} onblur={updateInput}></lightning-input>
+        
+        <lightning-input type="text" label="Please list workshops you would like to see offered in North Carolina." value={otherInformation.workshopInNorthCarolina} name="workshopInNorthCarolina" onchange={handleChange} onblur={updateInput}></lightning-input>
+
+    </div>
+</template>

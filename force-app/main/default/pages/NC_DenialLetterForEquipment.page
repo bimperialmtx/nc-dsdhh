@@ -1,0 +1,77 @@
+<apex:page renderAs="pdf" controller="NC_DenialLetterForEquipmentController">
+
+    <apex:composition template="NC_DocumentTemplate">
+    
+        <apex:define name="body">
+            <div class="body-container" style="padding-top:70px;padding-bottom:50px;font-size: 14px;">
+                <table>
+                    <tr>
+                        <td>{!denialLetterForEquipmentWrapperObject.consumerName}</td>
+                    </tr>
+                    <tr>
+                        <td>{!denialLetterForEquipmentWrapperObject.consumerAddress1}</td>
+                    </tr>
+                    <tr>
+                        <td>{!denialLetterForEquipmentWrapperObject.consumerCity}, {!denialLetterForEquipmentWrapperObject.consumerState} {!denialLetterForEquipmentWrapperObject.consumerPostalCode}</td>
+                    </tr>
+                </table>
+                
+                <div style="padding-top:25px">{!denialLetterForEquipmentWrapperObject.currentDate}</div>
+                <div style="padding-top:25px">Dear {!denialLetterForEquipmentWrapperObject.consumerName}</div>
+                <div style="padding-top:5px" class="p1">
+                   
+                    <apex:outputpanel rendered="{!denialLetterForEquipmentWrapperObject.deniedifincomemorethan250}">
+                        <p>
+                           Thank you for your request for a {!denialLetterForEquipmentWrapperObject.equipmentType} from DSDHH.
+                           Your request has been denied due to <b>Total family income more than 250 percent of the allowed income</b>. 
+                        </p>
+                    </apex:outputpanel>
+                    <apex:outputpanel rendered="{!denialLetterForEquipmentWrapperObject.deniedifEDSCOORreject}">
+                        <p>
+                           Thank you for your request for a {!denialLetterForEquipmentWrapperObject.equipmentType} from DSDHH.
+                           Your request has been denied due to {!denialLetterForEquipmentWrapperObject.deniedReason}. 
+                        </p>
+                    </apex:outputpanel>
+                </div>
+                <div class="p2 slds-p-top_x-small">
+                    <p>
+                        If you feel that we made a mistake or if your condition has changed since your application was
+                        submitted, please contact the {!denialLetterForEquipmentWrapperObject.regionalCenter} to discuss your options. They can be
+                        reached at {!denialLetterForEquipmentWrapperObject.regionalPhone}.
+                    </p>
+                </div>
+                <div class="p2  slds-p-top_x-small">
+                    <p>
+                        If you wish to appeal this decision, please follow the steps below to guide you through that
+                        process.
+                    </p>
+                </div>
+                <div class="slds-align_absolute-center slds-p-top_x-small">
+                    <div align="center"><h5><u><b>YOUR RIGHTS</b></u></h5></div>
+                </div>
+                
+                <div class="p3"> 
+                    <p>
+                        Pursuant to 10A NCAC 17D.0220 Applicants whose application for telecommunications
+                        equipment has been denied by the TEDP (the Equipment Distribution Service Office) may file an
+                        appeal using the following procedure for consumer appeals:
+                    </p>
+                </div>
+                <div class="slds-p-top_x-small">
+                    <h5 ><b>HOW TO APPEAL:</b></h5>
+                </div>
+                
+                <div class="slds-p-top_x-small">
+                    <ol>
+                        <li>Contact the {!denialLetterForEquipmentWrapperObject.regionalCenter} staff that assisted you with your application at {!denialLetterForEquipmentWrapperObject.regionalPhone}.</li>
+                        <li>Write a letter with reasons why you believe you qualify for the equipment. This letter must contain an explanation of the reasons for the appeal and must be submitted to the EDS Coordinator.</li>
+                        <li>Send the letter within 30 days of the date shown on the rejection letter.</li>
+                        <li>Mail the letter to: <u>DSDHH, 2301 Mail Service Center, Raleigh, NC 27699-2301 ATTN: EDS -Appeal.</u></li>
+                        <li>The EDS Coordinator shall review the appeal letter and render a decision within two (2) weeks after receiving the formal appeal.</li>
+                        <li>The DSDHH shall notify the individual appealing the decision, in writing, within five working days of the EDS Coordinator’s decision.</li>
+                    </ol>
+                </div>
+            </div>          
+        </apex:define>
+    </apex:composition>
+</apex:page>

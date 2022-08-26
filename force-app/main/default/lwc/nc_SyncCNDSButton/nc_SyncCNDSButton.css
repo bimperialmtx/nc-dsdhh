@@ -1,0 +1,15 @@
+/**
+ * Created by ashishpandey on 12/05/21.
+ */
+.isLoading::after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    text-align: center;
+    top: calc(50% + 3em);
+    font-weight: bold;
+}
+ .spinner-block {
+    z-index: 99999 !important;
+    position: fixed;
+}

@@ -1,0 +1,95 @@
+<apex:page renderAs="pdf" controller="NC_HA_AuthorizationController">
+<!-- Begin Default Content REMOVE THIS -->
+    <apex:composition template="NC_DocumentTemplate">
+        <apex:define name="body">
+            <div class="body-container" style="padding-top:20px;padding-bottom:5px">
+                <div>
+                    <div>
+                        {!authorizationHearingAidObject.currentDate}
+                    </div>
+                    <div>
+                        {!authorizationHearingAidObject.authorizationNumber}
+                    </div>
+                </div>
+
+                <table style="800px;padding-top:5px">
+                    <tr>
+                        <td style="width:400px">{!authorizationHearingAidObject.vendorName}</td>
+                        <td style="width:400px">{!authorizationHearingAidObject.consumerName}</td>
+                    </tr>
+                    <tr>
+                        <td style="width:400px">{!authorizationHearingAidObject.vendorAddress1}</td>
+                        <td style="width:400px">{!authorizationHearingAidObject.consumerAddress1}</td>
+                    </tr>
+                    <tr>
+                        <td style="width:400px">{!authorizationHearingAidObject.vendorCity} {!authorizationHearingAidObject.vendorState} {!authorizationHearingAidObject.vendorPostalCode}</td>
+                        <td style="width:400px">{!authorizationHearingAidObject.consumerCity} {!authorizationHearingAidObject.consumerState} {!authorizationHearingAidObject.consumerPostalCode}</td>
+                    </tr>
+                    <tr>
+                        <td style="width:400px">Vendor #Id</td>
+                        <td style="width:400px"> </td>
+                    </tr>
+                </table>
+                <div>
+                    <p>
+                        {!authorizationHearingAidObject.consumerName} has been approved for a hearing aid. Please provide the following services in line with this authorization: 
+                    </p>
+                </div>
+                
+                <table  border="1">
+                    <tr>
+                        <td style="max-width: 200px;min-width: 200px">Services:</td>
+                        <td style="max-width: 150px;min-width: 150px">Date Rendered:</td>
+                        <td style="max-width: 150px;min-width: 150px">Amount Authorized</td>
+                        <td style="max-width: 150px;min-width: 150px">Amount Billed</td>
+                    </tr>
+                    <apex:repeat value="{!authorizationHearingAidObject.upperItemList}" var="item">
+                        <tr>
+                            <td style="max-width: 200px;min-width: 200px">{!item.name}</td>
+                            <td style="max-width: 150px;min-width: 150px"></td>
+                            <td style="max-width: 150px;min-width: 150px">${!item.amount}</td>
+                            <td style="max-width: 150px;min-width: 150px">$</td>
+                        </tr>
+                    </apex:repeat>
+                    <tr>
+                        <td style="max-width: 200px;min-width: 200px">Hearing Aid</td>
+                        <td style="max-width: 150px;min-width: 150px"></td>
+                        <td style="max-width: 150px;min-width: 150px"></td>
+                        <td style="max-width: 150px;min-width: 150px">$</td>
+                    </tr>
+                </table>
+                
+                <div>Others:</div>
+                
+                <table  border="1">
+                    <apex:repeat value="{!authorizationHearingAidObject.lowerItemList}" var="item">
+                        <tr>
+                            <td style="max-width: 200px;min-width: 200px">{!item.name}</td>
+                            <td style="max-width: 150px;min-width: 150px"></td>
+                            <td style="max-width: 150px;min-width: 150px">{!if(item.name == 'Returned other materials fee', '', '$')}{!if(item.name == 'Returned other materials fee', '', item.amount)}</td>
+                            <td style="max-width: 150px;min-width: 150px">$</td>
+                        </tr>
+                    </apex:repeat>
+                </table>
+                
+                <table style="width:800px;padding-top:10px">
+                    <tr>
+                        <td style="width:200px"></td>
+                        <td style="width:200px"></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">Signature</td>
+                        <td style="width:200px">Date</td>
+                    </tr>
+                </table>
+                
+                <div>
+                    <p style="font-size:12px;padding-top:5px">
+                        Services herein authorized to be provided in compliance with Title VI of the Civil Rights Act of 1964. I hereby certify that all the above stated information is true, accurate and complete. I understand that payment and satisfaction of this claim will be from federal and state funds, and that any claims, statements, or documents, or concealment of a material fact may be prosecuted under applicable federal and state laws. I accept payment by the Division of Services for the Deaf and Hard of Hearing as payment in full for services rendered. 
+                    </p>
+                </div>
+            </div>          
+        </apex:define>
+    </apex:composition>
+<!-- End Default Content REMOVE THIS -->
+</apex:page>

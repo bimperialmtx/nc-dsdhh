@@ -1,0 +1,99 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 06-01-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<template>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="ulue" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open" onkeyup={handleKeyUp}>
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse modal-focused" title="Close" onclick={closeModal}>   
+                    <lightning-icon icon-name="utility:close"
+                       alternative-text="Close Add Income Modal"
+                       variant="inverse"
+                       size="small" ></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                 </button>
+                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Add Income</h1>
+                <p class="slds-m-top_x-small">Please enter your infomration below.</p>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <div class="container">
+                    <div class="table">
+                        <div class="table-head">
+                            <ul class="row">
+                                <li class="fieldname" >Income Type</li>
+                                <li class="fieldname" >Amount</li>
+                                <li class="fieldname" >Income Type</li>
+                                <li class="fieldname" >Amount</li>
+                              </ul>
+                        </div>
+                        <div class="table-body">
+                            <ul class="row">
+                                <li class="data">Gross Salary and Wages</li>  
+                                <li class="data"><lightning-input class="modal-focused" aria-label="Gross Salary and Wages Amount" type="number" required formatter="currency" label="Amount" name="Gross_Salary_and_Wages" variant="label-hidden" onchange={handleChange} value={incomeTypeShow.Gross_Salary_and_Wages}></lightning-input></li>
+                                <li class="data">Unemployment</li>  
+                                <li class="data"><lightning-input class="modal-focused" aria-label="Unemployment Amount" type="number" required formatter="currency" label="Amount" name="Unemployment" variant="label-hidden" onchange={handleChange} value={incomeTypeShow.Unemployment}></lightning-input></li>
+                            </ul>
+                            <ul class="row">
+                                <li class="data">Social Security</li>  
+                                <li class="data"><lightning-input class="modal-focused" aria-label="Social Security Amount" type="number" required formatter="currency" label="Amount" name="Social_Security" variant="label-hidden" onchange={handleChange} value={incomeTypeShow.Social_Security}></lightning-input></li>
+                                <li class="data">Veterans Administration Benefits</li>  
+                                <li class="data"><lightning-input class="modal-focused" aria-label="Veterans Administration Benefits Amount" type="number" required formatter="currency" label="Amount" name="Veterans_Administration" variant="label-hidden" onchange={handleChange} value={incomeTypeShow.Veterans_Administration}></lightning-input></li>
+                            </ul>
+                            <ul class="row">
+                                <li class="data">Retirement/Pension</li>  
+                                <li class="data"><lightning-input class="modal-focused" aria-label="Retirement/Pension Amount" type="number" required formatter="currency" label="Amount" name="Retirement_Pension" variant="label-hidden" onchange={handleChange} value={incomeTypeShow.Retirement_Pension}></lightning-input></li>
+                                <li class="data">Worker’s Compensation payments</li>  
+                                <li class="data"><lightning-input class="modal-focused" aria-label="Worker’s Compensation payments Amount" type="number" required formatter="currency" label="Amount" name="Worker_Compensation_payments" variant="label-hidden" onchange={handleChange} value={incomeTypeShow.Worker_Compensation_payments}></lightning-input></li>
+                            </ul>
+                            <ul class="row">
+                                <li class="data">Alimony</li>  
+                                <li class="data"><lightning-input class="modal-focused" aria-label="Alimony Amount" type="number" required formatter="currency" label="Amount" name="Alimony" variant="label-hidden" onchange={handleChange} value={incomeTypeShow.Alimony}></lightning-input></li>
+                                <li class="data">Rental Income</li>  
+                                <li class="data"><lightning-input class="modal-focused" aria-label="Rental Income Amount" type="number" required formatter="currency" label="Amount" name="Rental_Income" variant="label-hidden" onchange={handleChange} value={incomeTypeShow.Rental_Income}></lightning-input></li>
+                            </ul>
+                            <ul class="row">
+                                <li class="data">Child support</li>  
+                                <li class="data"><lightning-input class="modal-focused" aria-label="Child support Amount" type="number" required formatter="currency" label="Amount" name="Child_support" variant="label-hidden" onchange={handleChange} value={incomeTypeShow.Child_support}></lightning-input></li>
+                                <li class="data">On-the-Job training</li>  
+                                <li class="data"><lightning-input class="modal-focused" aria-label="On-the-Job training Amount" type="number" required formatter="currency" label="Amount" name="On_the_Job_training" variant="label-hidden" onchange={handleChange} value={incomeTypeShow.On_the_Job_training}></lightning-input></li>
+                            </ul>
+                            <ul class="row">
+                                <li class="data">AmeriCorps Stipends</li>  
+                                <li class="data"><lightning-input class="modal-focused" aria-label="AmeriCorps Stipends Amount" type="number" required formatter="currency" label="Amount" name="AmeriCorps_Stipends" variant="label-hidden" onchange={handleChange} value={incomeTypeShow.AmeriCorps_Stipends}></lightning-input></li>
+                                <li class="data">Armed Forces pay</li>  
+                                <li class="data"><lightning-input class="modal-focused" aria-label="Armed Forces pay Amount" type="number" required formatter="currency" label="Amount" name="Armed_Forces_pay" variant="label-hidden" onchange={handleChange} value={incomeTypeShow.Armed_Forces_pay}></lightning-input></li>
+                            </ul>
+                            <ul class="row">
+                                <li class="data">Work Release Payments</li>  
+                                <li class="data"><lightning-input class="modal-focused" aria-label="Work Release Payments Amount" type="number" required formatter="currency" label="Amount" name="Work_Release_Payments" variant="label-hidden" onchange={handleChange} value={incomeTypeShow.Work_Release_Payments}></lightning-input></li>
+                                <li class="data">Tobacco buy-out payments</li>  
+                                <li class="data"><lightning-input class="modal-focused" aria-label="Tobacco buy-out payments Amount" type="number" required formatter="currency" label="Amount" name="Tobacco_buy_out_payments" variant="label-hidden" onchange={handleChange} value={incomeTypeShow.Tobacco_buy_out_payments}></lightning-input></li>
+                            </ul>
+                            <ul class="row">
+                                <li class="data">Annuities</li>  
+                                <li class="data"><lightning-input class="modal-focused" aria-label="Annuities Amount" type="number" required formatter="currency" label="Amount" name="Annuities" variant="label-hidden" onchange={handleChange} value={incomeTypeShow.Annuities}></lightning-input></li>
+                                <li class="data">Cherokee tribal per capita Income paid to adult family members</li>  
+                                <li class="data"><lightning-input class="modal-focused" aria-label="Cherokee tribal per capita Income paid to adult family members Amount" type="number" required formatter="currency" label="Amount" name="Cherokee" variant="label-hidden" onchange={handleChange} value={incomeTypeShow.Cherokee}></lightning-input></li>
+                            </ul>
+                            <ul class="row">
+                                <li class="data">Adjustments</li>  
+                                <li class="data"><lightning-input class="modal-focused" aria-label="Adjustments Amount" type="number" required formatter="currency" label="Amount" name="Adjustments" variant="label-hidden" onchange={handleChange} value={incomeTypeShow.Adjustments}></lightning-input></li>
+                                <li class="data"></li>
+                                <li class="data"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_neuulal modal-focused" onclick={closeModal}>Cancel</button>
+                <button class="slds-button slds-button_brand modal-focused" onclick={savedata}>Save</button>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

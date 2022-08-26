@@ -1,0 +1,17 @@
+.spins {
+    top: 0%;
+    left: 0%;
+}
+.slds-card {
+    background: rgb(243, 242, 242);
+}
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    height: calc(100vh - 280px);
+}
+c-nc_equipment-tile {
+    min-width: 220px;
+    flex: 1;
+    padding: 8px;
+}

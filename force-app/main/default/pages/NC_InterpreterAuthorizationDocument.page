@@ -1,0 +1,123 @@
+<apex:page renderAs="pdf">
+<!-- Begin Default Content REMOVE THIS -->
+
+    <p style="text-align:center;font-family: arial, sans-serif;">
+        <b><u>Division of Services for the Deaf and the Hard of Hearing
+            Assignment Confirmation</u></b>
+        </p>
+        
+        <p style="text-align:center;font-family: arial, sans-serif;">
+        <b>CONFIDENTIAL</b>
+        </p>
+        
+        <table border="1" style="font-family: arial, sans-serif;border-collapse: collapse;width: 100%;">
+        <tr>
+            <th colspan='4' style="border: 1px solid #dddddd;text-align: center;padding: 8px;background-color: #dddddd;">Assignment Information for (Interpreter Name) </th>
+        </tr>
+        <tr>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Date:</td>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;"></td>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Time:</td>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;"></td>
+        </tr>
+        <tr>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Name:</td>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;" colspan="3"></td>
+        </tr>
+        <tr>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Purpose of Meeting:</td>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;" colspan="3"></td>
+        </tr>
+        <tr>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;" >Consumers/Participants involved?</td>
+            <td colspan="3" style="border: 1px solid #dddddd;text-align: left;padding: 8px;" valign="top"></td>
+        </tr>
+        <tr>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Location (Address, Building Name, Room Number, etc.):</td>
+            <td colspan="3" style="border: 1px solid #dddddd;text-align: left;padding: 8px;" valign="top"></td>
+        </tr>
+        <tr>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Point(s) of Contact (who interpreter contacts if late, lost, etc.):</td>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Kathleen Speckhardt or Marilyn Edwards (day of assignment) </td>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Contact Information:</td>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Office 665-8733 Marilyn: (828) 230-1903 Work Cell- Text</td>
+        </tr>
+        </table>
+        
+        <br/>
+        
+        <table border="1" style="font-family: arial, sans-serif;border-collapse: collapse;width: 100%;">
+        <tr>
+            <th colspan='2' style="border: 1px solid #dddddd;text-align: center;padding: 8px;background-color: #dddddd;">Interpreting/Language Information</th>
+        </tr>
+        <tr>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Team Interpreter:</td>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;"></td>
+        </tr>
+        <tr>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Language Needs/Specialized Interpreting? </td>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">
+            Spoken English – to – Sign and possible Sign-to-Spoken English
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Special Requests/Instructions:</td>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;"></td>
+        </tr>
+        </table>
+        
+        <br/>
+        
+        <table border="1" style="font-family: arial, sans-serif;border-collapse: collapse;width: 100%;">
+        <tr>
+            <th colspan='2' style="border: 1px solid #dddddd;text-align: center;padding: 8px;background-color: #dddddd;">Other Information</th>
+        </tr>
+        <tr>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Directions:</td>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Available upon request</td>
+        </tr>
+        <tr>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Parking Instructions: </td>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Any space in front of building</td>
+        </tr>
+        <tr>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Special Instructions:</td>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Please be aware of industry standards and arrive 10 to 15 minutes early to prepare for the assignment.</td>
+        </tr>
+        <tr>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Attire:</td>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;"><b><u>Business or Business Casual:</u></b>
+            <p><b><u>Slacks</u></b> – Slacks are acceptable provided they are clean and neat in appearance. Capri length slacks are also acceptable as long as they clearly are part of a professional attire. Inappropriate items include jeans, sweatpants, shorts, bib overalls, leggings, spandex or other form-fitting pants. </p>
+        
+            <p><b><u>Shirts</u></b> – Casual Shirt, golf shirt, sweaters and turtlenecks are acceptable. Inappropriate items include tank tops, halter-tops, spaghetti straps and tube tops. Muscle shirts and shirts with descriptive, obscene signs, symbols and drawings are not allowed. Clothing that reveals a bare midriff or chest, or clothes that expose the body in a sexually suggestive manner are not acceptable.</p>
+        
+            <p><b><u>Dresses and Skirts</u></b> – Casual dresses and skirts, and split skirts at or below the knee are acceptable. Dress and skirt length must be of modest length when standing. Mini-skirts are not acceptable. Backless or strapless sundresses, sheer or mesh clothing that reveals the body or underclothing is not allowed.</p>
+        
+            <p><b><u>Footwear</u></b> – Loafers, boots, flats, dress sandals, open-toed shoes, clogs and leather deck shoes are acceptable. Flip-flops (shower shoes) and bedroom slippers are not acceptable.</p>
+            </td>
+        </tr>
+        </table>
+        
+        <br/>
+        
+        <table border="1" style="font-family: arial, sans-serif;border-collapse: collapse;width: 100%;">
+        <tr>
+            <th colspan='2' style="border: 1px solid #dddddd;text-align: center;padding: 8px;background-color: #dddddd;">Billing Information</th>
+        </tr>
+        <tr>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Submit Invoice to:</td>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">NC Division of Services for the Deaf and Hard of Hearing- Asheville Regional Center<br />
+            Kathleen Speckhardt<br />
+            <a>kathleen.speckhardt@dhhs.nc.gov</a><br />
+            Phone: 828-665-8733 Office<br />
+            828-230-3695 Cell
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">Other:</td>
+            <td valign="top" style="border: 1px solid #dddddd;text-align: left;padding: 8px;">
+            </td>
+        </tr>
+        </table>
+<!-- End Default Content REMOVE THIS -->
+</apex:page>

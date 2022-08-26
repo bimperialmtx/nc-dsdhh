@@ -1,0 +1,14 @@
+<template>
+    <table class="slds-table slds-table_bordered slds-table_resizable-cols">
+        <tbody>
+            <template for:item="fileinfo" for:each={filesInfoList} >
+                <tr key={fileinfo.key}>
+                    <td>
+                        <!-- {fileinfo.label} -->
+                        <c-ncdsdhh_fileupload file-info={fileinfo} onrefresh={refresh} onviewfile={viewFile}></c-ncdsdhh_fileupload>
+                    </td>
+                </tr>
+            </template>
+        </tbody>
+    </table>
+</template>

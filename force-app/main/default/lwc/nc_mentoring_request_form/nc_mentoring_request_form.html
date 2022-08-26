@@ -1,0 +1,127 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 05-13-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<template>
+    <!-- Spinner -->
+    <div class="backdrop" if:true={showSpinner}>
+        <div class="spinner">
+            <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+        </div>
+    </div>
+
+    <!-- Heading -->
+    <div class="has-shadow slds-p-vertical_medium slds-m-bottom_medium heading_header_registration">
+        <div class="container d-flex justify-space-between">
+            <h1 class="slds-m-around_small header-title slds-align_absolute-center slds-text-align_center"><b>Interpreter Mentoring Request</b></h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="app-container slds-grid">
+            <div class="app-sidebar slds-col slds-size_4-of-12">
+                <!-- Flow Steps -->
+                <c-nc_mentoring_request_steps current-step={currentStep} original-step={originalStep}></c-nc_mentoring_request_steps>
+            </div>
+
+            <div class="app-content slds-col slds-size_8-of-12">
+                <!-- Different steps pages -->
+                <div style={showFamilyInformation} class="a11y-focused">
+                    <c-nc_mentoring_request_family_info deaf-family-members={deafFamilyMembers} member-relationship={memberRelationship} ></c-nc_mentoring_request_family_info>
+                    <div class="controls slds-m-top_small slds-p-left_xx-small">
+                        <lightning-button class="slds-p-left_xx-small" variant="brand" type="submit" label="Next" onclick={navigateToEducationInformation}></lightning-button>
+                    </div>
+                </div>
+
+                <div style={showEducationInformation} class="a11y-focused">
+                    <c-nc_mentoring_request_education education-level={educationLevel} degree={degree} college={college}></c-nc_mentoring_request_education>
+                    <div class="controls slds-m-top_small">
+                        <lightning-button class="slds-m-right_medium" onclick={navigateToFamilyInformation} label="Back"></lightning-button>
+                        <lightning-button variant="brand" type="submit" label="Next" onclick={navigateToNCITL}></lightning-button> 
+                    </div>
+                </div>
+
+                <div style={showNCITLBLicenseInformation} class="a11y-focused">
+                    <c-nc_mentoring_request_licenses licenses-issues-by-n-c-i-t-l-b={licensesIssuesByNCITLB}></c-nc_mentoring_request_licenses>
+                    <div class="controls slds-m-top_small">
+                        <lightning-button class="slds-m-right_medium" onclick={navigateToEducationInformation} label="Back"></lightning-button> 
+                        <lightning-button variant="brand" type="submit" label="Next" onclick={navigateToInterpreterCertification}></lightning-button> 
+                    </div>
+                </div>
+                <div style={showInterpreterCertificationExam} class="a11y-focused">
+                    <c-nc_mentoring_request_interpreter_certification have-interpreter-cert={haveInterpreterCert} interpreter-certifications={interpreterCertifications} assessment-level-options={assessmentLevelOptions}></c-nc_mentoring_request_interpreter_certification>
+                    
+                    <div class="controls slds-m-top_small">
+                        <lightning-button class="slds-m-right_medium" onclick={navigateToNCITL} label="Back"></lightning-button> 
+                        <lightning-button variant="brand" type="submit" label="Next" onclick={navigateToKnowledgeExam}></lightning-button> 
+                    </div>
+                </div>
+                <div style={showKnowledgeExam}>
+                    <c-nc_mentoring_request_knowledge_exam taken-knowledge={takenKnowledge} passed-knowledge={passedKnowledge} planning-knowledge={planningKnowledge}></c-nc_mentoring_request_knowledge_exam>
+                    <div class="controls slds-m-top_small">
+                        <lightning-button class="slds-m-right_medium" onclick={navigateToInterpreterCertification} label="Back"></lightning-button> 
+                        <lightning-button variant="brand" type="submit" label="Next" onclick={naviagetToPerformance}></lightning-button> 
+                    </div>
+                </div>
+                <div style={showPerformanceExam}>
+                    <c-nc_mentoring_request_performance_exam taken-performance={takenPerformance} passed-performance={passedPerformance} planning-performance={planningPerformance} how-many-time-performance={howManyTimePerformance} last-performance={lastPerformance} time-period-performance={timePeriodPerformance}></c-nc_mentoring_request_performance_exam>
+                    <div class="controls slds-m-top_small">
+                        <lightning-button class="slds-m-right_medium" onclick={navigateToKnowledgeExam} label="Back"></lightning-button> 
+                        <lightning-button variant="brand" type="submit" label="Next" onclick={navigateToEIPA}></lightning-button> 
+                    </div>
+                </div>
+                <div style={showEIPAInformation}>
+                    <c-nc_mentoring_request_eipa plan-to-take-e-i-p-a={planToTakeEIPA} when-plan-e-i-p-a={WhenPlanEIPA} last-take-the-e-i-p-a={lastTakeTheEIPA} eipa-score={eipaScore} how-taken-the-e-i-p-a={howTakenTheEIPA}></c-nc_mentoring_request_eipa>
+                    <div class="controls slds-m-top_small">
+                        <lightning-button class="slds-m-right_medium" onclick={naviagetToPerformance} label="Back"></lightning-button> 
+                        <lightning-button variant="brand" type="submit" label="Next" onclick={navigateToPercentageInformation}></lightning-button> 
+                    </div>
+                </div>
+                <div style={showPercentageInformation}>
+                    <c-nc_mentoring_request_percentage video-relay-interpreting={videoRelayInterpreting} video-remote-interpreting={videoRemoteInterpreting} community-freelance={communityFreelance} education-post-secondary={educationPostSecondary} educational-k12={educationalK12} other={other}></c-nc_mentoring_request_percentage>
+                    <div class="controls slds-m-top_small">
+                        <lightning-button class="slds-m-right_medium" onclick={navigateToEIPA} label="Back"></lightning-button> 
+                        <lightning-button variant="brand" type="submit" label="Next" onclick={navigateToSkills}></lightning-button> 
+                    </div>
+                </div> 
+                <div style={showInterpreterSkillInformation}>
+                    <c-nc_mentoring_request_skills information-assistance={informationAssistance} interpreter-skill-development={interpreterSkillDevelopment} mentoring-service={mentoringService}></c-nc_mentoring_request_skills>
+                    <div class="controls slds-m-top_small">
+                        <lightning-button class="slds-m-right_medium" onclick={navigateToPercentageInformation} label="Back"></lightning-button> 
+                        <lightning-button variant="brand" type="submit" label="Next" onclick={navigateToOthers}></lightning-button> 
+                    </div>
+                </div> 
+                <div style={showOtherInformation}>
+                    <c-nc_mentoring_request_other hours-worked-in-medical-setting={hoursWorkedInMedicalSetting} dhh-interpreter-vendor-list={dhhInterpreterVendorList} after5-year={after5Year}></c-nc_mentoring_request_other>
+                    <div class="controls slds-m-top_small">
+                        <lightning-button class="slds-m-right_medium" onclick={navigateToSkills} label="Back"></lightning-button> 
+                        <lightning-button data-id="submitButtonId" variant="brand" type="submit" label="submit" onclick={navigateToConfimration}></lightning-button> 
+                    </div>
+                </div>
+
+                <template if:true={isModalOpen}>
+                    <section onkeyup={handleKeyDown} role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <button data-id="closeButton" data-name="modal" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={navigateToOthers}>
+                                <lightning-icon icon-name="utility:close" variant="inverse" size="small" alternative-text="close" title="close"></lightning-icon>
+                            </button>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium title" id="modal-content-id-1">
+                            <h1><b data-name="modal">Are You Sure</b></h1>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <button class="slds-button slds-button_neutral" data-name="modal" onclick={navigateToOthers}>No</button>
+                            <button class="slds-button slds-button_brand" data-name="modal" onclick={submitDetails}>Yes</button>
+                        </footer>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,15 @@
+<aura:component implements="lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader" 
+access="global" >
+  <ltng:require styles="{!$Resource.NC_DSDHH_Resource + '/styles/a11y.css'}"></ltng:require>
+
+ <aura:html tag="style">
+      
+                .slds-modal__close{
+                  display : none;
+                }
+              </aura:html>
+    <div class="a11y-focused">
+        <c:nc_CreateServiceRequest recordId="{!v.recordId}" onvaluechange="{!c.closeModal}"></c:nc_CreateServiceRequest>
+        
+    </div>
+</aura:component>

@@ -1,0 +1,10 @@
+<aura:component implements="lightning:actionOverride,force:hasRecordId,force:appHostable,lightning:isUrlAddressable,lightning:hasPageReference,forceCommunity:availableForAllPageTypes" access="global" controller="NC_ConnectEquipmentController">
+    <aura:attribute name="parentRecordId" type="String" />
+    <aura:attribute name="NDBEDPRecord" type="Boolean" default="false" />
+    <lightning:workspaceAPI aura:id="workspace"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:if isTrue="{!v.NDBEDPRecord}">
+        <c:nC_ConnectEquipment parentRecordId="{!v.parentRecordId}" onclosewindow="{!c.handleWindowClose}"/>
+    </aura:if>
+</aura:component>

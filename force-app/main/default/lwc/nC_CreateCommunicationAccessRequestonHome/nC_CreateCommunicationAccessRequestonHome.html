@@ -1,0 +1,18 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 11-08-2021
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<template>
+    <!-- <lightning-button label="Create Communication Access Request" title="Create Communication Access Request" name="CreateCommunicationAccessRequest"
+          onclick={handleClick} class="slds-button slds-button_outline-brand"></lightning-button> -->
+
+    <lightning-button if:true={isCreateCommunicationVisible} variant="brand-outline" label="Create Communication Access Request" title="Create Communication Access Request" 
+    onclick={handleClick} class=""></lightning-button>
+
+    <lightning-button if:true={isCreateResourceLoanVisible} variant="brand-outline" label="Create Resource Loan" title="Create Resource Loan" 
+    onclick={handleCreateResourceLoan} class="slds-m-left_x-small"></lightning-button>
+
+</template>

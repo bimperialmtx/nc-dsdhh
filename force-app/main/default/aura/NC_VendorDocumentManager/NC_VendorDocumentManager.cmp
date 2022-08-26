@@ -1,0 +1,17 @@
+<aura:component controller="NC_VendorDocumentManagerController" implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" extends="c:NC_Base" access="global">
+    <aura:attribute name="disableField" type="String"/>
+    <aura:attribute name="disableFieldValue" type="String"/>    
+    <aura:attribute name="fileInfo" type="List" description="Contains the list of files to be uploaded"></aura:attribute>    
+    <aura:attribute name="showFileDoc" type="Boolean" description="Show the file component or not" default="false"></aura:attribute>    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:if isTrue="{!v.showFileDoc}" >
+        <c:nc_fileuploadcontainer 
+            recordId = "{!v.recordId}"
+            fileInfo = "{!v.fileInfo}"
+            onrefresh = "{!c.refreshView}"
+            onviewfile = "{!c.viewfile}"
+            disableField = "{!v.disableField}"
+            disableValue = "{!v.disableFieldValue}"
+        />
+    </aura:if>
+</aura:component>

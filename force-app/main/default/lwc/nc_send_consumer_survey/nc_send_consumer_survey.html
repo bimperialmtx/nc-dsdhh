@@ -1,0 +1,69 @@
+<template>
+  <div if:true={showSpinner}>
+    <div class="backdrop">
+      <div class="spinner">
+        <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+      </div>
+    </div>
+  </div>
+  <div>
+    <c-nc_dyanmic_paginator object-name='Contact' numberofcolumns="4" columns-from-parent={columnsList}
+      placeholder="Search..." sort-by='BirthDate' sort-dir='ASC' show-refresh-button where-clause={whereClause}
+      refresh-button-label="" record-id-list={recordIdList}
+      table-class="property-table slds-table slds-table_cell-buffer slds-table_bordered slds-max-medium-table_stacked-horizontal"
+      reset-table={resetTable} reload-table={reloadTable} new-button-label="Send survey" show-new-button
+      oncreaterecord={handleSurveySend} page-size="10" norecord-message="" show-all-paginator-buttons=true
+      onpaginatoraction={handlePaginatorAction} onresetflag={resetFlag} show-checkbox
+      onselectunselectcheckbox={updateSelectedValueList}>
+    </c-nc_dyanmic_paginator>
+  </div>
+
+  <template if:true={showDetailsForConfirmation}>
+    <section role="dialog" tabindex="0" aria-labelledby="modal-heading-01" aria-modal="true"
+      aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+      <template if:true={showSpinner}>
+        <div class="backdrop">
+          <div class="spinner">
+            <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+          </div>
+        </div>
+      </template>
+      <div class="slds-modal__container">
+        <div class="slds-modal__content slds-p-around_small">
+          <div class="slds-grid slds-grid_align-spread slds-wrap">
+            <div class="slds-p-around_small slds-col slds-size_1-of-1">
+              <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-1 
+                              slds-medium-size_1-of-1 
+                              slds-large-size_1-of-1 slds-p-around_medium">
+                  <lightning-input type="checkbox" label="Can the consumer fill this survey multiple times?"
+                    name="MultipleTime" onchange={handleInputChange}>
+                  </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-1 
+                              slds-medium-size_1-of-1 
+                              slds-large-size_1-of-1 slds-p-around_medium">
+                  <lightning-input type="datetime" 
+                    name="ExpirationDate" 
+                    field-level-help="Leave empty if you want the survey to never expire." 
+                    label="Expiration date time of survey invitaion"
+                    onchange={handleInputChange}>
+                  </lightning-input>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="slds-modal__footer">
+          <lightning-button class="slds-p-right_xx-small slds-float_left" icon-name="utility:close" variant="brand"
+            label='Close' onclick={closeModal}>
+          </lightning-button>
+          <lightning-button class="slds-p-right_xx-small slds-float_right" icon-name="utility:save" variant="brand"
+            label='Save' onclick={handleSave}>
+          </lightning-button>
+        </footer>
+      </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+</template>

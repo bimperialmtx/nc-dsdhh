@@ -1,0 +1,9 @@
+<template>
+    <table class="slds-table slds-table_bordered slds-table_resizable-cols">
+        <tbody>
+            <template for:item="fileinfo" for:each={filesInfoList} >
+                <c-ncdsdhh_fileupload key={fileinfo.key} file-info={fileinfo} onrefresh={refresh} onviewfile={viewFile} disable-delete={disableDelete} enable-upload={enableUpload}></c-ncdsdhh_fileupload>
+            </template>
+        </tbody>
+    </table>
+</template>

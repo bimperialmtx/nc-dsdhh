@@ -1,0 +1,23 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 05-11-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+    </template>
+    <div class="container d-flex justify-space-between slds-p-bottom_xx-small">
+        <h2 class="slds-p-left_xx-small header-title" data-id="headerDiv" tabindex="-1" aria-label="NCITLB License Information (Step 3 of 10)"><b>NCITLB License Information</b></h2>
+    </div>
+    <span data-id="accessibilityInfo3" style="display: none;">
+        Education Information is complete. NCITLB License Information is the current step (Step 3 of 10).
+    </span>
+    <div style="color: red;" class="extra-padding">* indicates required fields</div>
+    <div class="extra-padding">
+        <lightning-combobox name="licenseIssuedbyTheNCITLB" label="Do you have a license issued by the NCITLB?" value={dataNCITL.licenseIssuedbyTheNCITLB} placeholder="Select Progress" options={licensesIssuesByNCITLB} onchange={handleChange} ></lightning-combobox>
+        <lightning-input if:false={noNCITLBNumber} required type="text" label="What is your NCITLB license number?" value={dataNCITL.NCITLBLicenseNumber} name="NCITLBLicenseNumber" onchange={handleChange} onblur={updateInput}></lightning-input>
+    </div>
+</template>

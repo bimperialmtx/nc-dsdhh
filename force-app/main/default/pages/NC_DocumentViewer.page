@@ -1,0 +1,195 @@
+<apex:page controller="NC_DocumentViewerController" sideBar="true" renderAs="pdf" showHeader="false"  standardStylesheets="false" applyBodyTag="false">
+    <head>
+    <style type="text/css">
+        @page {
+            size: A4;
+            @top-center {
+                content: "";
+            }
+            @bottom-center {
+                content: "Page " counter(page) " of " counter(pages);
+            }
+        }
+        .invoice-box {
+          max-width: 800px;
+          height: auto;
+          margin: auto;
+          padding: 30px;
+          border: 1px solid #eee;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+          font-size: .8rem;
+          line-height: 20px;
+          font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+          color: #555;
+        }
+
+        .invoice-box table {
+          width: 100%;
+          line-height: inherit;
+          text-align: left;
+        }
+
+        .invoice-box table td {
+          padding: 5px;
+          vertical-align: top;
+        }
+
+        .invoice-box table tr td:nth-child(n + 2) {
+          text-align: right;
+        }
+        .information{
+          padding: 12px;
+          display: flex;
+        }
+        .fence_image{
+            float: right;
+            position: relative;
+            width: 60%;
+         }
+        .buyer_info{
+            float: left;
+            position: relative;
+            width: 100%;
+
+        }
+        .title_info{
+          font-weight: 600;
+          width:25%;
+          padding: 2px !important;
+        }
+        .data_info{
+          text-align: left !important;
+          padding: 0px !important;
+        }
+        .note{
+          text-align: center;
+          padding-top: 5px;
+        }
+        .empty_div{
+          padding: 0 15px;
+        }
+        .note_bold{
+          text-align: left;
+          font-size: 16px;
+          font-weight: 600;
+        }
+        .text_bold{
+          font-weight: 600;
+        }
+        .text_regular{
+          font-weight: 400;
+        }
+        .text_small{
+          font-size: 10px;
+          font-style: italic;
+        }
+        .text_center{
+          text-align: center;
+        }
+        .other_info{
+          font-weight: 600;
+          width:70%;
+          padding: 0px !important;
+        }
+        .end_footer{
+          font-family: 'Tangerine', cursive;
+          font-size: 30px;
+          font-style: normal;
+          font-weight: 600;
+          margin-top: 15px;
+        }
+
+        .text-font{
+            font-size : 12px !important;
+        }
+
+        .no_display_anchor{
+            color: white;
+        }
+
+
+
+    </style>
+    </head>
+    <body>
+    <div class="invoice-box">
+        <div style="width:100%;background-color:rgb(9,41,64)">
+            <img style ="width: 30%;padding:16px;" src="{!URLFOR($Resource.NCDHHS_LOGO)}" alt=""/>  
+        </div>
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="4">   
+                    <hr/>
+                    <div class="information text-font">
+                        <div class="buyer_info">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="title_info">Name: </td>
+                                        <td class="data_info">{!contactDataObj.name}</td>
+                                        <td class="title_info">Phone: </td>
+                                        <td class="data_info">{!contactDataObj.phone}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="title_info">Email: </td>
+                                        <td class="data_info">{!contactDataObj.email}</td>
+                                        <td class="title_info">Street: </td>
+                                        <td class="data_info">{!contactDataObj.street}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="title_info">City: </td>
+                                        <td class="data_info">{!contactDataObj.city}</td>
+                                        <td class="title_info">Country: </td>
+                                        <td class="data_info">{!contactDataObj.country}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <br/><br/><br/><br/><hr/>
+                    <div class="information text-font">
+                        <div class="information text-font">
+                            <table border="1">
+                                <tbody>
+                                    <tr>
+                                        <td class="other_info">Equipment Name</td>
+                                        <td class="data_info">Hearing Aid</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="other_info">Quantity</td>
+                                        <td class="data_info">4</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="other_info">Due Date</td>
+                                        <td class="data_info">10-09-2020</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="other_info">Approval Date</td>
+                                        <td class="data_info">04-23-2020</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="buyer_info text-font">
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td class="note_bold text_center">NCDHHS</td>
+                                </tr>
+                                <tr>
+                                    <td class="no_display_anchor text_center">
+                                        <div class="sign" id="sign">
+                                            <img src='{!url}' style="width:50%"/> 
+                                        </div> 
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </body>
+</apex:page>

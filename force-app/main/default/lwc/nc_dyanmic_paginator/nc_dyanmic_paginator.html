@@ -1,0 +1,169 @@
+<template>
+  <div class="app-content">
+      <div style="padding: .5rem;" if:false={showTableOnly}>
+          <div class="slds-float_right" style="max-width: 350px;">
+
+          </div>
+
+          <div class="slds-float_right slds-col" style="max-width: 350px;">
+              <span>
+                  <lightning-input type="text" value={searchStr} placeholder={placeholder} variant="label-hidden"
+                      onchange={searchRecords}></lightning-input>
+              </span>
+          </div>
+
+          <div class="slds-float_right slds-col slds-p-right_small" style="max-width: 350px;">
+              <lightning-button if:true={showNewButton} variant="brand" label={newButtonLabel}
+                  icon-name="utility:record_create" title={newButtonLabel} onclick={handleCreateRecord}
+                  disabled={lockComponent}>
+              </lightning-button>
+          </div>
+
+          <div class="slds-float_right slds-col slds-p-right_small" style="max-width: 350px;">
+            <!--
+              <lightning-button if:true={showRefreshButton} variant="brand" label={refreshButtonLabel}
+                  icon-name="utility:refresh" title="Refresh" onclick={handleTableRefresh} disabled={lockComponent}>
+              </lightning-button>
+              -->
+              <lightning-button-icon if:true={showRefreshButton} icon-name="utility:refresh" variant="brand" 
+                alternative-text="Refresh" title="Refresh" onclick={handleTableRefresh}>
+              </lightning-button-icon>
+          </div>
+
+          <div>
+              Show &nbsp;
+              <select class="slds-select" style="max-width: 55px;" onchange={setPageSize}>
+                  <template for:each={pageSizeOptions} for:item="pageSizeOption">
+                      <option key={pageSizeOption} value={pageSizeOption}>{pageSizeOption}</option>
+                  </template>
+              </select>
+              &nbsp; entries
+          </div>
+      </div>
+      <div style="padding: .5rem;" if:true={showTableOnly}>
+      </div>
+      <div class="table-container slds-border_left slds-border_right slds-border_bottom">
+          <template if:true={showQuery}>
+              {query}
+          </template>
+          <table class={tableClass} style="table-layout: fixed;">
+              <thead>
+                  <tr class="slds-text-title_caps">
+                      <th class="slds-col slds-cell-wrap" if:true={showCheckbox}>
+                          <!--<span>Select All</span>-->
+                          <lightning-input type="checkbox" checked={allSelected} onchange={handleSelectAll}>
+                          </lightning-input>
+                      </th>
+                      <template for:each={columns} for:item="column">
+                          <th if:false={column.dontShow} class="slds-col slds-cell-wrap" key={column.label}>
+                              <!--<p>{column.label}</p>-->
+                              <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                  <div class="slds-p-right_xx-small"><b>{column.label}</b></div>
+                                  <template if:true={column.isSortable}>
+                                      <template if:false={column.sorted}>
+                                          <lightning-icon class="sort_up" data-id={column.name}
+                                              icon-name="utility:sort" size="xx-small" onclick={handleSorting}>
+                                          </lightning-icon>
+                                      </template>
+                                      <template if:true={column.sorted}>
+                                          <template if:false={column.sortedAscending}>
+                                              <lightning-icon class="sort_down" data-id={column.name}
+                                                  icon-name="utility:arrowup" size="xx-small" onclick={handleSorting}>
+                                              </lightning-icon>
+                                          </template>
+                                          <template if:true={column.sortedAscending}>
+                                              <lightning-icon class="sort_down" data-id={column.name}
+                                                  icon-name="utility:arrowdown" size="xx-small"
+                                                  onclick={handleSorting}></lightning-icon>
+                                          </template>
+                                      </template>
+                                  </template>
+                              </div>
+                          </th>
+                      </template>
+                  </tr>
+              </thead>
+              <tbody>
+                  <template if:true={rows}>
+                      <template for:each={rows} for:item="row" for:index="index">
+                          <tr class="slds-hint-parent slds-has-flexi-truncate" key={row.id}>
+                              <td if:true={showCheckbox}>
+                                  <lightning-input type="checkbox" checked={row.isChecked} data-id={row.id}
+                                      onchange={handleCheckboxChange}>
+                                  </lightning-input>
+                              </td>
+                              <template for:each={row.columns} for:item="column">
+                                  <td class={column.class} key={column.label} data-label={column.label}>
+                                      <template if:true={column.isText}>
+                                          <div class="slds-truncate slds-cell-wrap" title={column.value}>
+                                              <template if:false={column.action}>
+                                                  {column.value}
+                                              </template>
+                                              <template if:true={column.action}>
+                                                  <a data-action={column.action} data-id={row.id}
+                                                      onclick={handleAction}>{column.value}</a>
+                                              </template>
+
+                                          </div>
+                                      </template>
+                                      <template if:true={column.isCheckbox}>
+                                          <lightning-input type="checkbox" checked={column.value} data-id={row.id}
+                                              disabled>
+                                          </lightning-input>
+                                      </template>
+                                      <template if:true={column.isButton}>
+                                          <div class="slds-truncate slds-cell-wrap" title={column.value}>
+                                              <lightning-button data-id={row.id} data-action={column.action}
+                                                  variant={column.varient} label={column.buttonLabel}
+                                                  icon-name={column.iconname} title={column.buttonlabel}
+                                                  onclick={handleAction} disabled={lockComponent}>
+                                              </lightning-button>
+                                          </div>
+                                      </template>
+                                      <template if:true={column.isButtons}>
+                                          <div class="slds-truncate slds-cell-wrap">
+                                              <template for:item="button" for:each={column.buttons}>
+                                                  <lightning-button key={button.label} data-id={row.id}
+                                                      data-action={button.label} variant={column.varient}
+                                                      icon-name={column.iconname} label={button.label}
+                                                      title={button.label} onclick={handleAction} class={button.class}
+                                                      disabled={lockComponent}>
+                                                  </lightning-button>
+                                              </template>
+                                          </div>
+                                      </template>
+                                  </td>
+                              </template>
+                          </tr>
+                      </template>
+                  </template>
+              </tbody>
+          </table>
+          <template if:false={norows}>
+              <p class="slds-text-align_center slds-p-around_medium">{norecordMessage}</p>
+          </template>
+      </div>
+      <div style="padding: 1rem 1rem 2rem 1rem;" class="custom-hide-comp" if:false={showTableOnly}>
+          <template if:true={showAllPaginatorButtons}>
+              <div class="slds-float_right" style="margin-top: -0.5rem;">
+                  <template for:each={buttonsLabel} for:item="buttoninfo">
+                      <lightning-button style="margin-left: .25rem;" class="paginator-button" key={buttoninfo.label} label={buttoninfo.label}
+                          title={buttoninfo.label} onclick={handleButtonClick} variant={buttoninfo.varient}
+                          disabled={buttoninfo.disabled}></lightning-button>
+                  </template>
+              </div>
+              Showing {fromCount} to {toCount} of {totalCount} entries
+          </template>
+      </div>
+      <div style="padding: 1rem 1rem 2rem 1rem;" class="custom-hide-comp" if:true={showTableOnly}>
+      </div>
+  </div>
+  <div if:true={showSpinner}>
+      <div class="backdrop">
+          <div class="spinner">
+              <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+          </div>
+      </div>
+  </div>
+
+</template>

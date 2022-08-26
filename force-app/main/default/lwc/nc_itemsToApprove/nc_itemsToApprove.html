@@ -1,0 +1,25 @@
+<template>
+    <template if:true={showSpinner}>
+        <div style="position: relative; top: 70px;">
+            <lightning-spinner variant="brand" alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </template>
+    <template if:true={isRequestPending}>
+        <div class="slds-m-top_small a11y-focused">
+            <lightning-card title = "Items to Approve">
+                <div class="slds-m-vertical_medium">
+                    <lightning-button data-id="approveButton" aria-describedby="errorLabel" label="Approve" variant="brand" class="slds-m-right_small slds-m-left_small" onclick={handleApproveAction}></lightning-button>
+                    <lightning-button data-id="rejectButton" aria-describedby="errorLabel" label="Reject" variant="destructive" onclick={handleRejectAction}></lightning-button>
+                    <span id="errorLabel" style="margin-left: -120%;">{toastMessage}</span>
+                </div>
+                <div class="slds-scrollable" style="max-height: 150px;">
+                    <lightning-datatable
+                        key-field="workItemId"
+                        columns={columns}
+                        data={data}>
+                    </lightning-datatable>
+                </div>
+            </lightning-card>
+        </div>
+    </template>
+</template>

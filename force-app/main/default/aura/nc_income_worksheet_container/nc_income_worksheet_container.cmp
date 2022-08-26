@@ -1,0 +1,14 @@
+<aura:component implements="lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                 access="global" >
+    <lightning:workspaceAPI aura:id="workspace" />
+    <ltng:require styles="{!$Resource.NC_DSDHH_Resource + '/styles/a11y.css'}"></ltng:require>
+    <aura:attribute name="request" type="String" />
+	<!-- Add an "init" handler to handle the first "v.pageReference" value -->
+    <aura:handler name="init" value="{!this}" action="{!c.onPageReferenceChange}"/>
+    <!-- Add a "change" handler to handle all changes to the "v.pageReference" value -->
+    <aura:handler name="change" value="{!v.pageReference}" action="{!c.onPageReferenceChange}"/>
+    <div style="background-color: white; height: 100%;" class="slds-p-around_medium a11y-focused">
+        <c:nC_IncomeWorksheet request="{!v.request}"></c:nC_IncomeWorksheet>
+    </div>
+    
+</aura:component>

@@ -1,0 +1,6 @@
+<aura:component controller="NC_CreateConsumerResourceLoanController"
+                implements="force:lightningQuickAction,force:hasRecordId"
+                extends="c:NC_Base">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	
+</aura:component>

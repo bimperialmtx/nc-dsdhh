@@ -1,0 +1,5 @@
+<aura:component controller="NC_CreateAttendeeRecordController"
+                implements="force:lightningQuickAction,force:hasRecordId"
+                extends="c:NC_Base">
+	<aura:handler name="init" action="{!c.doInit}" value="{!this}"/> 
+</aura:component>

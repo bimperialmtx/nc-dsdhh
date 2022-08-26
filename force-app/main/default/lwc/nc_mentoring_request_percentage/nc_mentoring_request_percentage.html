@@ -1,0 +1,29 @@
+<!--
+  @description       : 
+  @author            : kavya.konagonda@mtxb2b.com
+  @group             : 
+  @last modified on  : 05-16-2022
+  @last modified by  : kavya.konagonda@mtxb2b.com
+-->
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+    </template>
+    <div class="container d-flex justify-space-between slds-p-bottom_xx-small">
+        <h2 class="slds-p-left_xx-small header-title" data-id="headerDiv" tabindex="-1" aria-label="Interpret Percentage Information (Step 8 of 10)"><b>Interpret Percentage Information</b></h2>
+    </div>
+    <span data-id="accessibilityInfo8" style="display: none;">
+        EIPA Information is complete. Interpret Percentage Information is the current step (Step 8 of 10).
+    </span>
+    <div style="color: red;" class="extra-padding">* indicates required fields</div>
+    <div class="extra-padding">
+        <p>Of the time you spend interpreting, please estimate the percentage of time you interpret in the following settings. </p>
+        <lightning-combobox name="videoRelayInterpreting" label="Video Relay Interpreting" aria-label="Video Relay Interpreting" value={percentageInformation.videoRelayInterpreting} placeholder="Select Progress" options={videoRelayInterpreting} onchange={handleChange} ></lightning-combobox>
+        <lightning-combobox name="videoRemoteInterpreting" label="Video Remote Interpreting" aria-label="Video Remote Interpreting" value={percentageInformation.videoRemoteInterpreting} placeholder="Select Progress" options={videoRemoteInterpreting} onchange={handleChange} ></lightning-combobox>
+        <lightning-combobox name="communityFreelance" label="Community (freelance)" aria-label="Community (freelance)" value={percentageInformation.communityFreelance} placeholder="Select Progress" options={communityFreelance} onchange={handleChange} ></lightning-combobox>
+        <lightning-combobox name="eucationalK12" label="Educational K-12" aria-label="Educational K-12" value={percentageInformation.eucationalK12} placeholder="Select Progress" options={educationalK12} onchange={handleChange} ></lightning-combobox>
+        <lightning-combobox name="educationalPostSecondary" label="Educational Post-Secondary" aria-label="Educational Post-Secondary" value={percentageInformation.educationalPostSecondary} placeholder="Select Progress" options={educationPostSecondary} onchange={handleChange} ></lightning-combobox>
+        <lightning-combobox name="other" label="Other" value={percentageInformation.other} aria-label="Other" placeholder="Select Progress" options={other} onchange={handleChange} ></lightning-combobox>
+        <lightning-input type="text" data-id="hoursWorkedinMedicalSettings" name="hoursWorkedinMedicalSettings" label="If you work in the community, how many hours a week do you work in medical settings?" value={percentageInformation.hoursWorkedinMedicalSettings} onchange={handleHoursWorkedinMedicalSettings} required></lightning-input>
+    </div>
+</template>
